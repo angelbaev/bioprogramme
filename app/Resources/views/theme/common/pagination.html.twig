@@ -1,0 +1,46 @@
+{% set routeName = app.request.get('_route') %}
+{% set page = app.request.get('page', 1) %}
+{% set limit = constant('AppBundle\\Service\\BaseService::LIMIT') %}
+{% set totalPages = (total / limit)|round %}
+
+{% if totalPages > 1 %}
+    <ul class="pagination pagination-sm">
+        {% if page == 1 %}
+            <li class="disabled">
+                <a href="javascript:;">«</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path(routeName, {page: page-1 < 1 ? 1 : page-1}|merge(paginationParams)) }}">«</a>
+            </li>
+        {% endif %}
+        {#<li {{ page == 1 ? 'class="disabled"' }}>#}
+            {#<a href="{{ path(routeName, {page: page-1 < 1 ? 1 : page-1}) }}">«</a>#}
+        {#</li>#}
+
+        {# Render each page number #}
+        {% for i in 1..totalPages %}
+            <li {{ page == i ? 'class="active"' }}>
+                <a href="{{ path(routeName, {page: i}|merge(paginationParams)) }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+
+        {% if page == totalPages %}
+            <li class="disabled">
+                <a href="javascript:;">»</a>
+                <a href="javascript:;">»</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}|merge(paginationParams)) }}">»</a>
+                <a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}|merge(paginationParams)) }}">»</a>
+            </li>
+        {% endif %}
+
+        {#<li {{ page == totalPages ? 'class="disabled"' }}>#}
+            {#<a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}) }}">»</a>#}
+            {#<a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}) }}">»</a>#}
+        {#</li>#}
+    </ul>
+
+{% endif %}

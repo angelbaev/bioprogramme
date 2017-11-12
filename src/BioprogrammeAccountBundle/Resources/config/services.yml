@@ -1,0 +1,14 @@
+#services:
+#    bioprogramme_account.example:
+#        class: BioprogrammeAccountBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+parameters:
+    bioprogramme_account.entity.user: 'BioprogrammeAccountBundle\Entity\User'
+    bioprogramme_account.service.user_service: 'BioprogrammeAccountBundle\Service\UserService'
+services:
+    bioprogramme_account.user_manager:
+        class: '%bioprogramme_account.service.user_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_account.entity.user%'
