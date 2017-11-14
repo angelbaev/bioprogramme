@@ -1,0 +1,50 @@
+## YAML Template.
+CompanyName: Биопрограма
+LoginTitle: Вход в системата
+LoginButton: Вход
+Hello: Здравей
+Menu: Меню
+Dashboard: Табло
+Accounts: Акаунти
+Workers: Работници
+Worker: Работник
+Roles: Роли
+Permissions: Права
+Positions: Длъжности
+Bases: Бази
+Production: Производство
+Machines: Машини
+Options: Опции
+Marketing: Маркетинг
+Messaging: Съобщения
+Notifications: Нотификации
+Tickets: Тикети
+Reports: Отчети
+Systems: Система
+Settings: Настройки
+Cities: Градове
+Tickets Statuses: Тикети Статуси
+Tickets Reports: Тикети приоритети
+Tickets Labels: Тикети Етикети
+Home: Начало
+All rights reserved.: Всички права запазени.
+Add new: Добави нов
+Id: ID
+Username: Потребителско име
+Email: Имейл
+Fullname: Наименование
+Phone: Телефон
+Status: Статус
+Actions: Действия
+All: Всички
+Inactive: Неактивен
+Active: Активен
+Filter: Филтър
+Profile: Профил
+Worker creation: Създаване на работник
+Password: Парола
+Repeat Password: Повтори паролата
+Is active: Активен
+Create: Създай
+Worker edit: Редактиране на работник
+Save: Запази

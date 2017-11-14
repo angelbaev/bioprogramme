@@ -1,10 +1,10 @@
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><img src="img/logo.png" alt="Биопрограма" style="width: auto; height: 40px;"></a>
+        <a href="#"><img src="img/logo.png" alt="{% trans %} CompanyName {% endtrans %}" style="width: auto; height: 40px;"></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Вход в системата</p>
+        <p class="login-box-msg"> {% trans %} LoginTitle {% endtrans %}</p>
         {% if error %}
                 <p class="login-box-msg">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
         {% endif %}
@@ -19,17 +19,17 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
+                    {#<div class="checkbox icheck">#}
 
-                         <input type="checkbox" id="remember-me" class="checkbox-custom">
-                        <label for="remember-me" class="checkbox-custom-label">
-                        Запомни ме
-                        </label>
-                    </div>
+                         {#<input type="checkbox" id="remember-me" class="checkbox-custom">#}
+                        {#<label for="remember-me" class="checkbox-custom-label">#}
+                        {#Запомни ме#}
+                        {#</label>#}
+                    {#</div>#}
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Вход</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">{% trans %} LoginButton {% endtrans %}</button>
                 </div>
                 <!-- /.col -->
             </div>

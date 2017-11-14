@@ -16,7 +16,7 @@ class BaseService implements ServiceInterface
     /**
      * page limit
      */
-    const LIMIT = 4;
+    const LIMIT = 20;
     /**
      * @var EntityManager
      */

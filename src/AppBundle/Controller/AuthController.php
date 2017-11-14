@@ -13,6 +13,12 @@ class AuthController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $session = $request->getSession();
+        if (null === $session->get('_locale')) {
+            $session->set('_locale', 'bg');
+            //return $this->forward('AppBundle:AuthController:login');
+        }
+        $locale = $request->getLocale();
         $helper = $this->get('security.authentication_utils');
 
         // replace this example code with whatever you need

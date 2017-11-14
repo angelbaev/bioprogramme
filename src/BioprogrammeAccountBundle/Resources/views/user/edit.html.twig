@@ -5,7 +5,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">User edit</h3>
+                <h3 class="box-title">{% trans %}Worker edit{% endtrans %}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -17,7 +17,7 @@
                 </div>
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input class="btn btn-success btn-flat" type="submit" value="Edit" />
+        <input class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
     {{ form_end(edit_form) }}
             </div>
         </div>

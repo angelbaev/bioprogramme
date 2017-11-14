@@ -25,6 +25,7 @@ class UserFixture extends Fixture  implements ContainerAwareInterface
         $user->setUserName('admin');
         $user->setEmail('admin@bioprogramme.net');
         $user->setFullName('bioprogramme admin');
+        $user->setRoles(array('ROLE_ADMIN'));
         $user->setPhone('123456');
         $user->setIsActive(1);
         $password = $encoder->encodePassword($user, '123#');
@@ -38,6 +39,7 @@ class UserFixture extends Fixture  implements ContainerAwareInterface
         $user->setEmail('vasoto@etko.info');
         $user->setFullName('Vasil Hvurchilkov');
         $user->setPhone('123456');
+        $user->setRoles(array('ROLE_TO'));
         $user->setIsActive(1);
         $password = $encoder->encodePassword($user, '123#');
         $user->setPassword($password);

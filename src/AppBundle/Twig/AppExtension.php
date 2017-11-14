@@ -36,6 +36,6 @@ class AppExtension extends \Twig_Extension
     public function labelFilter($value)
     {
         //{% if user.isActive %}Yes{% else %}No{% endif %}
-        return '<small class="label ' . ($value ? 'label-success': 'label-danger') . '">' . ($value ? 'Active': 'Inactive') . '</small>';
+        return '<small class="label ' . ($value ? 'label-success': 'label-danger') . '">' . ($value ? 'Активен': 'Неактивен') . '</small>';
     }
 }

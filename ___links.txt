@@ -19,6 +19,11 @@ https://knpuniversity.com/screencast/symfony2-ep2/secure-every-page#play
 
 https://symfony.com/doc/current/security/voters.html
 https://stackoverflow.com/questions/38565572/manage-roles-and-assign-permissions-to-roles-symfony
+
+acl
+https://www.developer.com/lang/php/creating-a-custom-acl-in-php.html
+https://code.tutsplus.com/tutorials/a-better-login-system--net-3461
+https://stackoverflow.com/questions/15943780/symfony2-get-list-of-all-routes-of-a-controller
 ------------------
 registration 
 https://symfony.com/doc/current/doctrine/registration_form.html

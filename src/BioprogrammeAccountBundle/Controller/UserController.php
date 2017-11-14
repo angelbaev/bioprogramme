@@ -43,9 +43,9 @@ class UserController extends Controller
         $filter1 = ['like', 'username', 'test'
 
         ];
-        $offset = (4 * ($page - 1));
+
         $orderBy = [$sort, $order];
-        $users = $this->get('bioprogramme_account.user_manager')->search($filter, $orderBy, $page, 4);
+        $users = $this->get('bioprogramme_account.user_manager')->search($filter, $orderBy, $page);
         $total = $users->count();
 
         $queryParams = [

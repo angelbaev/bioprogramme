@@ -64,6 +64,10 @@ class User implements UserInterface, Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $roles = array();
 
     /**
      * Get id
@@ -220,12 +224,30 @@ class User implements UserInterface, Serializable
     }
 
     /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return $this
+     */
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+
+        // allows for chaining
+        return $this;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
-        return  array('ROLE_ADMIN','ROLE_USER');
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+//        return  array('ROLE_ADMIN','ROLE_USER');
     }
 
     /**
