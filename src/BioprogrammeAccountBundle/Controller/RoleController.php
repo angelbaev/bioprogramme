@@ -20,14 +20,30 @@ class RoleController extends Controller
      * @Route("/", name="account_role_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $page = $request->get('page', 1);
+        $sort = $request->get('sort', 'name');
+        $order = $request->get('order', 'desc');
 
-        $roles = $em->getRepository('BioprogrammeAccountBundle:Role')->findAll();
+        if ($order === 'desc') {
+            $order = 'asc';
+        } else {
+            $order = 'desc';
+        }
 
-        return $this->render('role/index.html.twig', array(
+        $orderBy = [$sort, $order];
+        $roles = $this->get('bioprogramme_account.role_manager')->search([], $orderBy, $page);
+        $total = $roles->count();
+
+
+        return $this->render('BioprogrammeAccountBundle:role:index.html.twig', array(
             'roles' => $roles,
+            'total' => $total,
+            'page' => $page,
+            'sort' => $sort,
+            'order' => $order,
+            'paginationParams' => ['sort' => $sort, 'order' => $order]
         ));
     }
 
@@ -44,14 +60,12 @@ class RoleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($role);
-            $em->flush();
+            $this->get('bioprogramme_account.role_manager')->save($role);
 
             return $this->redirectToRoute('account_role_show', array('id' => $role->getId()));
         }
 
-        return $this->render('role/new.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:role:new.html.twig', array(
             'role' => $role,
             'form' => $form->createView(),
         ));
@@ -67,7 +81,7 @@ class RoleController extends Controller
     {
         $deleteForm = $this->createDeleteForm($role);
 
-        return $this->render('role/show.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:role:show.html.twig', array(
             'role' => $role,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -86,12 +100,12 @@ class RoleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->get('bioprogramme_account.role_manager')->save($role);
 
             return $this->redirectToRoute('account_role_edit', array('id' => $role->getId()));
         }
 
-        return $this->render('role/edit.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:role:edit.html.twig', array(
             'role' => $role,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -110,9 +124,7 @@ class RoleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($role);
-            $em->flush();
+            $this->get('bioprogramme_account.role_manager')->delete($role);
         }
 
         return $this->redirectToRoute('account_role_index');

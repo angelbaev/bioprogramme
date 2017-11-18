@@ -2,13 +2,16 @@
 
 namespace BioprogrammeAccountBundle\Entity;
 
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Position
  *
  * @ORM\Table(name="position")
  * @ORM\Entity(repositoryClass="BioprogrammeAccountBundle\Repository\PositionRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Position
 {
@@ -69,7 +72,6 @@ class Position
      * @ORM\Column(name="updated_by", type="integer", nullable=true)
      */
     private $updatedBy;
-
 
     /**
      * Get id
@@ -247,6 +249,25 @@ class Position
     public function getUpdatedBy()
     {
         return $this->updatedBy;
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
     }
 }
 

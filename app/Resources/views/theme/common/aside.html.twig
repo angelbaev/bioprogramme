@@ -14,7 +14,12 @@
                 <!-- Status -->
             </div>
         </div>
-
+        {% set аccounts = [
+            'account_user_index','account_user_new','account_user_show','account_user_profile','account_user_edit',
+            'account_role_index','account_role_new','account_role_show','account_role_edit',
+            ' account_permission_index','account_permission_new','account_permission_show','account_permission_edit',
+            'account_position_index','account_position_new','account_position_show','account_position_edit'
+        ] %}
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
@@ -23,7 +28,7 @@
             <li class="active">
                 <a href="javascript:;"><i class="fa fa-dashboard"></i> <span>{% trans %}Dashboard{% endtrans %}</span></a>
             </li>
-            <li class="treeview {% if routeName in ['account_user_index','account_role_index',' account_permission_index','account_position_index'] %}active menu-open{% endif %}">
+            <li class="treeview {% if routeName in аccounts %}active menu-open{% endif %}">
                 <a href="javascript:;">
                     <i class="fa fa-user"></i>
                     <span>{% trans %}Accounts{% endtrans %}</span>

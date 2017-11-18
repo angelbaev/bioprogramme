@@ -50,6 +50,11 @@ Upload
 https://symfony.com/doc/current/controller/upload_file.html
 https://symfony.com/doc/master/bundles/SonataAdminBundle/cookbook/recipe_file_uploads.html
 
+auto update
+https://stackoverflow.com/questions/17321893/automatic-values-for-updated-at-created-at-in-doctrine
+https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/sluggable.md
+https://symfony.com/doc/current/doctrine/common_extensions.html
+https://stackoverflow.com/questions/10990469/automatically-updating-created-by-in-the-model
 --------------
 Deploying Symfony website to production server
 https://stackoverflow.com/questions/25887925/deploying-symfony-2-5-3-website-to-production-server

@@ -40,9 +40,6 @@ class UserController extends Controller
         } else {
             $order = 'desc';
         }
-        $filter1 = ['like', 'username', 'test'
-
-        ];
 
         $orderBy = [$sort, $order];
         $users = $this->get('bioprogramme_account.user_manager')->search($filter, $orderBy, $page);

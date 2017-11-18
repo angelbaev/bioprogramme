@@ -20,14 +20,29 @@ class PermissionController extends Controller
      * @Route("/", name="account_permission_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $page = $request->get('page', 1);
+        $sort = $request->get('sort', 'name');
+        $order = $request->get('order', 'desc');
 
-        $permissions = $em->getRepository('BioprogrammeAccountBundle:Permission')->findAll();
+        if ($order === 'desc') {
+            $order = 'asc';
+        } else {
+            $order = 'desc';
+        }
 
-        return $this->render('permission/index.html.twig', array(
+        $orderBy = [$sort, $order];
+        $permissions = $this->get('bioprogramme_account.permission_manager')->search([], $orderBy, $page);
+        $total = $permissions->count();
+
+        return $this->render('BioprogrammeAccountBundle:permission:index.html.twig', array(
             'permissions' => $permissions,
+            'total' => $total,
+            'page' => $page,
+            'sort' => $sort,
+            'order' => $order,
+            'paginationParams' => ['sort' => $sort, 'order' => $order]
         ));
     }
 
@@ -44,14 +59,12 @@ class PermissionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($permission);
-            $em->flush();
+            $this->get('bioprogramme_account.permission_manager')->save($permission);
 
             return $this->redirectToRoute('account_permission_show', array('id' => $permission->getId()));
         }
 
-        return $this->render('permission/new.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:permission:new.html.twig', array(
             'permission' => $permission,
             'form' => $form->createView(),
         ));
@@ -67,7 +80,7 @@ class PermissionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($permission);
 
-        return $this->render('permission/show.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:permission:show.html.twig', array(
             'permission' => $permission,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -86,12 +99,12 @@ class PermissionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->get('bioprogramme_account.permission_manager')->save($permission);
 
             return $this->redirectToRoute('account_permission_edit', array('id' => $permission->getId()));
         }
 
-        return $this->render('permission/edit.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:permission:edit.html.twig', array(
             'permission' => $permission,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -110,9 +123,7 @@ class PermissionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($permission);
-            $em->flush();
+            $this->get('bioprogramme_account.position_manager')->delete($permission);
         }
 
         return $this->redirectToRoute('account_permission_index');

@@ -1,14 +1,41 @@
-#services:
-#    bioprogramme_account.example:
-#        class: BioprogrammeAccountBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
 parameters:
     bioprogramme_account.entity.user: 'BioprogrammeAccountBundle\Entity\User'
     bioprogramme_account.service.user_service: 'BioprogrammeAccountBundle\Service\UserService'
+    bioprogramme_account.entity.role: 'BioprogrammeAccountBundle\Entity\Role'
+    bioprogramme_account.service.role_service: 'BioprogrammeAccountBundle\Service\RoleService'
+    bioprogramme_account.entity.permission: 'BioprogrammeAccountBundle\Entity\Permission'
+    bioprogramme_account.service.permission_service: 'BioprogrammeAccountBundle\Service\PermissionService'
+    bioprogramme_account.entity.position: 'BioprogrammeAccountBundle\Entity\Position'
+    bioprogramme_account.service.position_service: 'BioprogrammeAccountBundle\Service\PositionService'
 services:
+    entity_owner_assignment_listener:
+        class: AppBundle\EventListener\EntityOwnerAssignmentListener
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+#            - { name: doctrine.event_listener, event: preFlush }
     bioprogramme_account.user_manager:
         class: '%bioprogramme_account.service.user_service%'
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
             $container: '@service_container'
             $entity: '%bioprogramme_account.entity.user%'
+    bioprogramme_account.role_manager:
+        class: '%bioprogramme_account.service.role_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_account.entity.role%'
+    bioprogramme_account.permission_manager:
+        class: '%bioprogramme_account.service.permission_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_account.entity.permission%'
+    bioprogramme_account.position_manager:
+        class: '%bioprogramme_account.service.position_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_account.entity.position%'

@@ -34,7 +34,7 @@
                 <th>{% trans %}Phone{% endtrans %}</th>
                 <th>
                     {% if sort == 'isActive' %}
-                        <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: order, page: page}|merge(queryParams)) }}" class="sort-by {{ order }}"></a>
+                        <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: order, page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Status{% endtrans %}</a>
                     {%  else %}
                         <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: order, page: page}|merge(queryParams)) }}">{% trans %}Status{% endtrans %}</a>
                     {% endif %}

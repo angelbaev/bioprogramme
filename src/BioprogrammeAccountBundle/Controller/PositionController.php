@@ -20,14 +20,29 @@ class PositionController extends Controller
      * @Route("/", name="account_position_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $page = $request->get('page', 1);
+        $sort = $request->get('sort', 'name');
+        $order = $request->get('order', 'desc');
 
-        $positions = $em->getRepository('BioprogrammeAccountBundle:Position')->findAll();
+        if ($order === 'desc') {
+            $order = 'asc';
+        } else {
+            $order = 'desc';
+        }
 
-        return $this->render('position/index.html.twig', array(
+        $orderBy = [$sort, $order];
+        $positions = $this->get('bioprogramme_account.position_manager')->search([], $orderBy, $page);
+        $total = $positions->count();
+
+        return $this->render('BioprogrammeAccountBundle:position:index.html.twig', array(
             'positions' => $positions,
+            'total' => $total,
+            'page' => $page,
+            'sort' => $sort,
+            'order' => $order,
+            'paginationParams' => ['sort' => $sort, 'order' => $order]
         ));
     }
 
@@ -44,14 +59,12 @@ class PositionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($position);
-            $em->flush();
+            $this->get('bioprogramme_account.position_manager')->save($position);
 
             return $this->redirectToRoute('account_position_show', array('id' => $position->getId()));
         }
 
-        return $this->render('position/new.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:position:new.html.twig', array(
             'position' => $position,
             'form' => $form->createView(),
         ));
@@ -67,7 +80,7 @@ class PositionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($position);
 
-        return $this->render('position/show.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:position:show.html.twig', array(
             'position' => $position,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -86,12 +99,12 @@ class PositionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->get('bioprogramme_account.position_manager')->save($position);
 
             return $this->redirectToRoute('account_position_edit', array('id' => $position->getId()));
         }
 
-        return $this->render('position/edit.html.twig', array(
+        return $this->render('BioprogrammeAccountBundle:position:edit.html.twig', array(
             'position' => $position,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -110,9 +123,7 @@ class PositionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($position);
-            $em->flush();
+            $this->get('bioprogramme_account.position_manager')->delete($position);
         }
 
         return $this->redirectToRoute('account_position_index');

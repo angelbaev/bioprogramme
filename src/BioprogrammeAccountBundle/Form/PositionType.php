@@ -13,7 +13,7 @@ class PositionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('description')->add('isActive')->add('createdAt')->add('updatedAt')->add('createdBy')->add('updatedBy');
+        $builder->add('name')->add('description')->add('isActive');
     }
     
     /**
