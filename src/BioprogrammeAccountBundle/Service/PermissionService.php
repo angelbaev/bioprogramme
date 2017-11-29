@@ -13,6 +13,7 @@ use AppBundle\Service\BaseService;
  */
 class PermissionService extends BaseService
 {
+
     /**
      * PermissionService constructor.
      *
@@ -23,5 +24,40 @@ class PermissionService extends BaseService
     public function __construct(EntityManager $entityManager, Container $container, $entity)
     {
         parent::__construct($entityManager, $container, $entity);
+    }
+
+    /**
+     * @param array $routes
+     *
+     * @return array
+     */
+    public function  convertRouteCollection(array $routes)
+    {
+        $data = [];
+        foreach ($routes as $route => $params) {
+            if ($this->startsWith($route, '_')) continue;
+            if (in_array($route, [
+                'bioprogrammeaccount_default_index',
+                'login',
+                'auth_login_check',
+                'logout',
+                'homepage',
+                'permission',
+            ]))  continue;
+            $data[] = $route;
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param $haystack
+     * @param $needle
+     *
+     * @return bool
+     */
+    public function startsWith($haystack, $needle)
+    {
+        return $needle === '' || strrpos($haystack, $needle, -strlen($haystack)) !== false;
     }
 }

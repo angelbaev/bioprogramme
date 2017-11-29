@@ -17,11 +17,66 @@ class PermissionController extends Controller
     /**
      * Lists all permission entities.
      *
+     * @Route("/role/{role_id}", name="account_permission_role")
+     * @Method("GET")
+     */
+    public function roleAction(Request $request)
+    {
+        /** @var Router $router */
+        $router = $this->get('router');
+        $routes = $router->getRouteCollection()->all();
+        $permissions = $this->get('bioprogramme_account.permission_manager')->convertRouteCollection($routes);
+        $roleId = $request->get('role_id');
+        $role = $this->get('bioprogramme_account.role_manager')->findById($roleId);
+        $rolePermissions = unserialize($role->getPermission());
+        $access = [];
+        $modify = [];
+        if (isset($rolePermissions['access'])) {
+            $access = $rolePermissions['access'];
+        }
+        if (isset($rolePermissions['modify'])) {
+            $modify = $rolePermissions['modify'];
+        }
+
+        return $this->render('BioprogrammeAccountBundle:permission:index.html.twig', array(
+            'permissions' => $permissions,
+            'role' => $role,
+            'access' => $access,
+            'modify' => $modify,
+        ));
+    }
+
+    /**
+     * Save permissions
+     *
+     * @Route("/save-permissions", name="account_permission_save")
+     * @Method({"GET", "POST"})
+     */
+    public function saveAction(Request $request)
+    {
+        $roleId = $request->get('role_id');
+        $permission = serialize($request->get('permission'));
+        $role = $this->get('bioprogramme_account.role_manager')->findById($roleId);
+        $role->setPermission($permission);
+        $this->get('bioprogramme_account.role_manager')->save($role);
+
+        return $this->redirectToRoute('account_permission_role', array('role_id' => $roleId));
+    }
+
+    /**
+     * Lists all permission entities.
+     *
      * @Route("/", name="account_permission_index")
      * @Method("GET")
      */
     public function indexAction(Request $request)
     {
+        /** @var Router $router */
+        $router = $this->get('router');
+        $routes = $router->getRouteCollection()->all();
+        $this->get('bioprogramme_account.permission_manager')->convertRouteCollection($routes);
+
+
         $page = $request->get('page', 1);
         $sort = $request->get('sort', 'name');
         $order = $request->get('order', 'desc');

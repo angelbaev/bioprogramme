@@ -27,6 +27,14 @@ class RoleFixture extends Fixture  implements ContainerAwareInterface
         $manager->persist($role);
         $manager->flush();
 
+        // Manager
+        $role = new Role();
+        $role->setName('Manager');
+        $role->setCode('ROLE_MANAGER');
+        $role->setIsActive(1);
+        $manager->persist($role);
+        $manager->flush();
+
         // Technical officer
         $role = new Role();
         $role->setName('Technical officer');

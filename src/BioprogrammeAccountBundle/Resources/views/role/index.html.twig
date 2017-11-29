@@ -44,6 +44,8 @@
                     <div class="btn-group">
                         <a class="btn btn-default" href="{{ path('account_role_show', { 'id': role.id }) }}"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-default" href="{{ path('account_role_edit', { 'id': role.id }) }}"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-default" href="{{ path('account_permission_role', { 'role_id': role.id }) }}"><i class="fa fa-cogs"></i></a>
+
                     </div>
                  </td>
             </tr>

@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <form id="permission-form" method="post" action="{{ path('account_permission_save') }}">
+        <input type="hidden" name="role_id" value="{{ role.id }}">
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">{% trans %}Permissions{% endtrans %}</h3>
-                <a href="{{ path('account_permission_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
+                <h3 class="box-title">{% trans %}Permissions{% endtrans %} - {{ role.name }}</h3>
+                <a href="javascript:;" onclick="$('#permission-form').submit();" class="btn btn-success btn-flat pull-right"><i class="fa fa-floppy-o"></i> {% trans %}Save{% endtrans %}</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -14,38 +16,50 @@
                 <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>{% trans %}Id{% endtrans %}</th>
                 <th>
-                    {% if sort == 'name' %}
-                        <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
-                    {%  else %}
-                        <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}) }}">{% trans %}Name{% endtrans %}</a>
-                    {% endif %}
+                    {% trans %}Name{% endtrans %}
                 </th>
-                <th>{% trans %}Value{% endtrans %}</th>
-                <th>{% trans %}Actions{% endtrans %}</th>
+                <th>{% trans %}Access{% endtrans %}</th>
+                <th>{% trans %}Modify{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
         {% for permission in permissions %}
             <tr>
-                <td><a href="{{ path('account_permission_show', { 'id': permission.id }) }}">{{ permission.id }}</a></td>
-                <td>{{ permission.name }}</td>
-                <td>{{ permission.value }}</td>
+                <td>{{ permission }}</td>
                 <td>
-                    <div class="btn-group">
-                        <a class="btn btn-default" href="{{ path('account_permission_show', { 'id': permission.id }) }}"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-default" href="{{ path('account_permission_edit', { 'id': permission.id }) }}"><i class="fa fa-pencil"></i></a>
-                    </div>
+                    {% if permission in access %}
+                        <input type="checkbox" class="permission-access" name="permission[access][]" value="{{ permission }}" checked="checked" />
+                    {% else %}
+                        <input type="checkbox" class="permission-access" name="permission[access][]" value="{{ permission }}" />
+                    {% endif %}
+                </td>
+                <td>
+                    {% if permission in modify %}
+                        <input type="checkbox" class="permission-modify" name="permission[modify][]" value="{{ permission }}" checked="checked" />
+                    {% else %}
+                        <input type="checkbox" class="permission-modify" name="permission[modify][]" value="{{ permission }}" />
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
+        <tr>
+            <td></td>
+            <td>
+                <a onclick="$('.permission-access').attr('checked', true);">{% trans %}Select all{% endtrans %}</a>/
+                <a onclick="$('.permission-access').attr('checked', false);">{% trans %}Unselect all{% endtrans %}</a>
+            </td>
+            <td>
+                <a onclick="$('.permission-modify').attr('checked', true);">{% trans %}Select all{% endtrans %}</a>/
+                <a onclick="$('.permission-modify').attr('checked', false);">{% trans %}Unselect all{% endtrans %}</a>
+            </td>
+        </tr>
         </tbody>
     </table>
-                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: paginationParams} %}
 
             </div>
         </div>
     </div>
 </div>
+    </form>
 {% endblock %}

@@ -2,7 +2,9 @@
 
 namespace BioprogrammeAccountBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * Role
@@ -42,6 +44,19 @@ class Role
      */
     private $isActive;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="permission", type="text")
+     */
+    private $permission;
+
+    /**
+     * Role constructor.
+     */
+    public function __construct()
+    {
+    }
 
     /**
      * Get id
@@ -123,6 +138,29 @@ class Role
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Get Permission
+     *
+     * @return array
+     */
+    public function getPermission()
+    {
+        return $this->permission;
+    }
+
+    /**
+     * Set Permission
+     * @param $permissions
+     *
+     * @return $this
+     */
+    public function setPermission($permission)
+    {
+        $this->permission = $permission;
+
+        return $this;
     }
 }
 

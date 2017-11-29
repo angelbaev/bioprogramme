@@ -1,8 +1,7 @@
 <?php
 namespace AppBundle\Service;
 
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -18,7 +17,7 @@ class BaseService implements ServiceInterface
      */
     const LIMIT = 20;
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     protected $em;
     /**
@@ -36,11 +35,11 @@ class BaseService implements ServiceInterface
 
     /**
      *
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      * @param Container     $container
      * @param               $entity
      */
-    public function __construct(EntityManager $entityManager, Container $container, $entity)
+    public function __construct(EntityManagerInterface $entityManager, Container $container, $entity)
     {
         $this->em = $entityManager;
         $this->container = $container;
@@ -155,6 +154,19 @@ class BaseService implements ServiceInterface
 
         return $persister->count($criteria);
     }
+
+    /**
+     * Find entity by id
+     *
+     * @param $id
+     *
+     * @return null|object
+     */
+    public function findById($id)
+    {
+        return $this->repository->find($id);
+    }
+
     /**
      * get entitiy
      *

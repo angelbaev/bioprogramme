@@ -41,6 +41,15 @@
                 <td>{{ user.phone }}</td>
             </tr>
             <tr>
+                <th>{% trans %}Roles{% endtrans %}</th>
+                <td>
+                    {% for roleName in user.roles %}
+                        <span>{{ roleName }}</span>
+                        {% if not loop.last %}|{% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
                 <th>{% trans %}Status{% endtrans %}</th>
                 <td>{{ label(user.isActive) }}</td>
             </tr>

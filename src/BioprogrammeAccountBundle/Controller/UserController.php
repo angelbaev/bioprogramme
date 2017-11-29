@@ -142,9 +142,11 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $passwordEncoder = $this->container->get('security.password_encoder');
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
+            if (!is_null($user->getPassword())) {
+                $passwordEncoder = $this->container->get('security.password_encoder');
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+            }
 
             $this->get('bioprogramme_account.user_manager')->save($user);
 
