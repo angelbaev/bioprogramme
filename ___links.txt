@@ -49,6 +49,8 @@ https://www.sitepoint.com/data-fixtures-symfony2/
 Upload
 https://symfony.com/doc/current/controller/upload_file.html
 https://symfony.com/doc/master/bundles/SonataAdminBundle/cookbook/recipe_file_uploads.html
+https://stackoverflow.com/questions/22557340/symfony2-do-not-update-a-form-field-if-not-provided
+https://ourcodeworld.com/articles/read/53/how-to-upload-a-file-with-jquery-ajax-in-php-or-symfony
 
 auto update
 https://stackoverflow.com/questions/17321893/automatic-values-for-updated-at-created-at-in-doctrine

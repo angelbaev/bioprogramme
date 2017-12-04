@@ -63,7 +63,7 @@ class PermissionListener implements EventSubscriberInterface
 
                 if (!$this->hasPermission($key, $currentRoute)) {
                     // $event->getRequest()->getHost()
-                    $event->setResponse(new RedirectResponse('http://dev.biling.bioprogramme.net/app_dev.php/permission'));
+                    //$event->setResponse(new RedirectResponse('http://dev.biling.bioprogramme.net/app_dev.php/permission'));
                 }
             }
         }

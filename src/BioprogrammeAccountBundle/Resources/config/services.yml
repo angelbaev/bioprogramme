@@ -8,19 +8,19 @@ parameters:
     bioprogramme_account.entity.position: 'BioprogrammeAccountBundle\Entity\Position'
     bioprogramme_account.service.position_service: 'BioprogrammeAccountBundle\Service\PositionService'
 services:
-    permission_listener:
-        class: AppBundle\EventListener\PermissionListener
-        arguments: ['@security.token_storage', '@doctrine.orm.entity_manager']
-#           $tokenStorage: '@security.token_storage'
+#    permission_listener:
+#        class: AppBundle\EventListener\PermissionListener
+#        arguments: ['@security.token_storage', '@doctrine.orm.entity_manager']
+##           $tokenStorage: '@security.token_storage'
+##        tags:
+##           - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 0 }
+#    entity_owner_assignment_listener:
+#        class: AppBundle\EventListener\EntityOwnerAssignmentListener
+#        arguments: ['@security.token_storage']
 #        tags:
-#           - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 0 }
-    entity_owner_assignment_listener:
-        class: AppBundle\EventListener\EntityOwnerAssignmentListener
-        arguments: ['@security.token_storage']
-        tags:
-            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-#            - { name: doctrine.event_listener, event: preFlush }
+#            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+#            - { name: doctrine.event_listener, event: preUpdate }
+##            - { name: doctrine.event_listener, event: preFlush }
     BioprogrammeAccountBundle\Form\UserType:
         arguments: ['@doctrine.orm.entity_manager']
         tags: [form.type]

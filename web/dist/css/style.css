@@ -89,3 +89,8 @@ a.sort-by:after {
 .pointer {
     cursor: pointer;
 }
+
+#profile_image_preview {
+    width: 120px;
+    height: auto;
+}

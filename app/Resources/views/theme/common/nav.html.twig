@@ -108,14 +108,14 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <!-- The user image in the navbar-->
-                    <img src="dist/img/user2-160x160.jpg" class="user-image" alt="{{ app.user.getFullName() }}">
+                    <img src="{{ image_resize(app.user.image, 160, 160) }}" class="user-image" alt="{{ app.user.getFullName() }}">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <span class="hidden-xs">{{ app.user.getFullName() }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="Васил Хвърчилков">
+                        <img src="{{ image_resize(app.user.image, 160, 160) }}" class="img-circle" alt="{{ app.user.getFullName() }}">
 
                         <p>
                             {{ app.user.getFullName() }} - ТО

@@ -24,6 +24,7 @@ class RoleFixture extends Fixture  implements ContainerAwareInterface
         $role->setName('Administrator');
         $role->setCode('ROLE_ADMIN');
         $role->setIsActive(1);
+        $role->setPermission(serialize([]));
         $manager->persist($role);
         $manager->flush();
 
@@ -32,6 +33,7 @@ class RoleFixture extends Fixture  implements ContainerAwareInterface
         $role->setName('Manager');
         $role->setCode('ROLE_MANAGER');
         $role->setIsActive(1);
+        $role->setPermission(serialize([]));
         $manager->persist($role);
         $manager->flush();
 
@@ -40,6 +42,7 @@ class RoleFixture extends Fixture  implements ContainerAwareInterface
         $role->setName('Technical officer');
         $role->setCode('ROLE_TO');
         $role->setIsActive(1);
+        $role->setPermission(serialize([]));
         $manager->persist($role);
         $manager->flush();
 
@@ -48,6 +51,7 @@ class RoleFixture extends Fixture  implements ContainerAwareInterface
         $role->setName('Work department');
         $role->setCode('ROLE_WP');
         $role->setIsActive(1);
+        $role->setPermission(serialize([]));
         $manager->persist($role);
         $manager->flush();
     }

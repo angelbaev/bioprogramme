@@ -3,10 +3,13 @@
 namespace BioprogrammeAccountBundle\Controller;
 
 use BioprogrammeAccountBundle\Entity\User;
+use BioprogrammeAccountBundle\Form\ImageUserUploadType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * User controller.
@@ -122,10 +125,10 @@ class UserController extends Controller
      * @Route("/profile/{id}", name="account_user_profile")
      * @Method("GET")
      */
-    public function profileAction(User $user)
+    public function profileAction(Request $request, User $user)
     {
         return $this->render('BioprogrammeAccountBundle:user:profile.html.twig', array(
-            'user' => $user
+            'user' => $user,
         ));
     }
 
@@ -142,7 +145,7 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            if (!is_null($user->getPassword())) {
+            if (!is_null($editForm->get('password')->getData())) {
                 $passwordEncoder = $this->container->get('security.password_encoder');
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
                 $user->setPassword($password);
@@ -158,6 +161,32 @@ class UserController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Change profile image
+     *
+     * @Route("/{id}/image", name="account_user_image")
+     * @Method({"POST"})
+     */
+    public function imageAction(Request $request, User $user)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $file = $request->files->get('profile_image');
+        $status = ['status' => 'success', 'fileUploaded' => false];
+        if(!is_null($file)){
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $this->container->getParameter('dir_image') . 'data/profile';
+            $file->move($path,$filename);
+            $user->setImage('data/profile/' . $filename);
+            $this->get('bioprogramme_account.user_manager')->save($user);
+            $status = ['status' => 'success', 'fileUploaded' => true];
+        }
+
+        return new JsonResponse($status);
     }
 
     /**

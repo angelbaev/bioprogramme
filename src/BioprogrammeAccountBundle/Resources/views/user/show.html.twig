@@ -25,6 +25,10 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
+                <th>{% trans %}Image{% endtrans %}</th>
+                <td><img src="{{ image_resize(user.image, 64, 64) }}" alt="{{ user.fullName }}"></td>
+            </tr>
+            <tr>
                 <th>{% trans %}Username{% endtrans %}</th>
                 <td>{{ user.username }}</td>
             </tr>
@@ -48,6 +52,10 @@
                         {% if not loop.last %}|{% endif %}
                     {% endfor %}
                 </td>
+            </tr>
+            <tr>
+                <th>{% trans %}Position{% endtrans %}</th>
+                <td>{% if user.position %}{{ user.position.name }}{% endif %}</td>
             </tr>
             <tr>
                 <th>{% trans %}Status{% endtrans %}</th>

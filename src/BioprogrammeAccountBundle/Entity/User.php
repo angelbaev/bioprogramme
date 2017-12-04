@@ -60,11 +60,24 @@ class User implements UserInterface, Serializable
     private $phone;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Position")
+     * @ORM\JoinColumn(name="position_id", referencedColumnName="id")
+     */
+    private $position;
 
     /**
      * @ORM\Column(type="json_array")
@@ -215,6 +228,54 @@ class User implements UserInterface, Serializable
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return User
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set position
+     *
+     * @param Position $position
+     *
+     * @return User
+     */
+    public function setPosition(Position $position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return Position
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 
     /**
