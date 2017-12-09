@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
-            "BioprogrammeAccountBundle\\": "src/BioprogrammeAccountBundle"
+            "BioprogrammeAccountBundle\\": "src/BioprogrammeAccountBundle",
+            "BioprogrammeSettingBundle\\": "src/BioprogrammeSettingBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },

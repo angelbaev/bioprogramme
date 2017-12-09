@@ -1,0 +1,18 @@
+parameters:
+    bioprogramme_setting.entity.country: 'BioprogrammeSettingBundle\Entity\Country'
+    bioprogramme_setting.service.country_service: 'BioprogrammeSettingBundle\Service\CountryService'
+    bioprogramme_setting.entity.city: 'BioprogrammeSettingBundle\Entity\City'
+    bioprogramme_setting.service.city_service: 'BioprogrammeSettingBundle\Service\CityService'
+services:
+    bioprogramme_setting.country_manager:
+        class: '%bioprogramme_setting.service.country_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_setting.entity.country%'
+    bioprogramme_setting.city_manager:
+        class: '%bioprogramme_setting.service.city_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_setting.entity.city%'

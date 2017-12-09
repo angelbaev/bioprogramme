@@ -1,3 +1,8 @@
+bioprogramme_setting:
+    resource: "@BioprogrammeSettingBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 bioprogramme_account:
     resource: "@BioprogrammeAccountBundle/Controller/"
     type:     annotation

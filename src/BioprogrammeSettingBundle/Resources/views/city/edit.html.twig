@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">{% trans %}City edit{% endtrans %}</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{{ path('setting_city_index') }}"><i class="fa fa-list"></i></a>
+                        {{ form_start(delete_form) }}
+                        <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
+                        {{ form_end(delete_form) }}
+                    </div>
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+                    <input class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+    {{ form_end(edit_form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

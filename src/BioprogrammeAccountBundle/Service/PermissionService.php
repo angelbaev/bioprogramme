@@ -38,6 +38,7 @@ class PermissionService extends BaseService
             if ($this->startsWith($route, '_')) continue;
             if (in_array($route, [
                 'bioprogrammeaccount_default_index',
+                'bioprogrammesetting_default_index',
                 'login',
                 'auth_login_check',
                 'logout',

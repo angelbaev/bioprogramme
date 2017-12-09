@@ -21,6 +21,10 @@
             'account_position_index','account_position_new','account_position_show','account_position_edit',
             'account_permission_role'
         ] %}
+        {% set settings = [
+            'setting_city_index', 'setting_city_new', 'setting_city_show', 'setting_city_edit',
+            'setting_country_index', 'setting_country_new', 'setting_country_show', 'setting_country_edit'
+        ] %}
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
@@ -79,14 +83,15 @@
                     <span>{% trans %}Reports{% endtrans %}</span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="treeview {% if routeName in settings %}active menu-open{% endif %}">
                 <a href="#">
                     <i class="fa fa-gears"></i>
                     <span>{% trans %}Systems{% endtrans %}</span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="setting.html"><i class="fa fa-circle-o"></i>{% trans %}Settings{% endtrans %}</a></li>
-                    <li><a href="city.html"><i class="fa fa-circle-o"></i>{% trans %}Cities{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['setting_country_index', 'setting_country_new', 'setting_country_show', 'setting_country_edit'] %}active{% endif %}"><a href="{{ path('setting_country_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Countries{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['setting_city_index', 'setting_city_new', 'setting_city_show', 'setting_city_edit'] %}active{% endif %}"><a href="{{ path('setting_city_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Cities{% endtrans %}</a></li>
                     <li><a href="ticket-status.html"><i class="fa fa-circle-o"></i>{% trans %}Tickets Statuses{% endtrans %}</a></li>
                     <li><a href="priority.html"><i class="fa fa-circle-o"></i>{% trans %}Tickets Reports{% endtrans %}</a></li>
                     <li><a href="ticket-label.html"><i class="fa fa-circle-o"></i>{% trans %}Tickets Labels{% endtrans %}</a></li>

@@ -128,6 +128,7 @@ class PermissionListener implements EventSubscriberInterface
         }
         if (in_array($route, [
             'bioprogrammeaccount_default_index',
+            'bioprogrammesetting_default_index',
             'login',
             'auth_login_check',
             'logout',
