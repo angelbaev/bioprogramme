@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Buildings{% endtrans %}</h3>
+                <a href="{{ path('branch_building_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>
+                    {% if sort == 'name' %}
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% endif %}
+                    {%  else %}
+                        <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
+                    {% endif %}
+                </th>
+                <th>{% trans %}Status{% endtrans %}</th>
+                <th>{% trans %}Base{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr class="filter">
+            <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
+            <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
+            <td>
+                <select name="filter_isActive" class="form-control">
+                    <option value="*"> {% trans %}All{% endtrans %} </option>
+                    <option value="0" {% if filter.isActive == 0 %} selected {% endif %}>{% trans %}Inactive{% endtrans %}</option>
+                    <option value="1" {% if filter.isActive == 1 %} selected {% endif %}>{% trans %}Active{% endtrans %}</option>
+                </select>
+            </td>
+            <td>
+                <select name="filter_base" class="form-control">
+                    <option value="*"> {% trans %}All{% endtrans %} </option>
+                    {% for base in bases %}
+                    <option value="{{ base.id }}" {% if filter.base == base.id %} selected {% endif %}>{{ base.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td class="action-column">
+                <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
+            </td>
+        </tr>
+        {% for building in buildings %}
+            <tr>
+                <td><a href="{{ path('branch_building_show', { 'id': building.id }) }}">{{ building.id }}</a></td>
+                <td>{{ building.name }}</td>
+                <td>{{ label(building.isActive) }}</td>
+                <td>{% if building.base %}{{ building.base.name }}{% endif %}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{{ path('branch_building_show', { 'id': building.id }) }}"><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-default" href="{{ path('branch_building_edit', { 'id': building.id }) }}"><i class="fa fa-pencil"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: paginationParams} %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var path = '{{ path(app.request.get('_route')) }}';
+
+        function resetFilter(url) {
+            location = url;
+        }
+
+        function filter(url) {
+            url += '?';
+            var filter_name = $('input[name=\'filter_name\']').val();
+
+            if (filter_name) {
+                url += '&filter_name=' + encodeURIComponent(filter_name);
+            }
+
+            var filter_isActive = $('select[name=\'filter_isActive\']').val();
+
+            if (filter_isActive != '*') {
+                url += '&filter_isActive=' + encodeURIComponent(filter_isActive);
+            }
+
+            var filter_base = $('select[name=\'filter_base\']').val();
+
+            if (filter_base != '*') {
+                url += '&filter_base=' + encodeURIComponent(filter_base);
+            }
+
+            location = url;
+        }
+
+        $('table tr.filter input').keydown(function(e) {
+            if (e.keyCode == 13) {
+                filter(path);
+            }
+        });
+    </script>
+{% endblock %}

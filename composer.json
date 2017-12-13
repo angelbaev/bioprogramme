@@ -7,7 +7,9 @@
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
             "BioprogrammeAccountBundle\\": "src/BioprogrammeAccountBundle",
-            "BioprogrammeSettingBundle\\": "src/BioprogrammeSettingBundle"
+            "BioprogrammeSettingBundle\\": "src/BioprogrammeSettingBundle",
+            "BioprogrammeBranchBundle\\": "src/BioprogrammeBranchBundle",
+            "BioprogrammeProductionBundle\\": "src/BioprogrammeProductionBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },

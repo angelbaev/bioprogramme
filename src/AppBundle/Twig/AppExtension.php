@@ -72,6 +72,15 @@ class AppExtension extends \Twig_Extension
         return '<small class="label ' . ($value ? 'label-success': 'label-danger') . '">' . ($value ? 'Активен': 'Неактивен') . '</small>';
     }
 
+    /**
+     * Resize image
+     *
+     * @param string $file
+     * @param int $width
+     * @param int $height
+     *
+     * @return string
+     */
     public function imageResize($file, $width, $height)
     {
         $image = ImageHelper::resize($this->container, $file, $width, $height);
@@ -79,7 +88,7 @@ class AppExtension extends \Twig_Extension
             return $image;
         }
 
-        return $this->container->getParameter('http_image') . 'img/no_image.jpg';
+        return ImageHelper::resize($this->container, 'img/no_image.jpg', $width, $height);
     }
 
     /**

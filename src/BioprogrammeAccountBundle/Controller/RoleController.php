@@ -24,13 +24,7 @@ class RoleController extends Controller
     {
         $page = $request->get('page', 1);
         $sort = $request->get('sort', 'name');
-        $order = $request->get('order', 'desc');
-
-        if ($order === 'desc') {
-            $order = 'asc';
-        } else {
-            $order = 'desc';
-        }
+        $order = $request->get('order', 'asc');
 
         $orderBy = [$sort, $order];
         $roles = $this->get('bioprogramme_account.role_manager')->search([], $orderBy, $page);

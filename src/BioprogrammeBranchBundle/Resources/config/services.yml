@@ -1,0 +1,26 @@
+parameters:
+    bioprogramme_branch.entity.branch: 'BioprogrammeBranchBundle\Entity\Branch'
+    bioprogramme_branch.service.branch_service: 'BioprogrammeBranchBundle\Service\BranchService'
+    bioprogramme_branch.entity.base: 'BioprogrammeBranchBundle\Entity\Base'
+    bioprogramme_branch.service.base_service: 'BioprogrammeBranchBundle\Service\BranchBaseService'
+    bioprogramme_branch.entity.building: 'BioprogrammeBranchBundle\Entity\Building'
+    bioprogramme_branch.service.building_service: 'BioprogrammeBranchBundle\Service\BuildingService'
+services:
+    bioprogramme_branch.branch_manager:
+        class: '%bioprogramme_branch.service.branch_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_branch.entity.branch%'
+    bioprogramme_branch.base_manager:
+        class: '%bioprogramme_branch.service.base_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_branch.entity.base%'
+    bioprogramme_branch.building_manager:
+        class: '%bioprogramme_branch.service.building_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_branch.entity.building%'

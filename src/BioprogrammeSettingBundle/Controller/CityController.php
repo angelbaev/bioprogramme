@@ -24,17 +24,11 @@ class CityController extends Controller
     {
         $page = $request->get('page', 1);
         $sort = $request->get('sort', 'name');
-        $order = $request->get('order', 'desc');
+        $order = $request->get('order', 'asc');
 
         $filter = [
             'name' => $request->get('filter_name'),
         ];
-
-        if ($order === 'desc') {
-            $order = 'asc';
-        } else {
-            $order = 'desc';
-        }
 
         $orderBy = [$sort, $order];
         $cities = $this->get('bioprogramme_setting.city_manager')->search($filter, $orderBy, $page);

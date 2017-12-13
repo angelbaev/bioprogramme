@@ -18,14 +18,22 @@
                 <th>{% trans %}Id{% endtrans %}</th>
                 <th>
                     {% if sort == 'username' %}
-                        <a href="{{ path(app.request.get('_route'), {sort: 'username', order: order, page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Username{% endtrans %}</a>
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'username', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Username{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'username', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Username{% endtrans %}</a>
+                        {% endif %}
                     {%  else %}
                         <a href="{{ path(app.request.get('_route'), {sort: 'username', order: order, page: page}|merge(queryParams)) }}">{% trans %}Username{% endtrans %}</a>
                     {% endif %}
                 </th>
                 <th>
                     {% if sort == 'email' %}
-                        <a href="{{ path(app.request.get('_route'), {sort: 'email', order: order, page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Email{% endtrans %}</a>
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'email', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Email{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'email', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Email{% endtrans %}</a>
+                        {% endif %}
                     {%  else %}
                         <a href="{{ path(app.request.get('_route'), {sort: 'email', order: order, page: page}|merge(queryParams)) }}">{% trans %}Email{% endtrans %}</a>
                     {% endif %}
@@ -34,7 +42,11 @@
                 <th>{% trans %}Phone{% endtrans %}</th>
                 <th>
                     {% if sort == 'isActive' %}
-                        <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: order, page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Status{% endtrans %}</a>
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Status{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Status{% endtrans %}</a>
+                        {% endif %}
                     {%  else %}
                         <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: order, page: page}|merge(queryParams)) }}">{% trans %}Status{% endtrans %}</a>
                     {% endif %}

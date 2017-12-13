@@ -1,3 +1,25 @@
+bioprogramme_branch_building:
+    resource: "@BioprogrammeBranchBundle/Controller/BuildingController.php"
+    type:     annotation
+
+bioprogramme_branch_base:
+    resource: "@BioprogrammeBranchBundle/Controller/BaseController.php"
+    type:     annotation
+
+bioprogramme_branch_branch:
+    resource: "@BioprogrammeBranchBundle/Controller/BranchController.php"
+    type:     annotation
+
+bioprogramme_production:
+    resource: "@BioprogrammeProductionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+bioprogramme_branch:
+    resource: "@BioprogrammeBranchBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 bioprogramme_setting:
     resource: "@BioprogrammeSettingBundle/Controller/"
     type:     annotation

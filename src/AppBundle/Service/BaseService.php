@@ -115,7 +115,7 @@ class BaseService implements ServiceInterface
      *
      * @return Paginator
      */
-    public function search(array $criteria, array $orderBy = NULL, $page = 1, $limit = 20)
+    public function search(array $criteria, array $orderBy = NULL, $page = 1, $limit = self::LIMIT)
     {
         $criteria = array_diff(array_map('trim', $criteria), ['']);
 

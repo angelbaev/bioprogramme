@@ -16,7 +16,11 @@
                 <th>{% trans %}Id{% endtrans %}</th>
                 <th>
                     {% if sort == 'name' %}
-                        <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'desc', page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'asc', page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
+                        {% endif %}
                     {%  else %}
                         <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
                     {% endif %}

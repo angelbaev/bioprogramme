@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         $page = $request->get('page', 1);
         $sort = $request->get('sort', 'username');
-        $order = $request->get('order', 'desc');
+        $order = $request->get('order', 'asc');
 
         $filter = [
             'username' => $request->get('filter_username'),
@@ -37,12 +37,6 @@ class UserController extends Controller
             'phone' => $request->get('filter_phone'),
             'isActive' => $request->get('filter_isActive', null),
         ];
-
-        if ($order === 'desc') {
-            $order = 'asc';
-        } else {
-            $order = 'desc';
-        }
 
         $orderBy = [$sort, $order];
         $users = $this->get('bioprogramme_account.user_manager')->search($filter, $orderBy, $page);
@@ -59,9 +53,6 @@ class UserController extends Controller
         if (is_null($filter['isActive'])) {
             $filter['isActive'] = -1;
         }
-
-
-        $url = '';
 
         return $this->render('BioprogrammeAccountBundle:user:index.html.twig', array(
             'users' => $users,
