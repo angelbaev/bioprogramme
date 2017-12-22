@@ -42,6 +42,8 @@ class AppExtension extends \Twig_Extension
         return array(
             'label' => new \Twig_SimpleFunction('label', [$this, 'labelFilter'], ['is_safe' => ['html']]),
             'image_resize' => new \Twig_SimpleFunction('image_resize', [$this, 'imageResize'], ['is_safe' => ['html']]),
+            'array_chunk' => new \Twig_SimpleFunction('array_chunk', [$this, 'arrayChunk']),
+            'get_attribute_id' => new \Twig_SimpleFunction('get_attribute_id', [$this, 'findIdFromAttribute']),
         );
     }
 
@@ -89,6 +91,32 @@ class AppExtension extends \Twig_Extension
         }
 
         return ImageHelper::resize($this->container, 'img/no_image.jpg', $width, $height);
+    }
+
+    /**
+     * Split an array into chunks
+     *
+     * @param array      $array
+     * @param            $size
+     * @param bool|FALSE $preserveKeys
+     *
+     * @return array
+     */
+    public function arrayChunk($array , $size, $preserveKeys = false)
+    {
+        return array_chunk((array)$array, $size, $preserveKeys);
+    }
+
+    /**
+     * @param $str
+     *
+     * @return string
+     */
+    public function findIdFromAttribute($str)
+    {
+        preg_match_all('/\\"(.*?)\\"/', $str, $matches);
+
+        return (isset($matches[1][0]) ? $matches[1][0] . '_thumb' : 'thumb');
     }
 
     /**

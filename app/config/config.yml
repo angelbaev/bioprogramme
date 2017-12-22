@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@AppBundle/Resources/config/services.yml" }
     - { resource: "@BioprogrammeAccountBundle/Resources/config/services.yml" }
     - { resource: "@BioprogrammeSettingBundle/Resources/config/services.yml" }
     - { resource: "@BioprogrammeBranchBundle/Resources/config/services.yml" }
@@ -44,7 +45,7 @@ twig:
     strict_variables: '%kernel.debug%'
     paths:
       '%kernel.project_dir%/app/Resources/views/theme': theme
-    form_themes: ['bootstrap_3_horizontal_layout.html.twig']
+    form_themes: ['bootstrap_3_horizontal_layout.html.twig', 'AppBundle:Form:fields.html.twig']
 
 # Doctrine Configuration
 doctrine:

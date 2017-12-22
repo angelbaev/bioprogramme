@@ -39,6 +39,20 @@
                     <a href="https://symfony.com/doc/{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION')[:3] }}/page_creation.html">
                         How to create your first page in Symfony
                     </a>
+                    <div class="image-widget">
+                    <a href="javascript:;" id="thumb-image" class="img-thumbnail">
+                        <img src="{{ image_resize('demo.jpg', 120, 120) }}" alt="" title="" data-placeholder="" />
+                    </a>
+                    <input type="text" name="image" value="" id="input-image" />
+                    <div class="popover-content">
+                        <button type="button" id="button-image" class="btn btn-primary">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button type="button" id="button-clear" class="btn btn-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </div>
+                    </div>
                 </p>
             </div>
 

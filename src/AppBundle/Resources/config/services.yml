@@ -19,4 +19,7 @@ services:
 #            container: "@service_container"
         tags:
             - { name: twig.extension }
-
+    app.image_manager:
+        class: AppBundle\Service\ImageManagerService
+        arguments:
+            $container: '@service_container'

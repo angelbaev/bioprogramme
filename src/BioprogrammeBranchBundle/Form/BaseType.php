@@ -2,6 +2,7 @@
 
 namespace BioprogrammeBranchBundle\Form;
 
+use AppBundle\Form\Type\ImageType;
 use BioprogrammeBranchBundle\Entity\Branch;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +19,7 @@ class BaseType extends AbstractType
         $builder
             ->add('name')
             ->add('phone')
-            ->add('image')
+            ->add('image', ImageType::class)
             ->add('isActive')
             ->add(
                 'branch',
