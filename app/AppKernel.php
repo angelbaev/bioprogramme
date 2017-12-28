@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new BioprogrammeSettingBundle\BioprogrammeSettingBundle(),
             new BioprogrammeBranchBundle\BioprogrammeBranchBundle(),
             new BioprogrammeProductionBundle\BioprogrammeProductionBundle(),
+            new BioprogrammeMarketingBundle\BioprogrammeMarketingBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

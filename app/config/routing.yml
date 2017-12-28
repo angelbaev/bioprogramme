@@ -1,3 +1,8 @@
+bioprogramme_marketing:
+    resource: "@BioprogrammeMarketingBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 bioprogramme_branch_building:
     resource: "@BioprogrammeBranchBundle/Controller/BuildingController.php"
     type:     annotation

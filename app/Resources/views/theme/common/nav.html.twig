@@ -12,33 +12,20 @@
                 <!-- Menu toggle button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-envelope-o"></i>
-                    <span class="label label-success">4</span>
+                    <span id="message_count" class="label label-success"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="header">Вие имате 4 лични съобщения</li>
+                    <li class="header">{% trans %}Private Messages{% endtrans %}</li>
                     <li>
                         <!-- inner menu: contains the messages -->
-                        <ul class="menu">
-                            <li><!-- start message -->
-                                <a href="#">
-                                    <div class="pull-left">
-                                        <!-- User Image -->
-                                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                    </div>
-                                    <!-- Message title and timestamp -->
-                                    <h4>
-                                        Подръжка Дебнево
-                                        <small><i class="fa fa-clock-o"></i> 5 мин</small>
-                                    </h4>
-                                    <!-- The message -->
-                                    <p>Проблем мотокар</p>
-                                </a>
-                            </li>
+                        <ul id="message_list" class="menu">
+                            <!-- start message -->
+
                             <!-- end message -->
                         </ul>
                         <!-- /.menu -->
                     </li>
-                    <li class="footer"><a href="#">Виж всички</a></li>
+                    <li class="footer"><a href="{{ path('marketing_email_index') }}">{% trans %}View All{% endtrans %}</a></li>
                 </ul>
             </li>
             <!-- /.messages-menu -->
@@ -48,13 +35,13 @@
                 <!-- Menu toggle button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-bell-o"></i>
-                    <span class="label label-warning">10</span>
+                    <span id="notification_count" class="label label-warning"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="header">Вие имате 10 нотификаци</li>
+                    <li class="header">{% trans %}Notifications{% endtrans %}</li>
                     <li>
                         <!-- Inner Menu: contains the notifications -->
-                        <ul class="menu">
+                        <ul id="notification_list" class="menu">
                             <li><!-- start notification -->
                                 <a href="#">
                                     <i class="fa fa-users text-aqua"></i> имате 5 неотворени таска!
@@ -63,7 +50,7 @@
                             <!-- end notification -->
                         </ul>
                     </li>
-                    <li class="footer"><a href="#">Виж всички</a></li>
+                    <li class="footer"><a href="{{ path('marketing_notification_index') }}">{% trans %}View All{% endtrans %}</a></li>
                 </ul>
             </li>
             <!-- Tasks Menu -->
@@ -108,17 +95,17 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <!-- The user image in the navbar-->
-                    <img src="{{ image_resize(app.user.image, 160, 160) }}" class="user-image" alt="{{ app.user.getFullName() }}">
+                    <img id="nav_left_profile_image" src="{{ image_resize(app.user.image, 160, 160) }}" class="user-image" alt="{{ app.user.getFullName() }}">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <span class="hidden-xs">{{ app.user.getFullName() }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        <img src="{{ image_resize(app.user.image, 160, 160) }}" class="img-circle" alt="{{ app.user.getFullName() }}">
+                        <img id="nav_profile_image" src="{{ image_resize(app.user.image, 160, 160) }}" class="img-circle" alt="{{ app.user.getFullName() }}">
 
                         <p>
-                            {{ app.user.getFullName() }} - ТО
+                            {{ app.user.getFullName() }} - {{ prity_roles(app.user.roles, '|') }}
                             <small>{{ app.user.getEmail() }}</small>
                         </p>
                     </li>
@@ -126,10 +113,10 @@
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="{{ path('account_user_profile', {id: app.user.Id()}) }}" class="btn btn-default btn-flat">Профил</a>
+                            <a href="{{ path('account_user_profile', {id: app.user.Id()}) }}" class="btn btn-default btn-flat">{% trans %}Profile{% endtrans %}</a>
                         </div>
                         <div class="pull-right">
-                            <a href="{{ path('logout') }}" class="btn btn-default btn-flat">Изход</a>
+                            <a href="{{ path('logout') }}" class="btn btn-default btn-flat">{% trans %}Logout{% endtrans %}</a>
                         </div>
                     </li>
                 </ul>

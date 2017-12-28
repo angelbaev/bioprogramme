@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Notifications{% endtrans %}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Message{% endtrans %}</th>
+                <th>{% trans %}Is readed{% endtrans %}</th>
+                <th>{% trans %}Createdat{% endtrans %}</th>
+                <th>{% trans %}Updatedat{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for notification in notifications %}
+            <tr>
+                <td><a href="{{ path('marketing_notification_show', { 'id': notification.id }) }}">{{ notification.id }}</a></td>
+                <td>{{ notification.message }}</td>
+                <td>{{ label(notification.isReaded, ['Не', 'Да']) }}</td>
+                <td>{% if notification.createdAt %}{{ notification.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if notification.updatedAt %}{{ notification.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{{ path('marketing_notification_show', { 'id': notification.id }) }}"><i class="fa fa-eye"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: {}} %}
+
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $.ajax({
+            url: '{{ path('marketing_email_update')}}',
+            type: 'post',
+            dataType: 'json',
+            success: function(json) {
+                console.log(json)
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    </script>
+{% endblock %}

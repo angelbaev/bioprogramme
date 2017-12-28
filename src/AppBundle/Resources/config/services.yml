@@ -14,7 +14,7 @@ services:
 #            - { name: doctrine.event_listener, event: preFlush }
     app.twig.extension:
         class: AppBundle\Twig\AppExtension
-        arguments: ['@service_container']
+        arguments: ['@service_container', '@doctrine.orm.entity_manager']
 #        properties:
 #            container: "@service_container"
         tags:

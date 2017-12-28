@@ -14,15 +14,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ImageType extends AbstractType
 {
+    /**
+     * @inheritdoc
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getParent()
     {
         return TextType::class;
     }
 
+    /**
+     * Get type name
+     * @return string
+     */
     public function getName()
     {
         return 'image';

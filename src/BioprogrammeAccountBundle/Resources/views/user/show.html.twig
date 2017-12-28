@@ -47,10 +47,7 @@
             <tr>
                 <th>{% trans %}Roles{% endtrans %}</th>
                 <td>
-                    {% for roleName in user.roles %}
-                        <span>{{ roleName }}</span>
-                        {% if not loop.last %}|{% endif %}
-                    {% endfor %}
+                    {{ prity_roles(user.roles, '|') }}
                 </td>
             </tr>
             <tr>

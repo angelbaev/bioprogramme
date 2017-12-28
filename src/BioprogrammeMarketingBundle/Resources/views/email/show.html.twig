@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Message{% endtrans %}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="btn-group">
+                    {% if type == 'outbox' %}
+                    <a class="btn btn-default" href="{{ path('marketing_email_outbox') }}"><i class="fa fa-list"></i></a>
+                    {% else %}
+                    <a class="btn btn-default" href="{{ path('marketing_email_index') }}"><i class="fa fa-list"></i></a>
+                    {% endif %}
+                    <a class="btn btn-default" href="{{ path('marketing_email_edit', { 'id': email.id }) }}"><i class="fa fa-pencil"></i></a>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
+                    {{ form_end(delete_form) }}
+                </div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <td>{{ email.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}From user{% endtrans %}</th>
+                <td>{% if email.fromUser %}{{ email.fromUser.fullName }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}To user{% endtrans %}</th>
+                <td>{% if email.toUser %}{{ email.toUser.fullName }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Subject{% endtrans %}</th>
+                <td>{{ email.subject }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Message{% endtrans %}</th>
+                <td>{{ email.message|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Createdat{% endtrans %}</th>
+                <td>{% if email.createdAt %}{{ email.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Updatedat{% endtrans %}</th>
+                <td>{% if email.updatedAt %}{{ email.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

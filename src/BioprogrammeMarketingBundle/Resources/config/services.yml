@@ -1,0 +1,18 @@
+parameters:
+    bioprogramme_marketing.entity.notification: 'BioprogrammeMarketingBundle\Entity\Notification'
+    bioprogramme_marketing.service.notification_service: 'BioprogrammeMarketingBundle\Service\NotificationService'
+    bioprogramme_marketing.entity.email: 'BioprogrammeMarketingBundle\Entity\Email'
+    bioprogramme_marketing.service.email_service: 'BioprogrammeMarketingBundle\Service\EmailService'
+services:
+    bioprogramme_marketing.notification_manager:
+        class: '%bioprogramme_marketing.service.notification_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_marketing.entity.notification%'
+    bioprogramme_marketing.email_manager:
+        class: '%bioprogramme_marketing.service.email_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_marketing.entity.email%'

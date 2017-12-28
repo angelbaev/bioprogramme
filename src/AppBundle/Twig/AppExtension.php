@@ -5,6 +5,8 @@ namespace AppBundle\Twig;
 //https://twig.symfony.com/doc/2.x/advanced.html#id2
 //https://stackoverflow.com/questions/9633723/symfony2-twig-how-to-tell-the-custom-twig-tag-to-not-escape-the-output
 use AppBundle\Helper\ImageHelper;
+use BioprogrammeAccountBundle\Entity\Role;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -18,10 +20,15 @@ class AppExtension extends \Twig_Extension
      * @var ContainerInterface
      */
     private $container;
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $em;
 
-    public function __construct(ContainerInterface $containerInterface)
+    public function __construct(ContainerInterface $containerInterface, EntityManagerInterface $entityManager)
     {
         $this->container = $containerInterface;
+        $this->em = $entityManager;
     }
 
     /**
@@ -44,6 +51,7 @@ class AppExtension extends \Twig_Extension
             'image_resize' => new \Twig_SimpleFunction('image_resize', [$this, 'imageResize'], ['is_safe' => ['html']]),
             'array_chunk' => new \Twig_SimpleFunction('array_chunk', [$this, 'arrayChunk']),
             'get_attribute_id' => new \Twig_SimpleFunction('get_attribute_id', [$this, 'findIdFromAttribute']),
+            'prity_roles' => new \Twig_SimpleFunction('prity_roles', [$this, 'prityRoles'], ['is_safe' => ['html']]),
         );
     }
 
@@ -68,10 +76,10 @@ class AppExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function labelFilter($value)
+    public function labelFilter($value, $labels = ['Неактивен', 'Активен'])
     {
         //{% if user.isActive %}Yes{% else %}No{% endif %}
-        return '<small class="label ' . ($value ? 'label-success': 'label-danger') . '">' . ($value ? 'Активен': 'Неактивен') . '</small>';
+        return '<small class="label ' . ($value ? 'label-success': 'label-danger') . '">' . ($value ? $labels[1]: $labels[0]) . '</small>';
     }
 
     /**
@@ -117,6 +125,30 @@ class AppExtension extends \Twig_Extension
         preg_match_all('/\\"(.*?)\\"/', $str, $matches);
 
         return (isset($matches[1][0]) ? $matches[1][0] . '_thumb' : 'thumb');
+    }
+
+    /**
+     * Show prity roles
+     *
+     * @param        $codes
+     * @param string $separator
+     *
+     * @return string
+     */
+    public function prityRoles($codes, $separator = ',')
+    {
+        $roleNames = [];
+        $repository = $this->em->getRepository(Role::class);
+        $roles = $repository->findBy(['code' => $codes, 'isActive' => 1]);
+
+        foreach($roles as $role) {
+            $roleNames[] = $role->getName();
+        }
+
+        $roleNames[] = 'User';
+        $roleNames = array_unique($roleNames);
+
+        return implode($separator, $roleNames);
     }
 
     /**

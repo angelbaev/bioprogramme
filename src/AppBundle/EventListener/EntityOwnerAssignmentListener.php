@@ -29,9 +29,11 @@ class EntityOwnerAssignmentListener
         $entity = $event->getEntity();
 
         if(method_exists(get_class($entity), 'setCreatedBy')){
-            $entity->setCreatedBy(
-                $this->tokenStorage->getToken()->getUser()->getId()
-            );
+            if (!is_null($this->tokenStorage->getToken())) {
+                $entity->setCreatedBy(
+                    $this->tokenStorage->getToken()->getUser()->getId()
+                );
+            }
         }
     }
 

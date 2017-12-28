@@ -9,7 +9,8 @@
             "BioprogrammeAccountBundle\\": "src/BioprogrammeAccountBundle",
             "BioprogrammeSettingBundle\\": "src/BioprogrammeSettingBundle",
             "BioprogrammeBranchBundle\\": "src/BioprogrammeBranchBundle",
-            "BioprogrammeProductionBundle\\": "src/BioprogrammeProductionBundle"
+            "BioprogrammeProductionBundle\\": "src/BioprogrammeProductionBundle",
+            "BioprogrammeMarketingBundle\\": "src/BioprogrammeMarketingBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },

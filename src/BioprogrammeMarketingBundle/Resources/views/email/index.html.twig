@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">{% trans %}Inbox{% endtrans %}</h3>
+            <a href="{{ path('marketing_email_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Send Message{% endtrans %}</a>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive mailbox-messages">
+    <table class="table table-hover table-striped">
+        <thead>
+        </thead>
+        <tbody>
+        {% for email in emails %}
+            <tr>
+                <td><a href="{{ path('marketing_email_show', { 'id': email.id, 'type': 'inbox' }) }}">{{ email.id }}</a></td>
+                <td class="mailbox-star">
+                    <a href="{{ path('marketing_email_show', { 'id': email.id, 'type': 'inbox' }) }}">
+                        {% if email.isReaded %}
+                            <i class="fa fa-star-o text-yellow"></i>
+                        {% else %}
+                            <i class="fa fa-star text-yellow"></i>
+                        {% endif %}
+                    </a>
+                </td>
+                <td class="mailbox-name">{% if email.fromUser %}{{ email.fromUser.fullName }}{% endif %}</td>
+                <td class="mailbox-subject"><a href="{{ path('marketing_email_show', { 'id': email.id, 'type': 'inbox' }) }}">{{ email.subject }}</a></td>
+                <td class="mailbox-date">{% if email.createdAt %}{{ email.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: {}} %}
+ </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -27,6 +27,8 @@ class BranchFixture extends Fixture  implements ContainerAwareInterface
         $branch->setDescription('Биопрограма България');
         $manager->persist($branch);
         $manager->flush();
+
+        $this->addReference('bioprograma-branch', $branch);
     }
 
     /**

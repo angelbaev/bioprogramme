@@ -38,6 +38,8 @@ Phone: Телефон
 Status: Статус
 Actions: Действия
 All: Всички
+View All: Виж всички
+Logout: Изход
 Inactive: Неактивен
 Active: Активен
 Filter: Филтър
@@ -98,3 +100,17 @@ Folder: Папка
 Delete: Изтрий
 Search: Търси
 Do you want to delete this?: Искате ли да изтриете това ?
+Notification: Нотификация
+Message: Съобщение
+Subject: Относно
+Is readed: Прочетено
+Yes: Да
+No: Не
+Inbox: Входящи
+Outbox: Изходяши
+Send Message: Изпрати съобщение
+To user: До
+From user: От
+Send: Изпрати
+Replay: Отговори
+Private Messages: Лични съобщения

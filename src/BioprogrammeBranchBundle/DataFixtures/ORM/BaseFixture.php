@@ -4,6 +4,7 @@ namespace BioprogrammeBranchBundle\DataFixtures\ORM;
 use BioprogrammeBranchBundle\Entity\Base;
 use BioprogrammeBranchBundle\Entity\Branch;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -13,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @package BioprogrammeBranchBundle\DataFixtures\ORM
  */
-class BaseFixture extends Fixture  implements ContainerAwareInterface
+class BaseFixture extends Fixture  implements ContainerAwareInterface, DependentFixtureInterface
 {
     protected $container;
 
@@ -26,6 +27,7 @@ class BaseFixture extends Fixture  implements ContainerAwareInterface
         $base->setName('Антоново');
         $base->setPhone('123456');
         $base->setIsActive(true);
+        $base->setBranch($this->getReference('bioprograma-branch'));
         $manager->persist($base);
         $manager->flush();
     }
@@ -36,5 +38,15 @@ class BaseFixture extends Fixture  implements ContainerAwareInterface
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDependencies()
+    {
+        return [
+            BranchFixture::class,
+        ];
     }
 }

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">{% trans %}Outbox{% endtrans %}</h3>
+            <a href="{{ path('marketing_email_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Send Message{% endtrans %}</a>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive mailbox-messages">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    </thead>
+                    <tbody>
+
+        {% for email in emails %}
+            <tr>
+                <td><a href="{{ path('marketing_email_show', { 'id': email.id, 'type': 'outbox' }) }}">{{ email.id }}</a></td>
+                <td class="mailbox-name">{% if email.toUser %}{{ email.toUser.fullName }}{% endif %}</td>
+                <td class="mailbox-subject"><a href="{{ path('marketing_email_show', { 'id': email.id, 'type': 'outbox' }) }}">{{ email.subject }}</a></td>
+                <td class="mailbox-date">{% if email.createdAt %}{{ email.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: {}} %}
+ </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -54,10 +54,7 @@
             <tr>
                 <th>{% trans %}Roles{% endtrans %}</th>
                 <td>
-                    {% for roleName in user.roles %}
-                        <span>{{ roleName }}</span>
-                        {% if not loop.last %}|{% endif %}
-                    {% endfor %}
+                    {{ prity_roles(user.roles, '|') }}
                 </td>
             </tr>
             <tr>
@@ -103,7 +100,13 @@
                 // Using FileReader to display the image content
                 var reader = new FileReader();
                 reader.onload = (function(previewImg) {
-                    return function(e) { previewImg.attr('src', e.target.result); };
+                    return function(e) {
+                        $('#nav_profile_image').attr('src', e.target.result);
+                        $('#nav_left_profile_image').attr('src', e.target.result);
+                        $('#aside_profile_image').attr('src', e.target.result);
+
+                        previewImg.attr('src', e.target.result);
+                    };
                 })($('#profile_image_preview'));
                 reader.readAsDataURL(file);
             }

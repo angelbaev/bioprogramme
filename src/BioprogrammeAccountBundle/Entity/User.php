@@ -85,17 +85,10 @@ class User implements UserInterface, Serializable
     private $roles = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity="Permission", inversedBy="permissions")
-     * @JoinTable(name="user_to_permissions")
-     */
-    private $permissions = [];
-
-    /**
      * User constructor.
      */
     public function __construct()
     {
-        $this->permissions = new ArrayCollection();
     }
 
     /**
@@ -373,50 +366,6 @@ class User implements UserInterface, Serializable
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);
-    }
-
-
-    /**
-     * Get Permissions
-     *
-     * @return array
-     */
-    public function getPermissions()
-    {
-        return $this->permissions->toArray();
-    }
-
-    /**
-     * Add Permission
-     * @param Permission $permission
-     *
-     * @return $this
-     */
-    public function addPermission(Permission $permission)
-    {
-        $permission->addUser($this);
-        if (!$this->permissions->contains($permission)) {
-            $this->permissions->add($permission);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remove Permission
-     *
-     * @param Permission $permission
-     *
-     * @return $this
-     */
-    public function removePermission(Permission $permission)
-    {
-        $permission->removeUser($this);
-        if ($this->permissions->contains($permission)) {
-            $this->permissions->removeElement($permission);
-        }
-
-        return $this;
     }
 }
 

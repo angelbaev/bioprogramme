@@ -33,6 +33,8 @@ class UserFixture extends Fixture  implements ContainerAwareInterface
         $manager->persist($user);
         $manager->flush();
 
+        // other fixtures can get this object using the 'admin-user' name
+        $this->addReference('admin-user', $user);
 
         $user = new User();
         $user->setUserName('vasoto');
@@ -45,6 +47,8 @@ class UserFixture extends Fixture  implements ContainerAwareInterface
         $user->setPassword($password);
         $manager->persist($user);
         $manager->flush();
+        
+        $this->addReference('to-user', $user);
 
 
 
