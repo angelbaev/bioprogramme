@@ -38,6 +38,7 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
+            new \Twig_SimpleFilter('floor', array($this, 'floorNumber')),
         );
     }
 
@@ -69,6 +70,18 @@ class AppExtension extends \Twig_Extension
         $price = '$'.$price;
 
         return $price;
+    }
+
+    /**
+     *  Round fractions down
+     *
+     * @param float $number
+     *
+     * @return float
+     */
+    public function floorNumber($number)
+    {
+        return floor(floatval($number));
     }
 
     /**

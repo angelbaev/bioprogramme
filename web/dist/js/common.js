@@ -1,5 +1,3 @@
-//D:\Web-Projects\innovatoria\__TMP\OC demo\admin\view\javascript\common.js
-var baseUrl = 'http://dev.biling.bioprogramme.net/app_dev.php/';
 $(document).ready(function() {
     $('#button-image').on('click', function() {
         $('#modal-image').remove();
@@ -58,7 +56,7 @@ var CustomerEventSource = /** @class */ (function () {
                 html += '<li><a href="' + baseUrl + 'marketing/notification/' + notification.id + '"><i class="fa text-aqua"></i> ' + notification.message + '</a></li>';
             }
             if (html === '') {
-                html += '<li><a href="javascript:;"><i class="fa text-aqua"></i> Нямате нови нотификации!</a></li>';
+                html += '<li><a href="javascript:;"><i class="fa text-aqua"></i> ' + translation['no_new_notifications'] + '</a></li>';
             }
             $('#notification_list').html(html);
 
@@ -83,7 +81,7 @@ var CustomerEventSource = /** @class */ (function () {
                      + '</li>';
             }
             if (html === '') {
-                html += '<li><a href="javascript:;"><i class="fa text-aqua"></i> Нямате нови съобщения!</a></li>';
+                html += '<li><a href="javascript:;"><i class="fa text-aqua"></i> ' + translation['no_new_messages'] + '</a></li>';
             }
             $('#message_list').html(html);
             //tasks

@@ -2,8 +2,7 @@
 {% set page = app.request.get('page', 1) %}
 {% set limit = constant('AppBundle\\Service\\BaseService::LIMIT') %}
 {% set totalPages = (total / limit)|round %}
-{% set numLinks = 8 %}
-
+ 
 {% if totalPages > 1 %}
     <ul class="pagination pagination-sm">
         {% if page == 1 %}
@@ -12,27 +11,15 @@
             </li>
         {% else %}
             <li>
-                <a href="{{ path(routeName, {page: 1}|merge(paginationParams)) }}">«</a>
                 <a href="{{ path(routeName, {page: page-1 < 1 ? 1 : page-1}|merge(paginationParams)) }}">«</a>
             </li>
         {% endif %}
-        {% if totalPages <= numLinks %}
-            {% set start = 1 %}
-            {% set end = numLinks %}
-        {% else %}
-            {% set start = page - (numLinks/2)|floor %}
-            {% set end = page + (numLinks/2)|floor %}
-            {% if start < 1 %}
-                {% set end = end + (start|abs + 1) %}
-                {% set start = 1 %}
-            {% endif %}
-            {% if end > totalPages %}
-                {% set start = start - (end - totalPages) %}
-                {% set end = totalPages %}
-            {% endif %}
-        {% endif %}
+        {#<li {{ page == 1 ? 'class="disabled"' }}>#}
+            {#<a href="{{ path(routeName, {page: page-1 < 1 ? 1 : page-1}) }}">«</a>#}
+        {#</li>#}
 
-        {% for i in start..end %}
+        {# Render each page number #}
+        {% for i in 1..totalPages %}
             <li {{ page == i ? 'class="active"' }}>
                 <a href="{{ path(routeName, {page: i}|merge(paginationParams)) }}">{{ i }}</a>
             </li>
@@ -46,13 +33,14 @@
         {% else %}
             <li>
                 <a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}|merge(paginationParams)) }}">»</a>
-                <a href="{{ path(routeName, {page: totalPages}|merge(paginationParams)) }}">»</a>
+                <a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}|merge(paginationParams)) }}">»</a>
             </li>
         {% endif %}
+
+        {#<li {{ page == totalPages ? 'class="disabled"' }}>#}
+            {#<a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}) }}">»</a>#}
+            {#<a href="{{ path(routeName, {page: page+1 <= totalPages ? page+1 : page}) }}">»</a>#}
+        {#</li>#}
     </ul>
-    <div class="pull-right">
-        {% trans %}Showing{% endtrans %}
-        {{ start }} {% trans %}to{% endtrans %} {{ end }} {% trans %}of{% endtrans %}
-        {{ totalPages }} ({{ page }} - {% trans %}Page{% endtrans %})
-    </div>
+
 {% endif %}
