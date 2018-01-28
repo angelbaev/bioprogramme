@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Category{% endtrans %}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('nomenclature_category_index') }}"><i class="fa fa-list"></i></a>
+                    <a class="btn btn-default" href="{{ path('nomenclature_category_edit', { 'id': category.id }) }}"><i class="fa fa-pencil"></i></a>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
+                    {{ form_end(delete_form) }}
+                </div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <td>{{ category.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ category.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <td>{{ category.description }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Image{% endtrans %}</th>
+                <td><img src="{{ image_resize(category.image, 64, 64) }}" alt="{{ category.name }}"></td>
+            </tr>
+            <tr>
+                <th>{% trans %}Sort order{% endtrans %}</th>
+                <td>{{ category.sortOrder }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Status{% endtrans %}</th>
+                <td>{{ label(category.isActive) }}</td>
+            </tr>
+        </tbody>
+    </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

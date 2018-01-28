@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Machineorder creation{% endtrans %}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('machineorder_index') }}"><i class="fa fa-list"></i></a>
+                </div>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="row">
+            <h3>Mashini</h3>
+            <select name="machines" id="machines" class="select2" style="width: 300px;">
+                <option value="" disabled selected hidden>Please Choose...</option>
+                {% for machine in machines %}
+                <option value="{{ machine.id }}">{{ machine.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+                <input class="btn btn-success btn-flat" type="submit" value="{% trans %}Create{% endtrans %}" />
+    {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('#machines').on('select2:select', function (e) {
+            var data = e.params.data;
+            $('#bioprogrammeproductionbundle_machineorder_machineOrderReferences').append('<option value="' + data.id + '">' + data.text + '</option>');
+        });
+
+    </script>
+{% endblock %}

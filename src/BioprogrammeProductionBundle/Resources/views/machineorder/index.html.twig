@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Machineorders list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Serialnumber</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for machineOrder in machineOrders %}
+            <tr>
+                <td><a href="{{ path('machineorder_show', { 'id': machineOrder.id }) }}">{{ machineOrder.id }}</a></td>
+                <td>{{ machineOrder.serialNumber }}</td>
+                <td>{% if machineOrder.createdAt %}{{ machineOrder.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if machineOrder.updatedAt %}{{ machineOrder.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('machineorder_show', { 'id': machineOrder.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('machineorder_edit', { 'id': machineOrder.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('machineorder_new') }}">Create a new machineOrder</a>
+        </li>
+    </ul>
+{% endblock %}

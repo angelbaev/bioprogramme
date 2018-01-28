@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1> list</h1>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Lines{% endtrans %}</h3>
+                <a href="{{ path('branch_line_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>
+                    {% if sort == 'name' %}
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% endif %}
+                    {%  else %}
+                        <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
+                    {% endif %}
+                </th>
+                <th>
+                    {% if sort == 'isActive' %}
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Status{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Status{% endtrans %}</a>
+                        {% endif %}
+                    {%  else %}
+                        <a href="{{ path(app.request.get('_route'), {sort: 'isActive', order: order, page: page}|merge(queryParams)) }}">{% trans %}Status{% endtrans %}</a>
+                    {% endif %}
+                </th>
+                <th>{% trans %}Building{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr class="filter">
+            <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
+            <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
+            <td>
+                <select name="filter_isActive" class="form-control">
+                    <option value="*"> {% trans %}All{% endtrans %} </option>
+                    <option value="0" {% if filter.isActive == 0 %} selected {% endif %}>{% trans %}Inactive{% endtrans %}</option>
+                    <option value="1" {% if filter.isActive == 1 %} selected {% endif %}>{% trans %}Active{% endtrans %}</option>
+                </select>
+            </td>
+            <td></td>
+            <td class="action-column">
+                <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
+            </td>
+        </tr>
+        {% for line in lines %}
+            <tr>
+                <td><a href="{{ path('branch_line_show', { 'id': line.id }) }}">{{ line.id }}</a></td>
+                <td>{{ line.name }}</td>
+                <td>{{ label(line.isActive) }}</td>
+                <td>{{ line.building.name }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{{ path('branch_line_show', { 'id': line.id }) }}"><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-default" href="{{ path('branch_line_edit', { 'id': line.id }) }}"><i class="fa fa-pencil"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: paginationParams} %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var path = '{{ path(app.request.get('_route')) }}';
+
+        function resetFilter(url) {
+            location = url;
+        }
+
+        function filter(url) {
+            url += '?';
+            var filter_name = $('input[name=\'filter_name\']').val();
+
+            if (filter_name) {
+                url += '&filter_name=' + encodeURIComponent(filter_name);
+            }
+
+            var filter_isActive = $('select[name=\'filter_isActive\']').val();
+
+            if (filter_isActive != '*') {
+                url += '&filter_isActive=' + encodeURIComponent(filter_isActive);
+            }
+
+            location = url;
+        }
+
+        $('table tr.filter input').keydown(function(e) {
+            if (e.keyCode == 13) {
+                filter(path);
+            }
+        });
+    </script>
+{% endblock %}

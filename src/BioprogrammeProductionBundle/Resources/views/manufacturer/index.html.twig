@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Manufacturers{% endtrans %}</h3>
+                <a href="{{ path('nomenclature_manufacturer_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>
+                    {% if sort == 'name' %}
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% endif %}
+                    {%  else %}
+                        <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
+                    {% endif %}
+                </th>
+                <th>{% trans %}Image{% endtrans %}</th>
+                <th>{% trans %}Sort order{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr class="filter">
+            <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
+            <td></td>
+            <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
+            <td></td>
+            <td class="action-column">
+                <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
+            </td>
+        </tr>
+        {% for manufacturer in manufacturers %}
+            <tr>
+                <td><a href="{{ path('nomenclature_manufacturer_show', { 'id': manufacturer.id }) }}">{{ manufacturer.id }}</a></td>
+                <td><img src="{{ image_resize(manufacturer.image, 64, 64) }}" alt="{{ manufacturer.name }}"></td>
+                <td>{{ manufacturer.name }}</td>
+                <td>{{ manufacturer.sortOrder }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{{ path('nomenclature_manufacturer_show', { 'id': manufacturer.id }) }}"><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-default" href="{{ path('nomenclature_manufacturer_edit', { 'id': manufacturer.id }) }}"><i class="fa fa-pencil"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: paginationParams} %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var path = '{{ path(app.request.get('_route')) }}';
+
+        function resetFilter(url) {
+            location = url;
+        }
+
+        function filter(url) {
+            url += '?';
+            var filter_name = $('input[name=\'filter_name\']').val();
+
+            if (filter_name) {
+                url += '&filter_name=' + encodeURIComponent(filter_name);
+            }
+
+            location = url;
+        }
+
+        $('table tr.filter input').keydown(function(e) {
+            if (e.keyCode == 13) {
+                filter(path);
+            }
+        });
+    </script>
+{% endblock %}

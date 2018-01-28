@@ -5,6 +5,8 @@ parameters:
     bioprogramme_branch.service.base_service: 'BioprogrammeBranchBundle\Service\BranchBaseService'
     bioprogramme_branch.entity.building: 'BioprogrammeBranchBundle\Entity\Building'
     bioprogramme_branch.service.building_service: 'BioprogrammeBranchBundle\Service\BuildingService'
+    bioprogramme_branch.entity.line: 'BioprogrammeBranchBundle\Entity\Line'
+    bioprogramme_branch.service.line_service: 'BioprogrammeBranchBundle\Service\LineService'
 services:
     bioprogramme_branch.branch_manager:
         class: '%bioprogramme_branch.service.branch_service%'
@@ -24,3 +26,9 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
             $container: '@service_container'
             $entity: '%bioprogramme_branch.entity.building%'
+    bioprogramme_branch.line_manager:
+        class: '%bioprogramme_branch.service.line_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_branch.entity.line%'

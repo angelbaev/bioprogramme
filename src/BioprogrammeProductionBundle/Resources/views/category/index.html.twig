@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">{% trans %}Categories{% endtrans %}</h3>
+                    <a href="{{ path('nomenclature_category_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Image{% endtrans %}</th>
+                <th>
+                    {% if sort == 'name' %}
+                        {% if order == 'asc' %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'desc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.get('_route'), {sort: 'name', order: 'asc', page: page}|merge(queryParams)) }}" class="sort-by {{ order }}">{% trans %}Name{% endtrans %}</a>
+                        {% endif %}
+                    {%  else %}
+                        <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
+                    {% endif %}
+                </th>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <th>{% trans %}Sort order{% endtrans %}</th>
+                <th>{% trans %}Status{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td><a href="{{ path('nomenclature_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                <td><img src="{{ image_resize(category.image, 64, 64) }}" alt="{{ category.name }}"></td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+                <td>{{ category.sortOrder }}</td>
+                <td>{{ label(category.isActive) }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{{ path('nomenclature_category_show', { 'id': category.id }) }}"><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-default" href="{{ path('nomenclature_category_edit', { 'id': category.id }) }}"><i class="fa fa-pencil"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+                {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: paginationParams} %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

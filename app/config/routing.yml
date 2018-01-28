@@ -1,3 +1,31 @@
+bioprogramme_branch_line:
+    resource: "@BioprogrammeBranchBundle/Controller/LineController.php"
+    type:     annotation
+
+bioprogramme_production_machine_order:
+    resource: "@BioprogrammeProductionBundle/Controller/MachineOrderController.php"
+    type:     annotation
+
+bioprogramme_production_machine:
+    resource: "@BioprogrammeProductionBundle/Controller/MachineController.php"
+    type:     annotation
+
+bioprogramme_production_manufacturer:
+    resource: "@BioprogrammeProductionBundle/Controller/ManufacturerController.php"
+    type:     annotation
+
+bioprogramme_production_category:
+    resource: "@BioprogrammeProductionBundle/Controller/CategoryController.php"
+    type:     annotation
+
+bioprogramme_production_attribute:
+    resource: "@BioprogrammeProductionBundle/Controller/AttributeController.php"
+    type:     annotation
+
+bioprogramme_production_attribute_group:
+    resource: "@BioprogrammeProductionBundle/Controller/AttributeGroupController.php"
+    type:     annotation
+
 bioprogramme_marketing:
     resource: "@BioprogrammeMarketingBundle/Controller/"
     type:     annotation

@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">{% trans %}Machine{% endtrans %}</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="btn-group">
+                <a class="btn btn-default" href="{{ path('nomenclature_machine_index') }}"><i class="fa fa-list"></i></a>
+                <a class="btn btn-default" href={{ path('nomenclature_machine_edit', { 'id': machine.id }) }}"><i class="fa fa-pencil"></i></a>
+                {{ form_start(delete_form) }}
+                <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
+                {{ form_end(delete_form) }}
+            </div>
+            <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <td>{{ machine.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Model{% endtrans %}</th>
+                <td>{{ machine.model }}</td>
+            </tr>
+             <tr>
+                <th>{% trans %}Serial number{% endtrans %}</th>
+                <td>{{ machine.serialNumber }}</td>
+            </tr>
+           <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ machine.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <td>{{ machine.description|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Image{% endtrans %}</th>
+                <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}"></td>
+            </tr>
+            <tr>
+                <th>{% trans %}Quantity{% endtrans %}</th>
+                <td>{{ machine.quantity }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Warranty{% endtrans %}</th>
+                <td>{{ machine.warranty }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}State{% endtrans %}</th>
+                <td>{{ machine.state }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Year production{% endtrans %}</th>
+                <td>{{ machine.yearProduction }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Date deployment{% endtrans %}</th>
+                <td>{% if machine.dateDeployment %}{{ machine.dateDeployment|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+
+            <tr>
+                <th>{% trans %}Price{% endtrans %}</th>
+                <td>{{ machine.price }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Weight{% endtrans %}</th>
+                <td>{{ machine.weight }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Length{% endtrans %}</th>
+                <td>{{ machine.length }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Width{% endtrans %}</th>
+                <td>{{ machine.width }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Height{% endtrans %}</th>
+                <td>{{ machine.height }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Sort order{% endtrans %}</th>
+                <td>{{ machine.sortOrder }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Status{% endtrans %}</th>
+                <td>{{ label(machine.isActive) }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Createdat{% endtrans %}</th>
+                <td>{% if machine.createdAt %}{{ machine.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Updatedat{% endtrans %}</th>
+                <td>{% if machine.updatedAt %}{{ machine.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Createdby{% endtrans %}</th>
+                <td>{{ machine.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Updatedby{% endtrans %}</th>
+                <td>{{ machine.updatedBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

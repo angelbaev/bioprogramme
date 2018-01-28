@@ -2,17 +2,16 @@
 
 namespace BioprogrammeBranchBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Building
+ * Line
  *
- * @ORM\Table(name="building")
- * @ORM\Entity(repositoryClass="BioprogrammeBranchBundle\Repository\BuildingRepository")
+ * @ORM\Table(name="line")
+ * @ORM\Entity(repositoryClass="BioprogrammeBranchBundle\Repository\LineRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Building
+class Line
 {
     /**
      * @var int
@@ -38,15 +37,10 @@ class Building
     private $isActive;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Base")
-     * @ORM\JoinColumn(name="base_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Building")
+     * @ORM\JoinColumn(name="building_id", referencedColumnName="id")
      */
-    private $base;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Line", mappedBy="building")
-     */
-    private $lines;
+    private $building;
 
     /**
      * @var \DateTime
@@ -77,14 +71,6 @@ class Building
     private $updatedBy;
 
     /**
-     * Building constructor.
-     */
-    public function __construct()
-    {
-        $this->lines = new ArrayCollection();
-    }
-
-    /**
      * Get id
      *
      * @return int
@@ -99,7 +85,7 @@ class Building
      *
      * @param string $name
      *
-     * @return Building
+     * @return Line
      */
     public function setName($name)
     {
@@ -123,7 +109,7 @@ class Building
      *
      * @param boolean $isActive
      *
-     * @return Building
+     * @return Line
      */
     public function setIsActive($isActive)
     {
@@ -143,64 +129,27 @@ class Building
     }
 
     /**
-     * Set base
+     * Set Building
      *
-     * @param Base $base
+     * @param Building $building
      *
-     * @return Building
+     * @return Line
      */
-    public function setBase(Base $base)
+    public function setBuilding(Building $building)
     {
-        $this->base = $base;
+        $this->building = $building;
 
         return $this;
     }
 
     /**
-     * Get base
+     * Get Building
      *
      * @return Building
      */
-    public function getBase()
+    public function getBuilding()
     {
-        return $this->base;
-    }
-
-    /**
-     * Get lines
-     * @return Line[]
-     */
-
-    public function getBuildings() {
-        return $this->lines->toArray();
-    }
-
-    /**
-     * Add line
-     *
-     * @param Line $line
-     * @return Building
-     */
-    public function addBuilding(Line $line) {
-        if (!$this->lines->contains($line)) {
-            $this->lines->add($line);
-        }
-
-        return $this;
-    }
-
-    /**
-     *  Remove line
-     *
-     * @param Line $line
-     * @return Building
-     */
-    public function removeBuilding(Line $line) {
-        if ($this->lines->contains($line)) {
-            $this->lines->removeElement($line);
-        }
-
-        return $this;
+        return $this->building;
     }
 
     /**
@@ -208,7 +157,7 @@ class Building
      *
      * @param \DateTime $createdAt
      *
-     * @return Building
+     * @return Line
      */
     public function setCreatedAt($createdAt)
     {
@@ -232,7 +181,7 @@ class Building
      *
      * @param \DateTime $updatedAt
      *
-     * @return Building
+     * @return Line
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -256,7 +205,7 @@ class Building
      *
      * @param integer $createdBy
      *
-     * @return Building
+     * @return Line
      */
     public function setCreatedBy($createdBy)
     {
@@ -280,7 +229,7 @@ class Building
      *
      * @param integer $updatedBy
      *
-     * @return Building
+     * @return Line
      */
     public function setUpdatedBy($updatedBy)
     {

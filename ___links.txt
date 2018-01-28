@@ -54,6 +54,19 @@ https://ourcodeworld.com/articles/read/53/how-to-upload-a-file-with-jquery-ajax-
 
 chained selectors
 https://stackoverflow.com/questions/10186185/symfony2-chained-selectors
+https://symfony.com/doc/current/form/dynamic_form_modification.html
+https://codepen.io/stefita/post/dynamically-add-options-to-entity-form-field-in-simfony2
+----
+https://devlog.rolandow.com/2014/11/symfony-forms-dependent-selectboxes/
+https://ourcodeworld.com/articles/read/652/how-to-create-a-dependent-select-dependent-dropdown-in-symfony-3
+https://adayinthelifeof.nl/2014/03/19/dynamic-form-modification-in-symfony2/
+
+https://symfony.com/doc/current/form/create_custom_field_type.html
+
+ManyToMany with Extra Fields
+https://knpuniversity.com/screencast/collections/many-to-many-extra-fields
+https://stackoverflow.com/questions/3542243/doctrine2-best-way-to-handle-many-to-many-with-extra-columns-in-reference-table
+https://gist.github.com/ferodss/7104374
 
 auto update
 https://stackoverflow.com/questions/17321893/automatic-values-for-updated-at-created-at-in-doctrine

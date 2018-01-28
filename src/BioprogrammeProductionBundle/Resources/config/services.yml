@@ -1,4 +1,42 @@
+parameters:
+    bioprogramme_production.entity.attribute_group: 'BioprogrammeProductionBundle\Entity\AttributeGroup'
+    bioprogramme_production.service.attribute_group_service: 'BioprogrammeProductionBundle\Service\AttributeGroupService'
+    bioprogramme_production.entity.attribute: 'BioprogrammeProductionBundle\Entity\Attribute'
+    bioprogramme_production.service.attribute_service: 'BioprogrammeProductionBundle\Service\AttributeService'
+    bioprogramme_production.entity.category: 'BioprogrammeProductionBundle\Entity\Category'
+    bioprogramme_production.service.category_service: 'BioprogrammeProductionBundle\Service\CategoryService'
+    bioprogramme_production.entity.manufacturer: 'BioprogrammeProductionBundle\Entity\Manufacturer'
+    bioprogramme_production.service.manufacturer_service: 'BioprogrammeProductionBundle\Service\ManufacturerService'
+    bioprogramme_production.entity.machine: 'BioprogrammeProductionBundle\Entity\Machine'
+    bioprogramme_production.service.machine_service: 'BioprogrammeProductionBundle\Service\MachineService'
 services:
-#    bioprogramme_production.example:
-#        class: BioprogrammeProductionBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    bioprogramme_production.attribute_group_manager:
+        class: '%bioprogramme_production.service.attribute_group_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_production.entity.attribute_group%'
+    bioprogramme_production.attribute_manager:
+        class: '%bioprogramme_production.service.attribute_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_production.entity.attribute%'
+    bioprogramme_production.category_manager:
+        class: '%bioprogramme_production.service.category_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_production.entity.category%'
+    bioprogramme_production.manufacturer_manager:
+        class: '%bioprogramme_production.service.manufacturer_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_production.entity.manufacturer%'
+    bioprogramme_production.machine_manager:
+        class: '%bioprogramme_production.service.machine_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_production.entity.machine%'

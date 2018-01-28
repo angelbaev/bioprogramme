@@ -29,12 +29,22 @@
         {% set branches = [
         'branch_base_index', 'branch_base_new', 'branch_base_show', 'branch_base_edit',
         'branch_branch_index', 'branch_branch_new', 'branch_branch_show', 'branch_branch_edit',
-        'branch_building_index', 'branch_building_new', 'branch_building_show', 'branch_building_edit'
+        'branch_building_index', 'branch_building_new', 'branch_building_show', 'branch_building_edit',
+        'branch_line_index', 'branch_line_new', 'branch_line_show', 'branch_line_edit'
         ] %}
         {% set marketing = [
         'marketing_notification_index', 'marketing_notification_show',
         'marketing_email_index', 'marketing_email_outbox', 'marketing_email_new', 'marketing_email_show', 'marketing_email_edit'
         ] %}
+
+        {% set nomenclatures = [
+        'nomenclature_category_index', 'nomenclature_category_new', 'nomenclature_category_show', 'nomenclature_category_edit',
+        'nomenclature_attributegroup_index', 'nomenclature_attributegroup_new', 'nomenclature_attributegroup_show', 'nomenclature_attributegroup_edit',
+        'nomenclature_attribute_index', 'nomenclature_attribute_new', 'nomenclature_attribute_show', 'nomenclature_attribute_edit',
+        'nomenclature_machine_index', 'nomenclature_machine_new', 'nomenclature_machine_show', 'nomenclature_machine_edit',
+        'nomenclature_manufacturer_index', 'nomenclature_manufacturer_new', 'nomenclature_manufacturer_show', 'nomenclature_manufacturer_edit',
+        ] %}
+
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">{% trans %} Menu {% endtrans %}</li>
@@ -63,19 +73,29 @@
                     <li class="{% if routeName in ['branch_branch_index', 'branch_branch_new', 'branch_branch_show', 'branch_branch_edit'] %}active{% endif %}"><a href="{{ path('branch_branch_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Branches{% endtrans %}</a></li>
                     <li class="{% if routeName in ['branch_base_index', 'branch_base_new', 'branch_base_show', 'branch_base_edit'] %}active{% endif %}" ><a href="{{ path('branch_base_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Bases{% endtrans %}</a></li>
                     <li class="{% if routeName in ['branch_building_index', 'branch_building_new', 'branch_building_show', 'branch_building_edit'] %}active{% endif %}"><a href="{{ path('branch_building_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Buildings{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['branch_line_index', 'branch_line_new', 'branch_line_show', 'branch_line_edit'] %}active{% endif %}"><a href="{{ path('branch_line_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Lines{% endtrans %}</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
+            <li class="treeview {% if routeName in nomenclatures %}active menu-open{% endif %}">
+                <a href="javascript:;">
                     <i class="fa fa-gear"></i>
-                    <span>{% trans %}Production{% endtrans %}</span>
+                    <span>{% trans %}Nomenclature{% endtrans %}</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="machine.html"><i class="fa fa-circle-o"></i>{% trans %}Machines{% endtrans %}</a></li>
-                    <li><a href="option.html"><i class="fa fa-circle-o"></i>{% trans %}Parameters{% endtrans %}</a></li>
-                    <li><a href="option.html"><i class="fa fa-circle-o"></i>{% trans %}Мanufacturer{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['nomenclature_category_index', 'nomenclature_category_new', 'nomenclature_category_show', 'nomenclature_category_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_category_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Categories{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['nomenclature_attributegroup_index', 'nomenclature_attributegroup_new', 'nomenclature_attributegroup_show', 'nomenclature_attributegroup_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_attributegroup_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Attribute Groups{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['nomenclature_attribute_index', 'nomenclature_attribute_new', 'nomenclature_attribute_show', 'nomenclature_attribute_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_attribute_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Attributes{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['nomenclature_machine_index', 'nomenclature_machine_new', 'nomenclature_machine_show', 'nomenclature_machine_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_machine_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Machines{% endtrans %}</a></li>
+                    <li class="{% if routeName in ['nomenclature_manufacturer_index', 'nomenclature_manufacturer_new', 'nomenclature_manufacturer_show', 'nomenclature_manufacturer_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_manufacturer_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Manufacturers{% endtrans %}</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="{{ path('machineorder_index') }}">
+                    <i class="fa fa-gear"></i>
+                    <span>{% trans %}Заявка за машина{% endtrans %}</span>
+                </a>
+            </li>
+
             <li class="treeview {% if routeName in marketing %}active menu-open{% endif %}">
                 <a href="#">
                     <i class="fa fa-share-alt"></i>
