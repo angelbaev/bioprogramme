@@ -10,6 +10,9 @@ parameters:
     bioprogramme_production.entity.machine: 'BioprogrammeProductionBundle\Entity\Machine'
     bioprogramme_production.service.machine_service: 'BioprogrammeProductionBundle\Service\MachineService'
 services:
+    BioprogrammeProductionBundle\Form\MachineAttributeReferenceType:
+        arguments: ['@doctrine.orm.entity_manager', '@request_stack']
+        tags: [form.type]
     bioprogramme_production.attribute_group_manager:
         class: '%bioprogramme_production.service.attribute_group_service%'
         arguments:

@@ -2,6 +2,7 @@
 
 namespace BioprogrammeProductionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,6 +67,22 @@ class Category
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
     private $parent;
+
+    /**
+     * Machine in the category.
+     *
+     * @var Machine[]
+     * @ORM\ManyToMany(targetEntity="Machine", mappedBy="categories")
+     **/
+    private $machines;
+
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->machines = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -219,6 +236,50 @@ class Category
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Get Machines
+     *
+     * @return Category
+     */
+    public function getMachines()
+    {
+        return $this->machines->toArray();
+    }
+    /**
+     * Add Machine
+     *
+     * @param Machine $machine
+     * @return Category
+     */
+    public function addMachine(Machine $machine)
+    {
+        if ($this->machines->contains($machine)) {
+            return;
+        }
+
+        $this->machines->add($machine);
+        $machine->addCategory($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove Machine
+     *
+     * @param Machine $machine
+     * @return Category
+     */
+    public function removeCategory(Machine $machine)
+    {
+        if (!$this->machines->contains($machine)) {
+            return;
+        }
+        $this->machines->removeElement($machine);
+        $machine->removeMachine($this);
+
+        return $this;
     }
 }
 

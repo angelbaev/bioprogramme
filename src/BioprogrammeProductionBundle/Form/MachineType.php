@@ -23,6 +23,18 @@ class MachineType extends AbstractType
         $builder
             ->add('model')
             ->add('serialNumber')
+//            ->add(
+//                'categories',
+//                EntityType::class,
+//                [
+//                    'class' => Category::class,
+//                    'choice_label' => 'name',
+//                    'placeholder' => 'Select',
+//                    'attr' => [
+//                        'class' => 'select2',
+//                    ]
+//                ]
+//            )
             ->add('name')
             ->add(
                 'description',

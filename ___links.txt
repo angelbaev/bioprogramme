@@ -61,7 +61,10 @@ https://devlog.rolandow.com/2014/11/symfony-forms-dependent-selectboxes/
 https://ourcodeworld.com/articles/read/652/how-to-create-a-dependent-select-dependent-dropdown-in-symfony-3
 https://adayinthelifeof.nl/2014/03/19/dynamic-form-modification-in-symfony2/
 
+
 https://symfony.com/doc/current/form/create_custom_field_type.html
+https://stackoverflow.com/questions/9332925/how-to-inject-the-request-into-a-service
+https://github.com/javiereguiluz/easy-admin-demo
 
 ManyToMany with Extra Fields
 https://knpuniversity.com/screencast/collections/many-to-many-extra-fields
@@ -73,6 +76,18 @@ https://stackoverflow.com/questions/17321893/automatic-values-for-updated-at-cre
 https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/sluggable.md
 https://symfony.com/doc/current/doctrine/common_extensions.html
 https://stackoverflow.com/questions/10990469/automatically-updating-created-by-in-the-model
+
+autocomplate
+http://www.tipocode.com/symfony2/web/autocomplete
+http://www.tipocode.com/symfony-2/symfony2-star-rating-system/
+http://forum.symfony-project.org/forum/23/topic/81483.html
+
+ajax
+https://adayinthelifeof.nl/2014/03/19/dynamic-form-modification-in-symfony2/
+http://www.craftitonline.com/2011/08/symfony2-ajax-form-republish/
+https://blog.eleven-labs.com/en/upload-file-ajax/
+https://ourcodeworld.com/articles/read/53/how-to-upload-a-file-with-jquery-ajax-in-php-or-symfony
+
 --------------
 Deploying Symfony website to production server
 https://stackoverflow.com/questions/25887925/deploying-symfony-2-5-3-website-to-production-server

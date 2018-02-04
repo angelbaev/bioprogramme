@@ -15,12 +15,311 @@
                     <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
                     {{ form_end(delete_form) }}
                 </div>
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-    <input class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
-    {{ form_end(edit_form) }}
+
+                <br><br>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Machine{% endtrans %}</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Attributes{% endtrans %}</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
+                    <li><a href="#tab_4" data-toggle="tab">{% trans %}Documentation{% endtrans %}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <br>
+                        {{ form_start(edit_form) }}
+                        {{ form_widget(edit_form) }}
+                        <input class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+                        {{ form_end(edit_form) }}
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                        <br>
+                        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-machine-attribute">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th colspan="5">{% trans %}Attributes{% endtrans %}</th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>{% trans %}Attribute{% endtrans %}</th>
+                                <th>{% trans %}Text{% endtrans %}</th>
+                                <th>{% trans %}Actions{% endtrans %}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="attribute_list">
+                            {% for key, machineAttrRef in machine.attributes %}
+                                <tr>
+                                    <td>{{ key+1 }}</td>
+                                    <td>{{ machineAttrRef.attribute.name }}</td>
+                                    <td>{{ machineAttrRef.text }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-default" onclick="removeMachineAttribute({{ machineAttrRef.id }}, this)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% if machine.attributes|length == 0 %}
+                                <tr>
+                                    <td colspan="5">{% trans %}No results{% endtrans %}</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane" id="tab_3">
+                        <br>
+                        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-machine-document">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th colspan="5">{% trans %}Documents{% endtrans %}</th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Description{% endtrans %}</th>
+                                <th>{% trans %}Actions{% endtrans %}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="document_list">
+                            {% for key, document in machine.documents %}
+                                <tr>
+                                    <td>{{ key+1 }}</td>
+                                    <td>{{ document.name }}</td>
+                                    <td>{{ document.description }}</td>
+                                    <td>
+                                        <a class="btn btn-default"  target="_blank" href="{{ baseUrl }}/{{ document.file }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-default" onclick="removeMachineDocument({{ document.id }}, this)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% if machine.documents|length == 0 %}
+                                <tr>
+                                    <td colspan="5">{% trans %}No results{% endtrans %}</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane" id="tab_4">
+                        <br>
+                        {{ form_start(machine_manual_form, {attr:{'id': 'ajax_machine_manual_form'}}) }}
+                        {{ form_widget(machine_manual_form) }}
+                        <input class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+                        {{ form_end(machine_manual_form) }}
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-machine-attribute">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{% trans %}Add Attribute{% endtrans %}</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(machine_attribute_form, {attr:{'id': 'ajax_machine_attribute_form'}}) }}
+                {{ form_widget(machine_attribute_form) }}
+                <input id="ajax_machine_attribute_form_submit" class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+                {{ form_end(machine_attribute_form) }}
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+    <div class="modal fade" id="modal-machine-document">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{% trans %}Add Document{% endtrans %}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(machine_document_form, {attr:{'id': 'ajax_machine_document_form'}}) }}
+                    {{ form_widget(machine_document_form) }}
+                    <input id="ajax_machine_document_form_submit" class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+                    {{ form_end(machine_document_form) }}
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function removeMachineAttribute(id, e) {
+            $.ajax({
+                type: "POST",
+                url: "{{ path('nomenclature_machine_remove_attribute') }}",
+                data: {machineAtrrRefId: id},
+                dataType: "json",
+                success: function(json){
+                    if (json.status){
+                        $(e).closest('tr').remove();
+                    }
+                },
+                failure: function(errMsg) {
+                }
+            });
+        }
+
+        function removeMachineDocument(id, e) {
+            $.ajax({
+                type: "POST",
+                url: "{{ path('nomenclature_machine_remove_document') }}",
+                data: {documentId: id},
+                dataType: "json",
+                success: function(json){
+                    if (json.status){
+                        $(e).closest('tr').remove();
+                    }
+                },
+                failure: function(errMsg) {
+                }
+            });
+        }
+
+        $('#ajax_machine_attribute_form').on('submit', function(e) {
+            $.ajax({
+                type: "POST",
+                url: "{{ path('nomenclature_machine_add_attribute') }}",
+                data: $("#ajax_machine_attribute_form").serialize(),
+                dataType: "json",
+                success: function(json){
+                    $('#modal-machine-attribute').modal('hide');
+                    $("#ajax_machine_attribute_form").find("input[type=text]").val("");
+                    if(json.status) {
+                        var count = ($('#attribute_list tr').length + 1)
+                        var html =
+                                '<tr>' +
+                                '   <td>' +
+                                count +
+                                '   </td>' +
+                                '   <td>' +
+                                json.attribute.name +
+                                '   </td>' +
+                                '   <td>' +
+                                json.attribute.text +
+                                '   </td>' +
+                                '   <td>' +
+                                '<button type="button" class="btn btn-default remove-service"  onclick="removeMachineAttribute(' + json.attribute.id + ', this)"><i class="fa fa-trash"></i></button>' +
+                                '   </td>' +
+                                '</tr>';
+                        $('#attribute_list').append(html);
+                    }
+
+                },
+                failure: function(errMsg) {
+                }
+            });
+            e.preventDefault(); //Prevent Default action.
+
+        });
+
+        $('#ajax_machine_manual_form').on('submit', function(e) {
+            $.ajax({
+                type: "POST",
+                url: "{{ path('nomenclature_machine_add_manual') }}",
+                data: $("#ajax_machine_manual_form").serialize(),
+                dataType: "json",
+                success: function(json){
+                },
+                failure: function(errMsg) {
+                }
+            });
+            e.preventDefault(); //Prevent Default action.
+
+        });
+
+        var file = null;
+        $('input[type="file"]').on('change', function(event) {
+            if (this.files.length > 0) {
+                file = this.files[0];
+            }
+        });
+
+        $('#ajax_machine_document_form').on('submit', function(e) {
+            e.preventDefault();
+            var fd = new FormData();
+            $.each($("#ajax_machine_document_form").serializeArray(), function (key, input) {
+                fd.append(input.name, input.value);
+            });
+            fd.append('file', file);
+
+            xhr = new XMLHttpRequest();
+
+            xhr.open( 'POST', "{{ path('nomenclature_machine_add_document') }}", true );
+            xhr.onreadystatechange = function ( response ) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    if (json.status) {
+                        $('#modal-machine-document').modal('hide');
+                        $("#ajax_machine_document_form").find("input[type=text]").val("");
+                        $("#ajax_machine_document_form").find("input[type=file]").val("");
+                        $("#ajax_machine_document_form").find("textarea").val("");
+                        var count = ($('#document_list tr').length + 1)
+                        var html =
+                                '<tr>' +
+                                '   <td>' +
+                                count +
+                                '   </td>' +
+                                '   <td>' +
+                                json.document.name +
+                                '   </td>' +
+                                '   <td>' +
+                                json.document.description +
+                                '   </td>' +
+                                '   <td>' +
+                                '<a class="btn btn-default"  target="_blank" href="{{ baseUrl }}/' + json.document.file + '"><i class="fa fa-eye"></i></a>' +
+                                '<button type="button" class="btn btn-default remove-service"  onclick="removeMachineDocument(' + json.document.id + ', this)"><i class="fa fa-trash"></i></button>' +
+                                '   </td>' +
+                                '</tr>';
+                        $('#document_list').append(html);
+                    }
+                }
+            };
+            xhr.send( fd );
+
+            e.preventDefault(); //Prevent Default action.
+
+        });
+    </script>
+{% endblock %}
+{% block stylesheets %}
+<style>
+#ajax_machine_manual_form .form-group .col-sm-2 {
+    display: none;
+}
+#ajax_machine_manual_form .form-group .col-sm-10 {
+    width: 100%;
+}
+</style>
 {% endblock %}

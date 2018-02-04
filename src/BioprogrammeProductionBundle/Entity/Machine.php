@@ -150,16 +150,26 @@ class Machine
     private $manufacturer;
 
     /**
+     * @var Category[]
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="machines")
      * @JoinTable(name="machine_to_category")
      */
-    private $categories;
+    protected $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Attribute", inversedBy="machines")
-     * @JoinTable(name="machine_to_attribute")
+     * @ORM\OneToMany(targetEntity="MachineAttributeReference", mappedBy="machine")
      */
     private $attributes;
+
+    /**
+     * @ORM\OneToOne(targetEntity="MachineManual", mappedBy="machine")
+     */
+    private $manual;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MachineDocument", mappedBy="machine")
+     */
+    private $documents;
 
     /**
      * @var \DateTime
@@ -196,6 +206,7 @@ class Machine
     {
         $this->attributes = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     /**
@@ -641,6 +652,30 @@ class Machine
     }
 
     /**
+     * Set Manual
+     *
+     * @param MachineManual $manual
+     *
+     * @return Machine
+     */
+    public function setManual(MachineManual $manual)
+    {
+        $this->manual = $manual;
+
+        return $this;
+    }
+
+    /**
+     * Get Manual
+     *
+     * @return MachineManual
+     */
+    public function getManual()
+    {
+        return $this->manual;
+    }
+
+    /**
      * Get Categories
      *
      * @return Machine
@@ -658,9 +693,12 @@ class Machine
      */
     public function addCategory(Category $category)
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
+        if ($this->categories->contains($category)) {
+            return;
         }
+
+        $this->categories->add($category);
+        $category->addMachine($this);
 
         return $this;
     }
@@ -673,9 +711,11 @@ class Machine
      */
     public function removeCategory(Category $category)
     {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
+        if (!$this->categories->contains($category)) {
+            return;
         }
+        $this->categories->removeElement($category);
+        $category->removeMachine($this);
 
         return $this;
     }
@@ -719,6 +759,47 @@ class Machine
 
         return $this;
     }
+
+    /**
+     * Get Documents
+     *
+     * @return Machine
+     */
+    public function getDocuments()
+    {
+        return $this->documents->toArray();
+    }
+
+    /**
+     * Add Document
+     *
+     * @param MachineDocument $document
+     * @return Machine
+     */
+    public function addDocument(MachineDocument $document)
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents->add($document);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove Document
+     *
+     * @param MachineDocument $document
+     * @return Machine
+     */
+    public function removeDocument(MachineDocument $document)
+    {
+        if ($this->documents->contains($document)) {
+            $this->documents->removeElement($document);
+        }
+
+        return $this;
+    }
+
     /**
      * Set createdAt
      *
