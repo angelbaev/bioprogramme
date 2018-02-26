@@ -5,7 +5,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">{% trans %}Attributes{% endtrans %}</h3>
+                    <h3 class="box-title">{% trans %}Params{% endtrans %}</h3>
                     <a href="{{ path('nomenclature_attribute_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
                 </div>
                 <!-- /.box-header -->
@@ -26,7 +26,7 @@
                         <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
                     {% endif %}
                 </th>
-                <th>{% trans %}Attribute Groups{% endtrans %}</th>
+                <th>{% trans %}Param groups{% endtrans %}</th>
                 <th>{% trans %}Sort order{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
 

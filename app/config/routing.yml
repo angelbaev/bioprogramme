@@ -1,3 +1,11 @@
+bioprogramme_production_complect:
+    resource: "@BioprogrammeProductionBundle/Controller/ComplectController.php"
+    type:     annotation
+
+bioprogramme_production_building_block:
+    resource: "@BioprogrammeProductionBundle/Controller/BuildingBlockController.php"
+    type:     annotation
+
 bioprogramme_branch_line:
     resource: "@BioprogrammeBranchBundle/Controller/LineController.php"
     type:     annotation

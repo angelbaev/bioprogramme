@@ -5,8 +5,8 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">{% trans %}Param groups{% endtrans %}</h3>
-                <a href="{{ path('nomenclature_attributegroup_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
+                <h3 class="box-title">{% trans %}Complects{% endtrans %}</h3>
+                <a href="{{ path('nomenclature_complect_new') }}" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus"></i> {% trans %}Add new{% endtrans %}</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -14,6 +14,8 @@
         <thead>
             <tr>
                 <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Image{% endtrans %}</th>
+                <th>{% trans %}Number{% endtrans %}</th>
                 <th>
                     {% if sort == 'name' %}
                         {% if order == 'asc' %}
@@ -25,41 +27,51 @@
                         <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
                     {% endif %}
                 </th>
-                <th>{% trans %}Sort order{% endtrans %}</th>
+                <th>{% trans %}Price{% endtrans %}</th>
+                <th>{% trans %}Quantity{% endtrans %}</th>
+                <th>{% trans %}State{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
+        <tbody>
         <tr class="filter">
             <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
+            <td></td>
+            <td><input type="text" class="form-control" name="filter_number" value="{{ filter.number }}"></td>
             <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td class="action-column">
                 <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
             </td>
         </tr>
-        <tbody>
-        {% for attributeGroup in attributeGroups %}
+        {% for complect in complects %}
             <tr>
-                <td><a href="{{ path('nomenclature_attributegroup_show', { 'id': attributeGroup.id }) }}">{{ attributeGroup.id }}</a></td>
-                <td>{{ attributeGroup.name }}</td>
-                <td>{{ attributeGroup.sortOrder }}</td>
+                <td><a href="{{ path('nomenclature_complect_show', { 'id': complect.id }) }}">{{ complect.id }}</a></td>
+                <td>{{ complect.image }}</td>
+                <td>{{ complect.number }}</td>
+                <td>{{ complect.name }}</td>
+                <td>{{ complect.price }}</td>
+                <td>{{ complect.quantity }}</td>
+                <td>{{ complect.state }}</td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-default" href="{{ path('nomenclature_attributegroup_show', { 'id': attributeGroup.id }) }}"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-default" href="{{ path('nomenclature_attributegroup_edit', { 'id': attributeGroup.id }) }}"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-default" href="{{ path('nomenclature_complect_show', { 'id': complect.id }) }}"><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-default" href="{{ path('nomenclature_complect_edit', { 'id': complect.id }) }}"><i class="fa fa-pencil"></i></a>
                     </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
                 {% include ':theme/common:pagination.html.twig' with {'total': total, paginationParams: paginationParams} %}
 
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
 {% block javascripts %}
     <script>
@@ -75,6 +87,12 @@
 
             if (filter_name) {
                 url += '&filter_name=' + encodeURIComponent(filter_name);
+            }
+
+            var filter_number = $('input[name=\'filter_number\']').val();
+
+            if (filter_number) {
+                url += '&filter_number=' + encodeURIComponent(filter_number);
             }
 
             location = url;

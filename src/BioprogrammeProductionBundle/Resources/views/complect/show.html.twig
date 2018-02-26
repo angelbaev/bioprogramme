@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">{% trans %}Complect{% endtrans %}</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="btn-group">
+                <a class="btn btn-default" href="{{ path('nomenclature_complect_index') }}"><i class="fa fa-list"></i></a>
+                <a class="btn btn-default" href="{{ path('nomenclature_complect_edit', { 'id': complect.id }) }}"><i class="fa fa-pencil"></i></a>
+                {{ form_start(delete_form) }}
+                <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
+                {{ form_end(delete_form) }}
+            </div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <td>{{ complect.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Number{% endtrans %}</th>
+                <td>{{ complect.number }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ complect.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <td>{{ complect.description|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Image{% endtrans %}</th>
+                <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}"></td>
+            </tr>
+            <tr>
+                <th>{% trans %}Price{% endtrans %}</th>
+                <td>{{ complect.price }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Quantity{% endtrans %}</th>
+                <td>{{ complect.quantity }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Warranty{% endtrans %}</th>
+                <td>{{ complect.warranty }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}State{% endtrans %}</th>
+                <td>{{ complect.state }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Date of manufacture{% endtrans %}</th>
+                <td>{% if complect.dateOfManufacture %}{{ complect.dateOfManufacture|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Date implementation{% endtrans %}</th>
+                <td>{% if complect.dateImplementation %}{{ complect.dateImplementation|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Createdat{% endtrans %}</th>
+                <td>{% if complect.createdAt %}{{ complect.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Updatedat{% endtrans %}</th>
+                <td>{% if complect.updatedAt %}{{ complect.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Createdby{% endtrans %}</th>
+                <td>{{ complect.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Updatedby{% endtrans %}</th>
+                <td>{{ complect.updatedBy }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th colspan="3">{% trans %}Building Blocks{% endtrans %}</th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Model{% endtrans %}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="attribute_list">
+                            {% for key, buildingBlock in complect.buildingBlocks %}
+                                <tr>
+                                    <td>{{ key+1 }}</td>
+                                    <td><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}" target="_blank">{{ buildingBlock.name }}</a></td>
+                                    <td>{{ buildingBlock.model }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

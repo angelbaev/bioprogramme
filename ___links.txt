@@ -100,3 +100,6 @@ http://www.responsivefilemanager.com/index.php#sthash.nyN8Kvhf.dpbs
 https://studio-42.github.io/elFinder/#elf_l1_SW1hZ2Vz
 https://packagist.org/packages/youwe/file-manager-bundle
 https://packagist.org/packages/artgris/filemanager-bundle
+
+
+https://codereview.stackexchange.com/questions/131281/bash-script-to-simplify-git-deployment-workflow

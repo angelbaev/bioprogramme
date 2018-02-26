@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{% trans %}Complect edit{% endtrans %}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('nomenclature_complect_index') }}"><i class="fa fa-list"></i></a>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
+                    {{ form_end(delete_form) }}
+                </div>
+                <br><br>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Complect{% endtrans %}</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Building Blocks{% endtrans %}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <br>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+                <input class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+    {{ form_end(edit_form) }}
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                        <br>
+                        <button type="button" onclick="$('.select2-container').css('width', '100%');" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-building-block">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th colspan="5">{% trans %}Building Blocks{% endtrans %}</th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Model{% endtrans %}</th>
+                                <th>{% trans %}Actions{% endtrans %}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="attribute_list">
+                            {% for key, buildingBlock in complect.buildingBlocks %}
+                                <tr>
+                                    <td>{{ key+1 }}</td>
+                                    <td><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}" target="_blank">{{ buildingBlock.name }}</a></td>
+                                    <td>{{ buildingBlock.model }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-default" onclick="removeBuildingBlock({{ buildingBlock.id }}, this)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="modal fade" id="modal-building-block">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{% trans %}Building Бlock{% endtrans %}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(building_block_field_form, {attr:{'id': 'ajax_building_block_field_form'}}) }}
+                    {{ form_widget(building_block_field_form) }}
+                    <input id="ajax_building_block_field_form_submit" class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+                    {{ form_end(building_block_field_form) }}
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+{% endblock %}
+    {% block javascripts %}
+        <script>
+            function removeBuildingBlock(id, e) {
+                var url = '{{ path("nomenclature_complect_remove_building_block", {'id': 'complect_id'}) }}';
+                url = url.replace('complect_id', {{ complect.id }});
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {buildingBlockId: id},
+                    dataType: "json",
+                    success: function(json){
+                        if (json.status){
+                            $(e).closest('tr').remove();
+                        }
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+            }
+
+            $('#ajax_building_block_field_form').on('submit', function(e) {
+                var url = '{{ path("nomenclature_complect_add_building_block", {'id': 'complect_id'}) }}';
+                url = url.replace('complect_id', {{ complect.id }});
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { buildingBlockId: $('.building-block').val()},
+                    dataType: "json",
+                    success: function(json){
+                        $('#modal-building-block').modal('hide');
+
+                        if(json.status) {
+                            var count = ($('#attribute_list tr').length + 1);
+                            var url = '{{ path('nomenclature_buildingblock_show', { 'id': 'buildingblock_id' }) }}';
+                            url = url.replace('buildingblock_id', json.buildingBlock.id);
+                            var html =
+                                    '<tr>' +
+                                    '   <td>' +
+                                    count +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    '   <a href="' + url + '" target="_blank">' +
+                                    json.buildingBlock.name +
+                                    '   </a>' +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    json.buildingBlock.model +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    '<button type="button" class="btn btn-default remove-service"  onclick="removeBuildingBlock(' + json.buildingBlock.id + ', this)"><i class="fa fa-trash"></i></button>' +
+                                    '   </td>' +
+                                    '</tr>';
+                            $('#attribute_list').append(html);
+                        }
+
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+                e.preventDefault(); //Prevent Default action.
+
+            });
+        </script>
+    {% endblock %}

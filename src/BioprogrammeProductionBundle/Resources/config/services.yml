@@ -9,6 +9,10 @@ parameters:
     bioprogramme_production.service.manufacturer_service: 'BioprogrammeProductionBundle\Service\ManufacturerService'
     bioprogramme_production.entity.machine: 'BioprogrammeProductionBundle\Entity\Machine'
     bioprogramme_production.service.machine_service: 'BioprogrammeProductionBundle\Service\MachineService'
+    bioprogramme_production.entity.building_block: 'BioprogrammeProductionBundle\Entity\BuildingBlock'
+    bioprogramme_production.service.building_block_service: 'BioprogrammeProductionBundle\Service\BuildingBlockService'
+    bioprogramme_production.entity.complect: 'BioprogrammeProductionBundle\Entity\Complect'
+    bioprogramme_production.service.complect_service: 'BioprogrammeProductionBundle\Service\ComplectService'
 services:
     BioprogrammeProductionBundle\Form\MachineAttributeReferenceType:
         arguments: ['@doctrine.orm.entity_manager', '@request_stack']
@@ -43,3 +47,15 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
             $container: '@service_container'
             $entity: '%bioprogramme_production.entity.machine%'
+    bioprogramme_production.building_block_manager:
+        class: '%bioprogramme_production.service.building_block_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_production.entity.building_block%'
+    bioprogramme_production.complect_manager:
+        class: '%bioprogramme_production.service.complect_service%'
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $container: '@service_container'
+            $entity: '%bioprogramme_production.entity.complect%'
