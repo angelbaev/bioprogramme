@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <th>{% trans %}Image{% endtrans %}</th>
-                <td><img src="{{ image_resize(buildingBlock.image, 64, 64) }}" alt="{{ buildingBlock.name }}"></td>
+                <td><img src="{{ image_resize(buildingBlock.image, 64, 64) }}" alt="{{ buildingBlock.name }}" data-zoom data-image="{{ buildingBlock.image }}"></td>
             </tr>
             <tr>
                 <th>{% trans %}Description{% endtrans %}</th>

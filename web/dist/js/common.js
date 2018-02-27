@@ -30,6 +30,15 @@ $(document).ready(function() {
     $('.select2').select2();
     //bootstrap WYSIHTML5 - text editor
     $('.wysihtml').wysihtml5();
+
+    $(document).on('click', '[data-zoom]', function(e) {
+        $('#image-preview').attr('src', $(this).data('image'));
+        $('#image-caption').html($(this).attr('alt'));
+        $('#image-modal').show();
+    });
+    $(document).on('click', '.image-modal-close', function(e) {
+        $('#image-modal').hide();
+    });
 });
 
 //https://github.com/willdurand/BazingaJsTranslationBundle

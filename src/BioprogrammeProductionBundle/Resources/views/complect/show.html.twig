@@ -35,7 +35,7 @@
             </tr>
             <tr>
                 <th>{% trans %}Image{% endtrans %}</th>
-                <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}"></td>
+                <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}"  data-zoom data-image="{{ complect.image }}"></td>
             </tr>
             <tr>
                 <th>{% trans %}Price{% endtrans %}</th>

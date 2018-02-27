@@ -24,7 +24,7 @@
             <tr>
                 <th>{% trans %}Image{% endtrans %}</th>
                 <td>
-                <img src="{{ image_resize(base.image, 120, 120) }}"  alt="{{ base.name }}">
+                <img src="{{ image_resize(base.image, 120, 120) }}"  alt="{{ base.name }}" data-zoom data-image="{{ base.image }}">
                 </td>
             </tr>
             <tr>

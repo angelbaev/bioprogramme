@@ -47,7 +47,7 @@
         {% for buildingBlock in buildingBlocks %}
             <tr>
                 <td><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}">{{ buildingBlock.id }}</a></td>
-                <td><img src="{{ image_resize(buildingBlock.image, 64, 64) }}" alt="{{ buildingBlock.name }}"></td>
+                <td><img src="{{ image_resize(buildingBlock.image, 64, 64) }}" alt="{{ buildingBlock.name }}" data-zoom data-image="{{ buildingBlock.image }}"></td>
                 <td>{{ buildingBlock.name }}</td>
                 <td>{{ buildingBlock.model }}</td>
                 <td>{{ buildingBlock.quantity }}</td>

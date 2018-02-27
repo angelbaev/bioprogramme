@@ -49,7 +49,7 @@
         {% for complect in complects %}
             <tr>
                 <td><a href="{{ path('nomenclature_complect_show', { 'id': complect.id }) }}">{{ complect.id }}</a></td>
-                <td>{{ complect.image }}</td>
+                <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
                 <td>{{ complect.number }}</td>
                 <td>{{ complect.name }}</td>
                 <td>{{ complect.price }}</td>

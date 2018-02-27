@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <th>{% trans %}Image{% endtrans %}</th>
-                <td><img src="{{ image_resize(manufacturer.image, 64, 64) }}" alt="{{ manufacturer.name }}"></td>
+                <td><img src="{{ image_resize(manufacturer.image, 64, 64) }}" alt="{{ manufacturer.name }}" data-zoom data-image="{{ manufacturer.image }}"></td>
             </tr>
             <tr>
                 <th>{% trans %}Sort order{% endtrans %}</th>

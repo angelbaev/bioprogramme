@@ -87,6 +87,13 @@ class BuildingBlock
     private $height;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="$width", type="float", nullable=true)
+     */
+    private $width;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
@@ -345,6 +352,30 @@ class BuildingBlock
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * Set width
+     *
+     * @param float $width
+     *
+     * @return BuildingBlock
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return float
+     */
+    public function getWidth()
+    {
+        return $this->width;
     }
 
     /**

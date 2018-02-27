@@ -62,7 +62,7 @@
         {% for base in bases %}
             <tr>
                 <td><a href="{{ path('branch_base_show', { 'id': base.id }) }}">{{ base.id }}</a></td>
-                <td><img src="{{ image_resize(base.image, 64, 64) }}"  alt="{{ base.name }}"></td>
+                <td><img src="{{ image_resize(base.image, 64, 64) }}"  alt="{{ base.name }}" data-zoom data-image="{{ base.image }}"></td>
                 <td>{{ base.name }}</td>
                 <td>{{ base.phone }}</td>
                 <td>{{ label(base.isActive) }}</td>

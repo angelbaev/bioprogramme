@@ -43,7 +43,7 @@
         {% for manufacturer in manufacturers %}
             <tr>
                 <td><a href="{{ path('nomenclature_manufacturer_show', { 'id': manufacturer.id }) }}">{{ manufacturer.id }}</a></td>
-                <td><img src="{{ image_resize(manufacturer.image, 64, 64) }}" alt="{{ manufacturer.name }}"></td>
+                <td><img src="{{ image_resize(manufacturer.image, 64, 64) }}" alt="{{ manufacturer.name }}" data-zoom data-image="{{ manufacturer.image }}"></td>
                 <td>{{ manufacturer.name }}</td>
                 <td>{{ manufacturer.sortOrder }}</td>
                 <td>
