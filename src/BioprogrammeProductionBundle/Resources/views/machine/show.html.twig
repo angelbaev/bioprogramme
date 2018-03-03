@@ -10,7 +10,7 @@
         <div class="box-body">
             <div class="btn-group">
                 <a class="btn btn-default" href="{{ path('nomenclature_machine_index') }}"><i class="fa fa-list"></i></a>
-                <a class="btn btn-default" href={{ path('nomenclature_machine_edit', { 'id': machine.id }) }}"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-default" href="{{ path('nomenclature_machine_edit', { 'id': machine.id }) }}"><i class="fa fa-pencil"></i></a>
                 {{ form_start(delete_form) }}
                 <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
                 {{ form_end(delete_form) }}
@@ -22,12 +22,20 @@
                 <td>{{ machine.id }}</td>
             </tr>
             <tr>
+                <th>{% trans %}Base{% endtrans %}</th>
+                <td>{% if machine.base %}{{ machine.base.name }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Building{% endtrans %}</th>
+                <td>{% if machine.building %}{{ machine.building.name }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Line{% endtrans %}</th>
+                <td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>
+            </tr>
+            <tr>
                 <th>{% trans %}Model{% endtrans %}</th>
                 <td>{{ machine.model }}</td>
-            </tr>
-             <tr>
-                <th>{% trans %}Serial number{% endtrans %}</th>
-                <td>{{ machine.serialNumber }}</td>
             </tr>
            <tr>
                 <th>{% trans %}Name{% endtrans %}</th>
@@ -42,49 +50,12 @@
                 <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}"></td>
             </tr>
             <tr>
-                <th>{% trans %}Quantity{% endtrans %}</th>
-                <td>{{ machine.quantity }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Warranty{% endtrans %}</th>
-                <td>{{ machine.warranty }}</td>
-            </tr>
-            <tr>
                 <th>{% trans %}State{% endtrans %}</th>
                 <td>{{ machine.state }}</td>
             </tr>
             <tr>
-                <th>{% trans %}Year production{% endtrans %}</th>
-                <td>{{ machine.yearProduction }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Date deployment{% endtrans %}</th>
-                <td>{% if machine.dateDeployment %}{{ machine.dateDeployment|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-
-            <tr>
                 <th>{% trans %}Price{% endtrans %}</th>
                 <td>{{ machine.price }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Weight{% endtrans %}</th>
-                <td>{{ machine.weight }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Length{% endtrans %}</th>
-                <td>{{ machine.length }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Width{% endtrans %}</th>
-                <td>{{ machine.width }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Height{% endtrans %}</th>
-                <td>{{ machine.height }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Sort order{% endtrans %}</th>
-                <td>{{ machine.sortOrder }}</td>
             </tr>
             <tr>
                 <th>{% trans %}Status{% endtrans %}</th>

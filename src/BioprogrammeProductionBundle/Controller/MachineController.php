@@ -2,6 +2,7 @@
 
 namespace BioprogrammeProductionBundle\Controller;
 
+use AppBundle\Helper\ImageHelper;
 use BioprogrammeProductionBundle\Entity\Machine;
 use BioprogrammeProductionBundle\Entity\MachineAttributeReference;
 use BioprogrammeProductionBundle\Entity\MachineDocument;
@@ -54,6 +55,66 @@ class MachineController extends Controller
             'queryParams' => $queryParams,
             'paginationParams' => array_merge($queryParams, ['sort' => $sort, 'order' => $order]),
         ));
+    }
+
+    /**
+     *
+     * @Route("/building", name="nomenclature_building_list")
+     * @Method("GET")
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function listBuildingofBaseAction(Request $request)
+    {
+        $baseId = $request->get('baseId');
+
+        if (is_null($baseId) || empty($baseId)) {
+
+            return new JsonResponse([]);
+        }
+
+        $buildings =  $this->get('bioprogramme_branch.building_manager')->findBy(['base' => $baseId]);
+        $data = [];
+        foreach($buildings as $building) {
+            $data[] = [
+                'id' => $building->getId(),
+                'name' => $building->getName()
+            ];
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     *
+     * @Route("/lines", name="nomenclature_line_list")
+     * @Method("GET")
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function listLineofBuildingAction(Request $request)
+    {
+        $buildingId = $request->get('buildingId');
+
+        if (is_null($buildingId) || empty($buildingId)) {
+
+            return new JsonResponse([]);
+        }
+
+        $lines =  $this->get('bioprogramme_branch.line_manager')->findBy(['building' => $buildingId]);
+        $data = [];
+        foreach($lines as $line) {
+            $data[] = [
+                'id' => $line->getId(),
+                'name' => $line->getName()
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 
     /**
@@ -136,6 +197,7 @@ class MachineController extends Controller
 
         return $this->render('BioprogrammeProductionBundle:machine:edit.html.twig', array(
             'machine' => $machine,
+            'complects' => $this->get('bioprogramme_production.complect_manager')->findAll(),
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'machine_attribute_form' => $machineAttributeForm->createView(),
@@ -146,32 +208,37 @@ class MachineController extends Controller
 
     /**
      *
-     *
-     * @Route("/add-attribute", name="nomenclature_machine_add_attribute")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/machine-add-complect", name="nomenclature_machine_add_complect")
+     * @Method({"POST"})
      */
-    public function addAttributeAction(Request $request)
+    public function addComplectAction(Request $request, Machine $machine)
     {
         if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
             throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
         }
 
-        $entity = new MachineAttributeReference();
-        $form = $this->createForm('BioprogrammeProductionBundle\Form\MachineAttributeReferenceType', $entity);
-        $form->handleRequest($request);
-
-        $data = ['status' => false, 'attribute' => null];
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+        $id = $request->get('complectId', false);
+        $data = ['status' => false];
+        if ($id) {
+            $complect = $this->get('bioprogramme_production.complect_manager')->findById($id);
+            $image = ImageHelper::resize($this->container,  $complect->getImage(), 64, 64);
+            if (!$image) {
+                $image = ImageHelper::resize($this->container, 'img/no_image.jpg', 64, 64);
+            }
 
             $data['status'] = true;
-            $data['attribute'] = [
-                'id' => $entity->getId(),
-                'name' => $entity->getAttribute()->getName(),
-                'text' => $entity->getText()
+            $data['complect'] = [
+                'id' => $complect->getId(),
+                'image' =>$image,
+                'number' => $complect->getNumber(),
+                'name' => $complect->getName(),
+                'price' => $complect->getPrice(),
+                'state' => $complect->getState()
             ];
+            $machine->addComplect($complect);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($machine);
+            $em->flush();
         }
 
         return new JsonResponse($data);
@@ -179,24 +246,25 @@ class MachineController extends Controller
 
     /**
      *
-     *
-     * @Route("/remove-attribute", name="nomenclature_machine_remove_attribute")
+     * @Route("/{id}/machine-remove-complect", name="nomenclature_machine_remove_complect")
      * @Method({"POST"})
      */
-    public function removeAttributeAction(Request $request)
+    public function removeComplectAction(Request $request, Machine $machine)
     {
         if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
             throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
         }
 
-        $id = $request->get('machineAtrrRefId', false);
+        $id = $request->get('complectId', false);
         $data = ['status' => false];
         if ($id) {
             $data['status'] = true;
+            $complect = $this->get('bioprogramme_production.complect_manager')->findById($id);
+            $machine->removeComplect($complect);
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository(MachineAttributeReference::class)->find($id);
-            $em->remove($entity);
+            $em->persist($machine);
             $em->flush();
+
         }
 
         return new JsonResponse($data);

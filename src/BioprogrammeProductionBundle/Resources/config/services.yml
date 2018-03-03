@@ -14,6 +14,9 @@ parameters:
     bioprogramme_production.entity.complect: 'BioprogrammeProductionBundle\Entity\Complect'
     bioprogramme_production.service.complect_service: 'BioprogrammeProductionBundle\Service\ComplectService'
 services:
+    BioprogrammeProductionBundle\Form\MachineType:
+        arguments: ['@doctrine.orm.entity_manager']
+        tags: [form.type]
     BioprogrammeProductionBundle\Form\MachineAttributeReferenceType:
         arguments: ['@doctrine.orm.entity_manager', '@request_stack']
         tags: [form.type]

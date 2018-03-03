@@ -2,6 +2,7 @@
 
 namespace BioprogrammeBranchBundle\Entity;
 
+use BioprogrammeProductionBundle\Entity\Machine;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,6 +50,11 @@ class Building
     private $lines;
 
     /**
+     * @ORM\OneToMany(targetEntity="BioprogrammeProductionBundle\Entity\Machine", mappedBy="building")
+     */
+    private $machines;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
@@ -82,6 +88,7 @@ class Building
     public function __construct()
     {
         $this->lines = new ArrayCollection();
+        $this->machines = new ArrayCollection();
     }
 
     /**
@@ -171,7 +178,7 @@ class Building
      * @return Line[]
      */
 
-    public function getBuildings() {
+    public function getLines() {
         return $this->lines->toArray();
     }
 
@@ -181,7 +188,7 @@ class Building
      * @param Line $line
      * @return Building
      */
-    public function addBuilding(Line $line) {
+    public function addLine(Line $line) {
         if (!$this->lines->contains($line)) {
             $this->lines->add($line);
         }
@@ -195,9 +202,46 @@ class Building
      * @param Line $line
      * @return Building
      */
-    public function removeBuilding(Line $line) {
+    public function removeLine(Line $line) {
         if ($this->lines->contains($line)) {
             $this->lines->removeElement($line);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get machines
+     * @return Machine[]
+     */
+
+    public function getMachines() {
+        return $this->machines->toArray();
+    }
+
+    /**
+     * Add machine
+     *
+     * @param Machine $machine
+     * @return Building
+     */
+    public function addMachine(Machine $machine) {
+        if (!$this->machines->contains($machine)) {
+            $this->machines->add($machine);
+        }
+
+        return $this;
+    }
+
+    /**
+     *  Remove machine
+     *
+     * @param Machine $machine
+     * @return Building
+     */
+    public function removeMachine(Machine $machine) {
+        if ($this->machines->contains($machine)) {
+            $this->machines->removeElement($machine);
         }
 
         return $this;

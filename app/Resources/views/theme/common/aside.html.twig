@@ -84,7 +84,7 @@
                     <span>{% trans %}Nomenclature{% endtrans %}</span>
                 </a>
                 <ul class="treeview-menu">
-                    {#<li class="{% if routeName in ['nomenclature_machine_index', 'nomenclature_machine_new', 'nomenclature_machine_show', 'nomenclature_machine_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_machine_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Machines{% endtrans %}</a></li>#}
+                    <li class="{% if routeName in ['nomenclature_machine_index', 'nomenclature_machine_new', 'nomenclature_machine_show', 'nomenclature_machine_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_machine_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Machines{% endtrans %}</a></li>
                     <li class="{% if routeName in ['nomenclature_complect_index', 'nomenclature_complect_new', 'nomenclature_complect_show', 'nomenclature_complect_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_complect_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Complects{% endtrans %}</a></li>
                     <li class="{% if routeName in ['nomenclature_buildingblock_index', 'nomenclature_buildingblock_new', 'nomenclature_buildingblock_show', 'nomenclature_buildingblock_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_buildingblock_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Building Blocks{% endtrans %}</a></li>
                     <li class="{% if routeName in ['nomenclature_manufacturer_index', 'nomenclature_manufacturer_new', 'nomenclature_manufacturer_show', 'nomenclature_manufacturer_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_manufacturer_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Manufacturers{% endtrans %}</a></li>

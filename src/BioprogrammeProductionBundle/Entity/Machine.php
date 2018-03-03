@@ -2,6 +2,9 @@
 
 namespace BioprogrammeProductionBundle\Entity;
 
+use BioprogrammeBranchBundle\Entity\Base;
+use BioprogrammeBranchBundle\Entity\Building;
+use BioprogrammeBranchBundle\Entity\Line;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
@@ -46,46 +49,11 @@ class Machine
     private $description;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="quantity", type="float")
-     */
-    private $quantity;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="serial_number", type="string", length=64)
-     */
-    private $serialNumber;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="warranty", type="string", length=255)
-     */
-    private $warranty;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="state", type="integer", nullable=true)
      */
     private $state;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="year_production", type="integer", nullable=true)
-     */
-    private $yearProduction;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_deployment", type="datetime", nullable=true)
-     */
-    private $dateDeployment;
 
     /**
      * @var string
@@ -102,41 +70,6 @@ class Machine
     private $price;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="weight", type="decimal", precision=15, scale=4, nullable=true)
-     */
-    private $weight;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="length", type="decimal", precision=15, scale=8, nullable=true)
-     */
-    private $length;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="width", type="decimal", precision=15, scale=8, nullable=true)
-     */
-    private $width;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="height", type="decimal", precision=15, scale=8, nullable=true)
-     */
-    private $height;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="sort_order", type="integer", nullable=true)
-     */
-    private $sortOrder;
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
@@ -150,16 +83,22 @@ class Machine
     private $manufacturer;
 
     /**
-     * @var Category[]
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="machines")
-     * @JoinTable(name="machine_to_category")
+     * @ORM\ManyToOne(targetEntity="BioprogrammeBranchBundle\Entity\Base")
+     * @ORM\JoinColumn(name="base_id", referencedColumnName="id")
      */
-    protected $categories;
+    private $base;
 
     /**
-     * @ORM\OneToMany(targetEntity="MachineAttributeReference", mappedBy="machine")
+     * @ORM\ManyToOne(targetEntity="BioprogrammeBranchBundle\Entity\Building")
+     * @ORM\JoinColumn(name="building_id", referencedColumnName="id", nullable=true)
      */
-    private $attributes;
+    private $building;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BioprogrammeBranchBundle\Entity\Line")
+     * @ORM\JoinColumn(name="line_id", referencedColumnName="id", nullable=true)
+     */
+    private $line;
 
     /**
      * @ORM\OneToOne(targetEntity="MachineManual", mappedBy="machine")
@@ -170,6 +109,12 @@ class Machine
      * @ORM\OneToMany(targetEntity="MachineDocument", mappedBy="machine")
      */
     private $documents;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BioprogrammeProductionBundle\Entity\Complect")
+     * @JoinTable(name="machine_to_complect")
+     */
+    private $complects;
 
     /**
      * @var \DateTime
@@ -204,9 +149,8 @@ class Machine
      */
     public function __construct()
     {
-        $this->attributes = new ArrayCollection();
-        $this->categories = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        $this->complects = new ArrayCollection();
     }
 
     /**
@@ -292,30 +236,6 @@ class Machine
     }
 
     /**
-     * Set quantity
-     *
-     * @param float $quantity
-     *
-     * @return Machine
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * Get quantity
-     *
-     * @return float
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -361,126 +281,6 @@ class Machine
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * Set weight
-     *
-     * @param string $weight
-     *
-     * @return Machine
-     */
-    public function setWeight($weight)
-    {
-        $this->weight = $weight;
-
-        return $this;
-    }
-
-    /**
-     * Get weight
-     *
-     * @return string
-     */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
-
-    /**
-     * Set length
-     *
-     * @param string $length
-     *
-     * @return Machine
-     */
-    public function setLength($length)
-    {
-        $this->length = $length;
-
-        return $this;
-    }
-
-    /**
-     * Get length
-     *
-     * @return string
-     */
-    public function getLength()
-    {
-        return $this->length;
-    }
-
-    /**
-     * Set width
-     *
-     * @param string $width
-     *
-     * @return Machine
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    /**
-     * Get width
-     *
-     * @return string
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * Set height
-     *
-     * @param string $height
-     *
-     * @return Machine
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * Get height
-     *
-     * @return string
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Set sortOrder
-     *
-     * @param integer $sortOrder
-     *
-     * @return Machine
-     */
-    public function setSortOrder($sortOrder)
-    {
-        $this->sortOrder = $sortOrder;
-
-        return $this;
-    }
-
-    /**
-     * Get sortOrder
-     *
-     * @return int
-     */
-    public function getSortOrder()
-    {
-        return $this->sortOrder;
     }
 
     /**
@@ -532,51 +332,75 @@ class Machine
     }
 
     /**
-     * Set serial number
+     * Set Base
      *
-     * @param string $serialNumber
+     * @param Base $base
      *
      * @return Machine
      */
-    public function setSerialNumber($serialNumber)
+    public function setBase(Base $base)
     {
-        $this->serialNumber = $serialNumber;
+        $this->base = $base;
 
         return $this;
     }
 
     /**
-     * Get serial number
-     *
-     * @return string
-     */
-    public function getSerialNumber()
-    {
-        return $this->serialNumber;
-    }
-
-    /**
-     * Set warranty
-     *
-     * @param string $warranty
+     * Get Base
      *
      * @return Machine
      */
-    public function setWarranty($warranty)
+    public function getBase()
     {
-        $this->warranty = $warranty;
+        return $this->base;
+    }
+
+    /**
+     * Set Building
+     *
+     * @param Building $building
+     *
+     * @return Machine
+     */
+    public function setBuilding(Building $building)
+    {
+        $this->building = $building;
 
         return $this;
     }
 
     /**
-     * Get warranty
+     * Get Building
      *
-     * @return string
+     * @return Machine
      */
-    public function getWarranty()
+    public function getBuilding()
     {
-        return $this->warranty;
+        return $this->building;
+    }
+
+    /**
+     * Set Line
+     *
+     * @param Line $line
+     *
+     * @return Machine
+     */
+    public function setLine(Line $line)
+    {
+        $this->line = $line;
+
+        return $this;
+    }
+
+    /**
+     * Get Line
+     *
+     * @return Machine
+     */
+    public function getLine()
+    {
+        return $this->line;
     }
 
     /**
@@ -604,54 +428,6 @@ class Machine
     }
 
     /**
-     * Set Year Production
-     *
-     * @param int $yearProduction
-     *
-     * @return Machine
-     */
-    public function setYearProduction($yearProduction)
-    {
-        $this->yearProduction = $yearProduction;
-
-        return $this;
-    }
-
-    /**
-     * Get Year Production
-     *
-     * @return int
-     */
-    public function getYearProduction()
-    {
-        return $this->yearProduction;
-    }
-
-    /**
-     * Set Date Deployment
-     *
-     * @param \DateTime $dateDeployment
-     *
-     * @return Machine
-     */
-    public function setDateDeployment($dateDeployment)
-    {
-        $this->dateDeployment = $dateDeployment;
-
-        return $this;
-    }
-
-    /**
-     * Get Date Deployment
-     *
-     * @return \DateTime
-     */
-    public function getDateDeployment()
-    {
-        return $this->dateDeployment;
-    }
-
-    /**
      * Set Manual
      *
      * @param MachineManual $manual
@@ -673,91 +449,6 @@ class Machine
     public function getManual()
     {
         return $this->manual;
-    }
-
-    /**
-     * Get Categories
-     *
-     * @return Machine
-     */
-    public function getCategories()
-    {
-        return $this->categories->toArray();
-    }
-
-    /**
-     * Add Category
-     *
-     * @param Category $category
-     * @return Machine
-     */
-    public function addCategory(Category $category)
-    {
-        if ($this->categories->contains($category)) {
-            return;
-        }
-
-        $this->categories->add($category);
-        $category->addMachine($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove Category
-     *
-     * @param Category $category
-     * @return Machine
-     */
-    public function removeCategory(Category $category)
-    {
-        if (!$this->categories->contains($category)) {
-            return;
-        }
-        $this->categories->removeElement($category);
-        $category->removeMachine($this);
-
-        return $this;
-    }
-
-    /**
-     * Get Attributes
-     *
-     * @return Machine
-     */
-    public function getAttributes()
-    {
-        return $this->attributes->toArray();
-    }
-
-    /**
-     * Add Attribute
-     *
-     * @param Attribute $category
-     * @return Machine
-     */
-    public function addAttribute(Attribute $attribute)
-    {
-        if (!$this->attributes->contains($attribute)) {
-            $this->attributes->add($attribute);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remove Attribute
-     *
-     * @param Attribute $category
-     * @return Machine
-     */
-    public function removeAttribute(Attribute $attribute)
-    {
-        if ($this->attributes->contains($attribute)) {
-            $this->attributes->removeElement($attribute);
-        }
-
-        return $this;
     }
 
     /**
@@ -795,6 +486,46 @@ class Machine
     {
         if ($this->documents->contains($document)) {
             $this->documents->removeElement($document);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get complects
+     *
+     * @return Machine
+     */
+    public function getComplects()
+    {
+        return $this->complects->toArray();
+    }
+
+    /**
+     * Add complect
+     *
+     * @param Complect $complect
+     * @return Machine
+     */
+    public function addComplect(Complect $complect)
+    {
+        if (!$this->complects->contains($complect)) {
+            $this->complects->add($complect);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove complect
+     *
+     * @param Complect $complect
+     * @return Machine
+     */
+    public function removeComplect(Complect $complect)
+    {
+        if ($this->complects->contains($complect)) {
+            $this->complects->removeElement($complect);
         }
 
         return $this;

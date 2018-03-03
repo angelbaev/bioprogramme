@@ -19,7 +19,7 @@
                 <br><br>
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Machine{% endtrans %}</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Attributes{% endtrans %}</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Complects{% endtrans %}</a></li>
                     <li><a href="#tab_3" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
                     <li><a href="#tab_4" data-toggle="tab">{% trans %}Documentation{% endtrans %}</a></li>
                 </ul>
@@ -39,33 +39,34 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th colspan="5">{% trans %}Attributes{% endtrans %}</th>
+                                <th colspan="7">{% trans %}Complects{% endtrans %}</th>
                             </tr>
                             <tr>
                                 <th>#</th>
-                                <th>{% trans %}Attribute{% endtrans %}</th>
-                                <th>{% trans %}Text{% endtrans %}</th>
+                                <th>{% trans %}Image{% endtrans %}</th>
+                                <th>{% trans %}Number{% endtrans %}</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Price{% endtrans %}</th>
+                                <th>{% trans %}State{% endtrans %}</th>
                                 <th>{% trans %}Actions{% endtrans %}</th>
                             </tr>
                             </thead>
-                            <tbody id="attribute_list">
-                            {% for key, machineAttrRef in machine.attributes %}
+                            <tbody id="complect_list">
+                            {% for key, complect in machine.complects %}
                                 <tr>
                                     <td>{{ key+1 }}</td>
-                                    <td>{{ machineAttrRef.attribute.name }}</td>
-                                    <td>{{ machineAttrRef.text }}</td>
+                                    <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
+                                    <td>{{ complect.number }}</td>
+                                    <td>{{ complect.name }}</td>
+                                    <td>{{ complect.price }}</td>
+                                    <td>{{ complect.state }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-default" onclick="removeMachineAttribute({{ machineAttrRef.id }}, this)">
+                                        <button type="button" class="btn btn-default" onclick="removeMachineComplect({{ complect.id }}, this)">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
                             {% endfor %}
-                            {% if machine.attributes|length == 0 %}
-                                <tr>
-                                    <td colspan="5">{% trans %}No results{% endtrans %}</td>
-                                </tr>
-                            {% endif %}
                             </tbody>
                         </table>
 
@@ -131,14 +132,34 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{% trans %}Add Attribute{% endtrans %}</h4>
+                <h4 class="modal-title">{% trans %}Add Complect{% endtrans %}</h4>
             </div>
             <div class="modal-body">
-                {{ form_start(machine_attribute_form, {attr:{'id': 'ajax_machine_attribute_form'}}) }}
-                {{ form_widget(machine_attribute_form) }}
-                <input id="ajax_machine_attribute_form_submit" class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
-                {{ form_end(machine_attribute_form) }}
-            </div>
+
+                <table id="table_complect_list" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{% trans %}Image{% endtrans %}</th>
+                        <th>{% trans %}Number{% endtrans %}</th>
+                        <th>{% trans %}Name{% endtrans %}</th>
+                        <th>{% trans %}Price{% endtrans %}</th>
+                        <th>{% trans %}State{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody id="complect_all_list">
+                    {% for complect in complects %}
+                        <tr>
+                            <td><input type="checkbox" data-complect name="" value="{{ complect.id }}"></td>
+                            <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
+                            <td>{{ complect.number }}</td>
+                            <td>{{ complect.name }}</td>
+                            <td>{{ complect.price }}</td>
+                            <td>{{ complect.state }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>            </div>
             <div class="modal-footer">
 
             </div>
@@ -175,11 +196,62 @@
 {% endblock %}
 {% block javascripts %}
     <script>
-        function removeMachineAttribute(id, e) {
+        $('#table_complect_list').DataTable();
+
+        $('[data-complect]').on('click', function (e) {
+//https://www.w3schools.com/howto/howto_js_filter_table.asp
+            var complectId = this.value;
+            var url = '{{ path("nomenclature_machine_add_complect", {'id': 'complect_id'}) }}';
+            url = url.replace('complect_id', complectId);
+
             $.ajax({
                 type: "POST",
-                url: "{{ path('nomenclature_machine_remove_attribute') }}",
-                data: {machineAtrrRefId: id},
+                url: url,
+                data: {complectId: complectId},
+                dataType: "json",
+                success: function(json){
+                    if (json.status){
+                        var count = ($('#complect_list tr').length + 1)
+                        var html =
+                                '<tr>' +
+                                '   <td>' +
+                                count +
+                                '   </td>' +
+                                '   <td>' +
+                                '       <img src="' + json.complect.image + '">' +
+                                '   </td>' +
+                                '   <td>' +
+                                json.complect.number +
+                                '   </td>' +
+                                '   <td>' +
+                                json.complect.name +
+                                '   </td>' +
+                                '   <td>' +
+                                json.complect.price +
+                                '   </td>' +
+                                '   <td>' +
+                                json.complect.state +
+                                '   </td>' +
+                                '   <td>' +
+                                '<button type="button" class="btn btn-default remove-service"  onclick="removeMachineComplect(' + json.complect.id + ', this)"><i class="fa fa-trash"></i></button>' +
+                                '   </td>' +
+                                '</tr>';
+                        $('#complect_list').append(html);
+                    }
+                },
+                failure: function(errMsg) {
+                }
+            });
+        });
+
+        function removeMachineComplect(id, e) {
+            var url = '{{ path("nomenclature_machine_remove_complect", {'id': 'complect_id'}) }}';
+            url = url.replace('complect_id', id);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {complectId: id},
                 dataType: "json",
                 success: function(json){
                     if (json.status){
@@ -206,43 +278,6 @@
                 }
             });
         }
-
-        $('#ajax_machine_attribute_form').on('submit', function(e) {
-            $.ajax({
-                type: "POST",
-                url: "{{ path('nomenclature_machine_add_attribute') }}",
-                data: $("#ajax_machine_attribute_form").serialize(),
-                dataType: "json",
-                success: function(json){
-                    $('#modal-machine-attribute').modal('hide');
-                    $("#ajax_machine_attribute_form").find("input[type=text]").val("");
-                    if(json.status) {
-                        var count = ($('#attribute_list tr').length + 1)
-                        var html =
-                                '<tr>' +
-                                '   <td>' +
-                                count +
-                                '   </td>' +
-                                '   <td>' +
-                                json.attribute.name +
-                                '   </td>' +
-                                '   <td>' +
-                                json.attribute.text +
-                                '   </td>' +
-                                '   <td>' +
-                                '<button type="button" class="btn btn-default remove-service"  onclick="removeMachineAttribute(' + json.attribute.id + ', this)"><i class="fa fa-trash"></i></button>' +
-                                '   </td>' +
-                                '</tr>';
-                        $('#attribute_list').append(html);
-                    }
-
-                },
-                failure: function(errMsg) {
-                }
-            });
-            e.preventDefault(); //Prevent Default action.
-
-        });
 
         $('#ajax_machine_manual_form').on('submit', function(e) {
             $.ajax({

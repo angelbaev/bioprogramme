@@ -2,6 +2,7 @@
 
 namespace BioprogrammeBranchBundle\Entity;
 
+use BioprogrammeProductionBundle\Entity\Machine;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,6 +44,11 @@ class Base
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BioprogrammeProductionBundle\Entity\Machine", mappedBy="base")
+     */
+    private $machines;
 
     /**
      * @var bool
@@ -95,6 +101,7 @@ class Base
      */
     public function __construct() {
         $this->buildings = new ArrayCollection();
+        $this->machines = new ArrayCollection();
     }
 
     /**
@@ -258,6 +265,43 @@ class Base
     public function removeBuilding(Building $building) {
         if ($this->buildings->contains($building)) {
             $this->buildings->removeElement($building);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get machines
+     * @return Machine[]
+     */
+
+    public function getMachines() {
+        return $this->machines->toArray();
+    }
+
+    /**
+     * Add machine
+     *
+     * @param Machine $machine
+     * @return Line
+     */
+    public function addMachine(Machine $machine) {
+        if (!$this->machines->contains($machine)) {
+            $this->machines->add($machine);
+        }
+
+        return $this;
+    }
+
+    /**
+     *  Remove machine
+     *
+     * @param Machine $machine
+     * @return Line
+     */
+    public function removeMachine(Machine $machine) {
+        if ($this->machines->contains($machine)) {
+            $this->machines->removeElement($machine);
         }
 
         return $this;

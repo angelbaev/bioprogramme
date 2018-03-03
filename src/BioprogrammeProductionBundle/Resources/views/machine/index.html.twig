@@ -16,7 +16,6 @@
                 <th>{% trans %}Id{% endtrans %}</th>
                 <th>{% trans %}Image{% endtrans %}</th>
                 <th>{% trans %}Model{% endtrans %}</th>
-                <th>{% trans %}Serial number{% endtrans %}</th>
                 <th>
                     {% if sort == 'name' %}
                         {% if order == 'asc' %}
@@ -28,9 +27,10 @@
                         <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
                     {% endif %}
                 </th>
-                <th>{% trans %}Quantity{% endtrans %}</th>
+                <th>{% trans %}Base{% endtrans %}</th>
+                <th>{% trans %}Building{% endtrans %}</th>
+                <th>{% trans %}Line{% endtrans %}</th>
                 <th>{% trans %}State{% endtrans %}</th>
-                <th>{% trans %}Status{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
@@ -38,13 +38,13 @@
         {% for machine in machines %}
             <tr>
                 <td><a href="{{ path('nomenclature_machine_show', { 'id': machine.id }) }}">{{ machine.id }}</a></td>
-                <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}"></td>
+                <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}" data-zoom data-image="{{ machine.image }}"></td>
                 <td>{{ machine.model }}</td>
-                <td>{{ machine.serialNumber }}</td>
                 <td>{{ machine.name }}</td>
-                <td>{{ machine.quantity }}</td>
+                <td>{% if machine.base %}{{ machine.base.name }}{% endif %}</td>
+                <td>{% if machine.building %}{{ machine.building.name }}{% endif %}</td>
+                <td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>
                 <td>{{ machine.state }}</td>
-                <td>{{ label(machine.isActive) }}</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-default" href="{{ path('nomenclature_machine_show', { 'id': machine.id }) }}"><i class="fa fa-eye"></i></a>

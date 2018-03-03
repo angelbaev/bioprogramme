@@ -2,6 +2,8 @@
 
 namespace BioprogrammeBranchBundle\Entity;
 
+use BioprogrammeProductionBundle\Entity\Machine;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,6 +45,11 @@ class Line
     private $building;
 
     /**
+     * @ORM\OneToMany(targetEntity="BioprogrammeProductionBundle\Entity\Machine", mappedBy="line")
+     */
+    private $machines;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
@@ -69,6 +76,14 @@ class Line
      * @ORM\Column(name="updated_by", type="integer", nullable=true)
      */
     private $updatedBy;
+
+    /**
+     * Line constructor.
+     */
+    public function __construct()
+    {
+        $this->machines = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -150,6 +165,43 @@ class Line
     public function getBuilding()
     {
         return $this->building;
+    }
+
+    /**
+     * Get machines
+     * @return Machine[]
+     */
+
+    public function getMachines() {
+        return $this->machines->toArray();
+    }
+
+    /**
+     * Add machine
+     *
+     * @param Machine $machine
+     * @return Line
+     */
+    public function addMachine(Machine $machine) {
+        if (!$this->machines->contains($machine)) {
+            $this->machines->add($machine);
+        }
+
+        return $this;
+    }
+
+    /**
+     *  Remove machine
+     *
+     * @param Machine $machine
+     * @return Line
+     */
+    public function removeMachine(Machine $machine) {
+        if ($this->machines->contains($machine)) {
+            $this->machines->removeElement($machine);
+        }
+
+        return $this;
     }
 
     /**
