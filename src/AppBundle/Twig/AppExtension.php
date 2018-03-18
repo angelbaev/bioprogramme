@@ -49,6 +49,7 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             'label' => new \Twig_SimpleFunction('label', [$this, 'labelFilter'], ['is_safe' => ['html']]),
+            'state' => new \Twig_SimpleFunction('state', [$this, 'stateFilter'], ['is_safe' => ['html']]),
             'image_resize' => new \Twig_SimpleFunction('image_resize', [$this, 'imageResize'], ['is_safe' => ['html']]),
             'array_chunk' => new \Twig_SimpleFunction('array_chunk', [$this, 'arrayChunk']),
             'get_attribute_id' => new \Twig_SimpleFunction('get_attribute_id', [$this, 'findIdFromAttribute']),
@@ -93,6 +94,17 @@ class AppExtension extends \Twig_Extension
     {
         //{% if user.isActive %}Yes{% else %}No{% endif %}
         return '<small class="label ' . ($value ? 'label-success': 'label-danger') . '">' . ($value ? $labels[1]: $labels[0]) . '</small>';
+    }
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    public function stateFilter($value, $labels = [ 1 => 'Работи', 2 => 'Не работи', 3 => 'В ремонт'])
+    {
+        //{% if user.isActive %}Yes{% else %}No{% endif %}
+        return '<small class="label label-success">' . ($value ? $labels[$value]: $labels[1]) . '</small>';
     }
 
     /**

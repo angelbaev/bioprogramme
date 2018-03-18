@@ -19,6 +19,7 @@ class BuildingBlockType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('number')
             ->add('name')
             ->add('model')
             ->add(

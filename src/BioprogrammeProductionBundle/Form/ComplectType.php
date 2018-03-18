@@ -102,7 +102,17 @@ class ComplectType extends AbstractType
                     ]
                 ]
             )
-            ->add('state')
+            ->add(
+                'state',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        'Работи' => '1',
+                        'Не работи' => '2',
+                        'В ремонт' => '3'
+                    ]
+                ]
+            )
             ->add(
                 'dateOfManufacture',
                 DateType::class,

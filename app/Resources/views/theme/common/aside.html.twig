@@ -92,12 +92,6 @@
                     <li class="{% if routeName in ['nomenclature_attribute_index', 'nomenclature_attribute_new', 'nomenclature_attribute_show', 'nomenclature_attribute_edit'] %}active{% endif %}"><a href="{{ path('nomenclature_attribute_index') }}"><i class="fa fa-circle-o"></i>{% trans %}Params{% endtrans %}</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="{{ path('machineorder_index') }}">
-                    <i class="fa fa-gear"></i>
-                    <span>{% trans %}Заявка за машина{% endtrans %}</span>
-                </a>
-            </li>
 
             <li class="treeview {% if routeName in marketing %}active menu-open{% endif %}">
                 <a href="#">

@@ -173,7 +173,7 @@ New param: Нов параметър
 Edit param: Редактиране на параметър
 Param: Паратметър
 Building Blocks: Съставни части и елементи
-Building Бlock: Съставна част
+Building Block: Съставна част
 Complects: Комплекти
 Buildingblock creation: Нова съставна част
 Buildingblock edit: Редактиране на съставна част
@@ -186,3 +186,6 @@ Number: Номер
 Add param: Добави параметър
 Add Complect: Добави комплект
 Search Complect: Намери комплект
+Work: Работи
+Not work: Не работи
+In service: В ремонт

@@ -12,6 +12,7 @@ use BioprogrammeProductionBundle\Entity\Manufacturer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -43,6 +44,7 @@ class MachineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('number')
             ->add('model')
             ->add('name')
             ->add(
@@ -54,7 +56,17 @@ class MachineType extends AbstractType
                     ]
                 ]
             )
-            ->add('state')
+            ->add(
+                'state',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        'Работи' => '1',
+                        'Не работи' => '2',
+                        'В ремонт' => '3'
+                    ]
+                ]
+            )
             ->add('image', ImageType::class)
             ->add(
                 'manufacturer',

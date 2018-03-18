@@ -33,6 +33,7 @@ class BuildingBlockController extends Controller
         $filter = [
             'name' => $request->get('filter_name'),
             'model' => $request->get('filter_model'),
+            'number' => $request->get('filter_number'),
         ];
 
         $orderBy = [$sort, $order];
@@ -41,6 +42,8 @@ class BuildingBlockController extends Controller
 
         $queryParams = [
             'filter_name' => $request->get('filter_name'),
+            'filter_model' => $request->get('filter_model'),
+            'filter_number' => $request->get('filter_number'),
         ];
 
         return $this->render('BioprogrammeProductionBundle:buildingblock:index.html.twig', array(

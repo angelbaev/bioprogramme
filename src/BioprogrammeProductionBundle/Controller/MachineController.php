@@ -35,6 +35,12 @@ class MachineController extends Controller
 
         $filter = [
             'name' => $request->get('filter_name'),
+            'number' => $request->get('filter_number'),
+            'model' => $request->get('filter_model'),
+            'base' => $request->get('filter_base'),
+            'building' => $request->get('filter_building'),
+            'line' => $request->get('filter_line'),
+            'state' => $request->get('filter_state'),
         ];
 
         $orderBy = [$sort, $order];
@@ -43,6 +49,12 @@ class MachineController extends Controller
 
         $queryParams = [
             'filter_name' => $request->get('filter_name'),
+            'filter_model' => $request->get('filter_model'),
+            'filter_number' => $request->get('filter_number'),
+            'filter_base' => $request->get('filter_base'),
+            'filter_building' => $request->get('filter_building'),
+            'filter_line' => $request->get('filter_line'),
+            'filter_state' => $request->get('filter_state'),
         ];
 
         return $this->render('BioprogrammeProductionBundle:machine:index.html.twig', array(
@@ -54,6 +66,9 @@ class MachineController extends Controller
             'filter' => $filter,
             'queryParams' => $queryParams,
             'paginationParams' => array_merge($queryParams, ['sort' => $sort, 'order' => $order]),
+            'bases' => $this->get('bioprogramme_branch.base_manager')->findAll(),
+            'buildings' => $this->get('bioprogramme_branch.building_manager')->findBy(['base' => $filter['base']]),
+            'lines' => $this->get('bioprogramme_branch.line_manager')->findBy(['building' => $filter['building']])
         ));
     }
 

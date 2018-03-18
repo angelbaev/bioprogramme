@@ -52,9 +52,9 @@
                 <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
                 <td>{{ complect.number }}</td>
                 <td>{{ complect.name }}</td>
-                <td>{{ complect.price }}</td>
+                <td>{{ complect.price }} лв.</td>
                 <td>{{ complect.quantity }}</td>
-                <td>{{ complect.state }}</td>
+                <td>{{ state(complect.state) }}</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-default" href="{{ path('nomenclature_complect_show', { 'id': complect.id }) }}"><i class="fa fa-eye"></i></a>

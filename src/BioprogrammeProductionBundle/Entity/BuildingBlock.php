@@ -26,6 +26,13 @@ class BuildingBlock
     /**
      * @var string
      *
+     * @ORM\Column(name="number", type="string", length=65)
+     */
+    private $number;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -184,6 +191,30 @@ class BuildingBlock
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set number
+     *
+     * @param string $number
+     *
+     * @return BuildingBlock
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return string
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 
     /**

@@ -15,6 +15,16 @@
                 <button type="submit" class="btn btn-default"><i class="fa fa-trash"></i></button>
                 {{ form_end(delete_form) }}
             </div>
+            <br><br>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Machine{% endtrans %}</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Complects{% endtrans %}</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
+                    <li><a href="#tab_4" data-toggle="tab">{% trans %}Documentation{% endtrans %}</a></li>
+                </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <br>
             <table class="table table-bordered">
         <tbody>
             <tr>
@@ -34,6 +44,10 @@
                 <td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>
             </tr>
             <tr>
+                <th>{% trans %}Number{% endtrans %}</th>
+                <td>{{ machine.number }}</td>
+            </tr>
+            <tr>
                 <th>{% trans %}Model{% endtrans %}</th>
                 <td>{{ machine.model }}</td>
             </tr>
@@ -47,15 +61,15 @@
             </tr>
             <tr>
                 <th>{% trans %}Image{% endtrans %}</th>
-                <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}"></td>
+                <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}" data-zoom data-image="{{ machine.image }}"></td>
             </tr>
             <tr>
                 <th>{% trans %}State{% endtrans %}</th>
-                <td>{{ machine.state }}</td>
+                <td>{{ state(machine.state) }}</td>
             </tr>
             <tr>
                 <th>{% trans %}Price{% endtrans %}</th>
-                <td>{{ machine.price }}</td>
+                <td>{{ machine.price }} лв.</td>
             </tr>
             <tr>
                 <th>{% trans %}Status{% endtrans %}</th>
@@ -79,6 +93,88 @@
             </tr>
         </tbody>
     </table>
+                </div>
+                <div class="tab-pane" id="tab_2">
+                    <br>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{% trans %}Image{% endtrans %}</th>
+                                <th>{% trans %}Number{% endtrans %}</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Price{% endtrans %}</th>
+                                <th>{% trans %}State{% endtrans %}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="complect_list">
+                            {% for key, complect in machine.complects %}
+                                <tr>
+                                    <td>{{ key+1 }}</td>
+                                    <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
+                                    <td><a href="{{ path('nomenclature_complect_show', { 'id': complect.id }) }}" target="_blank">{{ complect.number }}</a></td>
+                                    <td>
+                                        {{ complect.name }}
+                                        <hr>
+                                        <ul>
+                            {% for buildingBlock in complect.buildingBlocks %}
+                                <li>
+                                    <span><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}" target="_blank">{{ buildingBlock.name }}</a></span>
+                                    <span>{{ buildingBlock.model }}</span>
+                                </li>
+                            {% endfor %}
+                                    </ul>
+                                    </td>
+                                    <td>{{ complect.price }} лв.</td>
+                                    <td>{{ complect.state }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                </div>
+
+                <div class="tab-pane" id="tab_3">
+                    <br>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Description{% endtrans %}</th>
+                                <th>{% trans %}Actions{% endtrans %}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="document_list">
+                            {% for key, document in machine.documents %}
+                                <tr>
+                                    <td>{{ key+1 }}</td>
+                                    <td>{{ document.name }}</td>
+                                    <td>{{ document.description }}</td>
+                                    <td>
+                                        <a class="btn btn-default"  target="_blank" href="{{ baseUrl }}/{{ document.file }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% if machine.documents|length == 0 %}
+                                <tr>
+                                    <td colspan="5">{% trans %}No results{% endtrans %}</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+
+                </div>
+                <div class="tab-pane" id="tab_4">
+                    <br>
+                    {% if machine.manual%}
+                    {{ machine.manual.manual|raw }}
+                    {% endif %}
+                </div>
+            </div>
+
             </div>
         </div>
     </div>

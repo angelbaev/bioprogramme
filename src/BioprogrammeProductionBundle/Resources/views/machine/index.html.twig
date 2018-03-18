@@ -15,6 +15,7 @@
             <tr>
                 <th>{% trans %}Id{% endtrans %}</th>
                 <th>{% trans %}Image{% endtrans %}</th>
+                <th>{% trans %}Number{% endtrans %}</th>
                 <th>{% trans %}Model{% endtrans %}</th>
                 <th>
                     {% if sort == 'name' %}
@@ -35,16 +36,59 @@
             </tr>
         </thead>
         <tbody>
+        <tr class="filter">
+            <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
+            <td></td>
+            <td><input type="text" class="form-control" name="filter_number" value="{{ filter.number }}"></td>
+            <td><input type="text" class="form-control" name="filter_model" value="{{ filter.model }}"></td>
+            <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
+            <td>
+                <select class="form-control" name="filter_base">
+                    <option value="*">{% trans %}All{% endtrans %}</option>
+                    {% for base in bases %}
+                        <option value="{{ base.id }}" {% if filter.base == base.id %} selected {% endif %}>{{ base.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select class="form-control" name="filter_building">
+                    <option value="*">{% trans %}All{% endtrans %}</option>
+                    {% for building in buildings %}
+                        <option value="{{ building.id }}" {% if filter.building == building.id %} selected {% endif %}>{{ building.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select class="form-control" name="filter_line">
+                    <option value="*">{% trans %}All{% endtrans %}</option>
+                    {% for line in lines %}
+                        <option value="{{ line.id }}" {% if filter.line == line.id %} selected {% endif %}>{{ line.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select class="form-control" name="filter_state">
+                    <option value="*">{% trans %}All{% endtrans %}</option>
+                    <option value="1" {% if filter.state == 1 %} selected {% endif %}>{% trans %}Work{% endtrans %}</option>
+                    <option value="2" {% if filter.state == 2 %} selected {% endif %}>{% trans %}Not work{% endtrans %}</option>
+                    <option value="3" {% if filter.state == 3 %} selected {% endif %}>{% trans %}In service{% endtrans %}</option>
+                </select>
+            </td>
+            <td class="action-column">
+                <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
+            </td>
+        </tr>
         {% for machine in machines %}
             <tr>
                 <td><a href="{{ path('nomenclature_machine_show', { 'id': machine.id }) }}">{{ machine.id }}</a></td>
                 <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}" data-zoom data-image="{{ machine.image }}"></td>
+                <td>{{ machine.number }}</td>
                 <td>{{ machine.model }}</td>
                 <td>{{ machine.name }}</td>
                 <td>{% if machine.base %}{{ machine.base.name }}{% endif %}</td>
                 <td>{% if machine.building %}{{ machine.building.name }}{% endif %}</td>
                 <td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>
-                <td>{{ machine.state }}</td>
+                <td>{{ state(machine.state) }}</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-default" href="{{ path('nomenclature_machine_show', { 'id': machine.id }) }}"><i class="fa fa-eye"></i></a>
@@ -73,10 +117,44 @@
 
         function filter(url) {
             url += '?';
+            var filter_model = $('input[name=\'filter_model\']').val();
+
+            if (filter_model) {
+                url += '&filter_model=' + encodeURIComponent(filter_model);
+            }
+            var filter_number = $('input[name=\'filter_number\']').val();
+
+            if (filter_number) {
+                url += '&filter_number=' + encodeURIComponent(filter_number);
+            }
             var filter_name = $('input[name=\'filter_name\']').val();
 
             if (filter_name) {
                 url += '&filter_name=' + encodeURIComponent(filter_name);
+            }
+
+            var filter_base = $('select[name=\'filter_base\']').val();
+
+            if (filter_base != '*') {
+                url += '&filter_base=' + encodeURIComponent(filter_base);
+            }
+
+            var filter_building = $('select[name=\'filter_building\']').val();
+
+            if (filter_building != '*') {
+                url += '&filter_building=' + encodeURIComponent(filter_building);
+            }
+
+            var filter_line = $('select[name=\'filter_line\']').val();
+
+            if (filter_line != '*') {
+                url += '&filter_line=' + encodeURIComponent(filter_line);
+            }
+
+            var filter_state = $('select[name=\'filter_state\']').val();
+
+            if (filter_state != '*') {
+                url += '&filter_state=' + encodeURIComponent(filter_state);
             }
 
             location = url;
