@@ -39,7 +39,7 @@ class MachineController extends Controller
             'model' => $request->get('filter_model'),
             'base' => $request->get('filter_base'),
             'building' => $request->get('filter_building'),
-            'line' => $request->get('filter_line'),
+//            'line' => $request->get('filter_line'),
             'state' => $request->get('filter_state'),
         ];
 
@@ -53,7 +53,7 @@ class MachineController extends Controller
             'filter_number' => $request->get('filter_number'),
             'filter_base' => $request->get('filter_base'),
             'filter_building' => $request->get('filter_building'),
-            'filter_line' => $request->get('filter_line'),
+//            'filter_line' => $request->get('filter_line'),
             'filter_state' => $request->get('filter_state'),
         ];
 
@@ -68,7 +68,7 @@ class MachineController extends Controller
             'paginationParams' => array_merge($queryParams, ['sort' => $sort, 'order' => $order]),
             'bases' => $this->get('bioprogramme_branch.base_manager')->findAll(),
             'buildings' => $this->get('bioprogramme_branch.building_manager')->findBy(['base' => $filter['base']]),
-            'lines' => $this->get('bioprogramme_branch.line_manager')->findBy(['building' => $filter['building']])
+//            'lines' => $this->get('bioprogramme_branch.line_manager')->findBy(['building' => $filter['building']])
         ));
     }
 

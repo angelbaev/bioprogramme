@@ -59,13 +59,6 @@ class BuildingBlock
     private $image;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="quantity", type="float", nullable=true)
-     */
-    private $quantity;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="warranty", type="string", length=160, nullable=true)
@@ -80,11 +73,25 @@ class BuildingBlock
     private $weight;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="weight_val", type="string", length=25, nullable=true)
+     */
+    private $weightVal;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="length", type="float", nullable=true)
      */
     private $length;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="length_val", type="string", length=25, nullable=true)
+     */
+    private $lengthVal;
 
     /**
      * @var float
@@ -94,11 +101,25 @@ class BuildingBlock
     private $height;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="height_val", type="string", length=25, nullable=true)
+     */
+    private $heightVal;
+
+    /**
      * @var float
      *
-     * @ORM\Column(name="$width", type="float", nullable=true)
+     * @ORM\Column(name="width", type="float", nullable=true)
      */
     private $width;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="width_val", type="string", length=25, nullable=true)
+     */
+    private $widthVal;
 
     /**
      * @var bool
@@ -266,30 +287,6 @@ class BuildingBlock
     }
 
     /**
-     * Set quantity
-     *
-     * @param float $quantity
-     *
-     * @return BuildingBlock
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * Get quantity
-     *
-     * @return float
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
      * Set warranty
      *
      * @param string $warranty
@@ -407,6 +404,102 @@ class BuildingBlock
     public function getWidth()
     {
         return $this->width;
+    }
+
+    /**
+     * Set weightVal
+     *
+     * @param string $weightVal
+     *
+     * @return BuildingBlock
+     */
+    public function setWeightVal($weightVal)
+    {
+        $this->weightVal = $weightVal;
+
+        return $this;
+    }
+
+    /**
+     * Get weightVal
+     *
+     * @return string
+     */
+    public function getWeightVal()
+    {
+        return $this->weightVal;
+    }
+
+    /**
+     * Set lengthVal
+     *
+     * @param string $lengthVal
+     *
+     * @return BuildingBlock
+     */
+    public function setLengthVal($lengthVal)
+    {
+        $this->lengthVal = $lengthVal;
+
+        return $this;
+    }
+
+    /**
+     * Get lengthVal
+     *
+     * @return string
+     */
+    public function getLengthVal()
+    {
+        return $this->lengthVal;
+    }
+
+    /**
+     * Set heightVal
+     *
+     * @param string $heightVal
+     *
+     * @return BuildingBlock
+     */
+    public function setHeightVal($heightVal)
+    {
+        $this->heightVal = $heightVal;
+
+        return $this;
+    }
+
+    /**
+     * Get heightVal
+     *
+     * @return string
+     */
+    public function getHeightVal()
+    {
+        return $this->heightVal;
+    }
+
+    /**
+     * Set widthVal
+     *
+     * @param string $widthVal
+     *
+     * @return BuildingBlock
+     */
+    public function setWidthVal($widthVal)
+    {
+        $this->widthVal = $widthVal;
+
+        return $this;
+    }
+
+    /**
+     * Get widthVal
+     *
+     * @return string
+     */
+    public function getWidthVal()
+    {
+        return $this->widthVal;
     }
 
     /**

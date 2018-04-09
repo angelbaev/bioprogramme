@@ -28,7 +28,6 @@
                         <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
                     {% endif %}
                 </th>
-                <th>{% trans %}Quantity{% endtrans %}</th>
                 <th>{% trans %}Status{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
@@ -41,7 +40,6 @@
             <td><input type="text" class="form-control" name="filter_model" value="{{ filter.model }}"></td>
             <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
             <td></td>
-            <td></td>
             <td class="action-column">
                 <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
             </td>
@@ -53,7 +51,6 @@
                 <td>{{ buildingBlock.number }}</td>
                 <td>{{ buildingBlock.model }}</td>
                 <td>{{ buildingBlock.name }}</td>
-                <td>{{ buildingBlock.quantity }}</td>
                 <td>{% if buildingBlock.isActive %}{{ label(buildingBlock.isActive) }}{% endif %}</td>
                 <td>
                     <div class="btn-group">

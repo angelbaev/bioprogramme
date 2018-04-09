@@ -54,7 +54,7 @@ class Complect
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal", precision=10, scale=4, nullable=true)
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $price;
 
@@ -94,16 +94,19 @@ class Complect
     private $dateImplementation;
 
     /**
+     * @ORM\OneToMany(targetEntity="ComplectAttributeReference", mappedBy="complect")
+     */
+    private $buildingBlocks;
+    /**
      * @ORM\ManyToOne(targetEntity="Manufacturer")
      * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")
      */
     private $manufacturer;
 
     /**
-     * @ORM\ManyToMany(targetEntity="BuildingBlock", inversedBy="complects")
-     * @ORM\JoinTable(name="complect_to_building_block")
+     * @ORM\OneToMany(targetEntity="BioprogrammeProductionBundle\Entity\ComplectDocument", mappedBy="complect")
      */
-    private $buildingBlocks;
+    private $documents;
 
     /**
      * @var \DateTime
@@ -139,6 +142,7 @@ class Complect
     public function __construct()
     {
         $this->buildingBlocks = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     /**
@@ -452,6 +456,46 @@ class Complect
         $block->removeComplect($this);
         if ($this->buildingBlocks->contains($block)) {
             $this->buildingBlocks->removeElement($block);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get Documents
+     *
+     * @return Complect
+     */
+    public function getDocuments()
+    {
+        return $this->documents->toArray();
+    }
+
+    /**
+     * Add Document
+     *
+     * @param ComplectDocument $document
+     * @return Machine
+     */
+    public function addDocument(ComplectDocument $document)
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents->add($document);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove Document
+     *
+     * @param ComplectDocument $document
+     * @return Machine
+     */
+    public function removeDocument(ComplectDocument $document)
+    {
+        if ($this->documents->contains($document)) {
+            $this->documents->removeElement($document);
         }
 
         return $this;

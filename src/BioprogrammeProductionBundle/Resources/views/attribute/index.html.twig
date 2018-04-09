@@ -26,7 +26,7 @@
                         <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
                     {% endif %}
                 </th>
-                <th>{% trans %}Param groups{% endtrans %}</th>
+                {#<th>{% trans %}Param groups{% endtrans %}</th>#}
                 <th>{% trans %}Sort order{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
 
@@ -35,7 +35,7 @@
         <tr class="filter">
             <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
             <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
-            <td></td>
+            {#<td></td>#}
             <td></td>
             <td class="action-column">
                 <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
@@ -46,7 +46,7 @@
             <tr>
                 <td><a href="{{ path('nomenclature_attribute_show', { 'id': attribute.id }) }}">{{ attribute.id }}</a></td>
                 <td>{{ attribute.name }}</td>
-                <td>{% if attribute.attributeGroup %} {{ attribute.attributeGroup.name }} {% endif %}</td>
+                {#<td>{% if attribute.attributeGroup %} {{ attribute.attributeGroup.name }} {% endif %}</td>#}
                 <td>{{ attribute.sortOrder }}</td>
                 <td>
                     <div class="btn-group">

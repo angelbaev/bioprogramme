@@ -17,16 +17,16 @@ class AttributeType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('sortOrder')
-            ->add(
-                'attributeGroup',
-                EntityType::class,
-                [
-                    'class' => AttributeGroup::class,
-                    'choice_label' => 'name',
-                    'label' => 'Param groups'
-                ]
-            );
+            ->add('sortOrder');
+//            ->add(
+//                'attributeGroup',
+//                EntityType::class,
+//                [
+//                    'class' => AttributeGroup::class,
+//                    'choice_label' => 'name',
+//                    'label' => 'Param groups'
+//                ]
+//            );
     }/**
      * {@inheritdoc}
      */

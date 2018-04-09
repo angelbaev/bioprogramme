@@ -2,7 +2,10 @@
 
 namespace BioprogrammeProductionBundle\Controller;
 
+use AppBundle\Helper\ImageHelper;
 use BioprogrammeProductionBundle\Entity\Complect;
+use BioprogrammeProductionBundle\Entity\ComplectAttributeReference;
+use BioprogrammeProductionBundle\Entity\ComplectDocument;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -111,15 +114,88 @@ class ComplectController extends Controller
 
             return $this->redirectToRoute('nomenclature_complect_edit', array('id' => $complect->getId()));
         }
+        $complectDocument = new ComplectDocument();
+        $complectDocument->setComplect($complect);
+        $complectDocumentForm = $this->createForm('BioprogrammeProductionBundle\Form\ComplectDocumentType', $complectDocument);
 
-        $buildingBlockFieldForm = $this->createForm('BioprogrammeProductionBundle\Form\BuildingBlockFieldType', $complect);
+//        $buildingBlockFieldForm = $this->createForm('BioprogrammeProductionBundle\Form\BuildingBlockFieldType', $complect);
+        $complectAttributeReference = new ComplectAttributeReference();
+        $complectAttributeReference->setComplect($complect);
+        $buildingBlockFieldForm = $this->createForm('BioprogrammeProductionBundle\Form\ComplectAttributeReferenceType', $complectAttributeReference);
 
         return $this->render('BioprogrammeProductionBundle:complect:edit.html.twig', array(
             'complect' => $complect,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'building_block_field_form' => $buildingBlockFieldForm->createView(),
+            'complect_document_form' => $complectDocumentForm->createView(),
         ));
+    }
+
+    /**
+     *
+     *
+     * @Route("/add-document", name="nomenclature_complect_add_document")
+     * @Method({"GET", "POST"})
+     */
+    public function addDocumentAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $entity = new ComplectDocument();
+        $form = $this->createForm('BioprogrammeProductionBundle\Form\ComplectDocumentType', $entity);
+        $form->handleRequest($request);
+
+        $data = ['status' => false, 'document' => null];
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $request->files->get('file');
+            //$filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $filename = $file->getClientOriginalName();
+            $path = $this->container->getParameter('dir_image') . 'documents/';
+            $file->move($path,$filename);
+            $entity->setFile('documents/' . $filename);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            $data['status'] = true;
+            $data['document'] = [
+                'id' => $entity->getId(),
+                'name' => $entity->getName(),
+                'description' => $entity->getDescription(),
+                'file' => $entity->getFile()
+            ];
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     *
+     *
+     * @Route("/remove-document", name="nomenclature_complect_remove_document")
+     * @Method({"POST"})
+     */
+    public function removeDocumentAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $id = $request->get('documentId', false);
+        $data = ['status' => false];
+        if ($id) {
+            $data['status'] = true;
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository(ComplectDocument::class)->find($id);
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return new JsonResponse($data);
     }
 
     /**
@@ -134,20 +210,40 @@ class ComplectController extends Controller
             throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
         }
 
-        $buildingBlockId = $request->get('buildingBlockId');
+        $entity = new ComplectAttributeReference();
+        $form = $this->createForm('BioprogrammeProductionBundle\Form\ComplectAttributeReferenceType', $entity);
+        $form->handleRequest($request);
 
-        $entity = $this->get('bioprogramme_production.building_block_manager')->findById($buildingBlockId);
-        $complect->addBuildingBlock($entity);
-        $this->get('bioprogramme_production.complect_manager')->save($complect);
+        $data = ['status' => false, 'buildingBlock' => null];
 
-        $data = [
-             'status' => true,
-             'buildingBlock' => [
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entity->setComplect($complect);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+            $data['status'] = true;
+            $attributes = [];
+            foreach ($entity->getBuildingBlock()->getAttributes() as $attribute) {
+                $attributes[] = [
+                    'name' => $attribute->getAttribute()->getName(),
+                    'text' => $attribute->getText()
+                ];
+            }
+            $image = ImageHelper::resize($this->container,  $entity->getBuildingBlock()->getImage(), 64, 64);
+            if (!$image) {
+                $image = ImageHelper::resize($this->container, 'img/no_image.jpg', 64, 64);
+            }
+
+            $data['buildingBlock'] = [
                 'id' => $entity->getId(),
-                'name' => $entity->getName(),
-                'model' => $entity->getModel()
-             ]
-        ];
+                'image' => $image,
+                'name' => $entity->getBuildingBlock()->getName(),
+                'model' => $entity->getBuildingBlock()->getModel(),
+                'number' => $entity->getBuildingBlock()->getNumber(),
+                'attributeRefs' => $attributes,
+                'quantity' => $entity->getQuantity()
+            ];
+        }
 
         return new JsonResponse($data);
     }
@@ -164,13 +260,14 @@ class ComplectController extends Controller
             throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
         }
 
-        $id = $request->get('buildingBlockId', false);
+        $id = $request->get('complectAttributeRefId', false);
         $data = ['status' => false];
         if ($id) {
             $data['status'] = true;
-            $entity = $this->get('bioprogramme_production.building_block_manager')->findById($id);
-            $complect->removeBuildingBlock($entity);
-            $this->get('bioprogramme_production.complect_manager')->save($complect);
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository(ComplectAttributeReference::class)->find($id);
+            $em->remove($entity);
+            $em->flush();
         }
 
         return new JsonResponse($data);

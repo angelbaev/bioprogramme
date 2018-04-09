@@ -1,15 +1,15 @@
 <?php
 
-namespace BioprogrammeBranchBundle\Form;
+namespace BioprogrammeProductionBundle\Form;
 
-use AppBundle\Form\Type\ImageType;
-use BioprogrammeBranchBundle\Entity\Branch;
+use BioprogrammeProductionBundle\Entity\Complect;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BaseType extends AbstractType
+class ComplectDocumentType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,25 +18,28 @@ class BaseType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('phone')
-            ->add('address')
-            ->add('image', ImageType::class)
-            ->add('isActive')
+            ->add('description')
+            ->add('file', FileType::class)
             ->add(
-                'branch',
+                'complect',
                 EntityType::class,
                 [
-                    'class' => Branch::class,
-                    'choice_label' => 'name'
+                    'class' => Complect::class,
+                    'choice_label'=> 'name',
+                    'label' => FALSE,
+                    'attr' => [
+                        'class' => 'hidden'
+                    ]
                 ]
-            );
+            )
+        ;
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BioprogrammeBranchBundle\Entity\Base'
+            'data_class' => 'BioprogrammeProductionBundle\Entity\ComplectDocument'
         ));
     }
 
@@ -45,7 +48,7 @@ class BaseType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'bioprogrammebranchbundle_base';
+        return 'bioprogrammeproductionbundle_complectdocument';
     }
 
 

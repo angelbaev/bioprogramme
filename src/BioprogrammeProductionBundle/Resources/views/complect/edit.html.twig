@@ -19,6 +19,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Complect{% endtrans %}</a></li>
                     <li><a href="#tab_2" data-toggle="tab">{% trans %}Building Blocks{% endtrans %}</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
@@ -41,19 +42,35 @@
                             </tr>
                             <tr>
                                 <th>#</th>
-                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Image{% endtrans %}</th>
+                                <th>{% trans %}Number{% endtrans %}</th>
                                 <th>{% trans %}Model{% endtrans %}</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Quantity{% endtrans %}</th>
                                 <th>{% trans %}Actions{% endtrans %}</th>
                             </tr>
                             </thead>
                             <tbody id="attribute_list">
-                            {% for key, buildingBlock in complect.buildingBlocks %}
+                            {% for key, complectAttributeRef in complect.buildingBlocks %}
                                 <tr>
                                     <td>{{ key+1 }}</td>
-                                    <td><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}" target="_blank">{{ buildingBlock.name }}</a></td>
-                                    <td>{{ buildingBlock.model }}</td>
+                                    <td><img src="{{ image_resize(complectAttributeRef.buildingBlock.image, 64, 64) }}" alt="{{ complectAttributeRef.buildingBlock.name }}"  data-zoom data-image="{{ complectAttributeRef.buildingBlock.image }}"></td>
                                     <td>
-                                        <button type="button" class="btn btn-default" onclick="removeBuildingBlock({{ buildingBlock.id }}, this)">
+                                        <a href="{{ path('nomenclature_buildingblock_show', { 'id': complectAttributeRef.buildingBlock.id }) }}" target="_blank">
+                                            {{ complectAttributeRef.buildingBlock.number }}
+                                        </a>
+                                    </td>
+                                    <td>{{ complectAttributeRef.buildingBlock.model }}</td>
+                                    <td>
+                                        {{ complectAttributeRef.buildingBlock.name }}
+                                        <hr>
+                                        {% for attributeRef in complectAttributeRef.buildingBlock.attributes %}
+                                            <div>{{ attributeRef.attribute.name }} - {{ attributeRef.text }}</div>
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ complectAttributeRef.quantity }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-default" onclick="removeBuildingBlock({{ complectAttributeRef.id }}, this)">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -61,6 +78,43 @@
                             {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                    <div class="tab-pane" id="tab_3">
+                        <br>
+                        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-complect-document">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th colspan="5">{% trans %}Documents{% endtrans %}</th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Description{% endtrans %}</th>
+                                <th>{% trans %}Actions{% endtrans %}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="document_list">
+                            {% for key, document in complect.documents %}
+                                <tr>
+                                    <td>{{ key+1 }}</td>
+                                    <td>{{ document.name }}</td>
+                                    <td>{{ document.description }}</td>
+                                    <td>
+                                        <a class="btn btn-default"  target="_blank" href="{{ baseUrl }}/{{ document.file }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-default" onclick="removeMachineDocument({{ document.id }}, this)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
                     </div>
 
             </div>
@@ -73,7 +127,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{% trans %}Building Бlock{% endtrans %}</h4>
+                    <h4 class="modal-title">{% trans %}Building Block{% endtrans %}</h4>
                 </div>
                 <div class="modal-body">
                     {{ form_start(building_block_field_form, {attr:{'id': 'ajax_building_block_field_form'}}) }}
@@ -89,7 +143,29 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <div class="modal fade" id="modal-complect-document">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{% trans %}Add Document{% endtrans %}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(complect_document_form, {attr:{'id': 'ajax_complect_document_form'}}) }}
+                    {{ form_widget(complect_document_form) }}
+                    <input id="ajax_complect_document_form_submit" class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+                    {{ form_end(complect_document_form) }}
+                </div>
+                <div class="modal-footer">
 
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 {% endblock %}
     {% block javascripts %}
         <script>
@@ -100,7 +176,7 @@
                 $.ajax({
                     type: "POST",
                     url: url,
-                    data: {buildingBlockId: id},
+                    data: {complectAttributeRefId: id},
                     dataType: "json",
                     success: function(json){
                         if (json.status){
@@ -119,7 +195,7 @@
                 $.ajax({
                     type: "POST",
                     url: url,
-                    data: { buildingBlockId: $('.building-block').val()},
+                    data: $("#ajax_building_block_field_form").serialize(),
                     dataType: "json",
                     success: function(json){
                         $('#modal-building-block').modal('hide');
@@ -128,18 +204,33 @@
                             var count = ($('#attribute_list tr').length + 1);
                             var url = '{{ path('nomenclature_buildingblock_show', { 'id': 'buildingblock_id' }) }}';
                             url = url.replace('buildingblock_id', json.buildingBlock.id);
+                            var artibiteHtml = '';
+                            $.each(json.buildingBlock.attributeRefs, function( index, value ) {
+                                artibiteHtml += '<div>' + value.name + ' - ' + value.text + '</div>';
+                            });
                             var html =
                                     '<tr>' +
                                     '   <td>' +
                                     count +
                                     '   </td>' +
                                     '   <td>' +
+                                    '   <img src="' + json.buildingBlock.image + '"  alt="' + json.buildingBlock.name + '" data-zoom data-image="' + json.buildingBlock.image + '">' +
+                                    '   </td>' +
+                                    '   <td>' +
                                     '   <a href="' + url + '" target="_blank">' +
-                                    json.buildingBlock.name +
+                                    json.buildingBlock.number +
                                     '   </a>' +
                                     '   </td>' +
                                     '   <td>' +
                                     json.buildingBlock.model +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    json.buildingBlock.name +
+                                    '   <hr>' +
+                                    artibiteHtml +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    json.buildingBlock.quantity +
                                     '   </td>' +
                                     '   <td>' +
                                     '<button type="button" class="btn btn-default remove-service"  onclick="removeBuildingBlock(' + json.buildingBlock.id + ', this)"><i class="fa fa-trash"></i></button>' +
@@ -152,6 +243,75 @@
                     failure: function(errMsg) {
                     }
                 });
+                e.preventDefault(); //Prevent Default action.
+
+            });
+
+            function removeMachineDocument(id, e) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('nomenclature_complect_remove_document') }}",
+                    data: {documentId: id},
+                    dataType: "json",
+                    success: function(json){
+                        if (json.status){
+                            $(e).closest('tr').remove();
+                        }
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+            }
+
+            var file = null;
+            $('input[type="file"]').on('change', function(event) {
+                if (this.files.length > 0) {
+                    file = this.files[0];
+                }
+            });
+
+            $('#ajax_complect_document_form').on('submit', function(e) {
+                e.preventDefault();
+                var fd = new FormData();
+                $.each($("#ajax_complect_document_form").serializeArray(), function (key, input) {
+                    fd.append(input.name, input.value);
+                });
+                fd.append('file', file);
+
+                xhr = new XMLHttpRequest();
+
+                xhr.open( 'POST', "{{ path('nomenclature_complect_add_document') }}", true );
+                xhr.onreadystatechange = function ( response ) {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var json = JSON.parse(xhr.responseText);
+                        if (json.status) {
+                            $('#modal-complect-document').modal('hide');
+                            $("#ajax_complect_document_form").find("input[type=text]").val("");
+                            $("#ajax_complect_document_form").find("input[type=file]").val("");
+                            $("#ajax_complect_document_form").find("textarea").val("");
+                            var count = ($('#document_list tr').length + 1)
+                            var html =
+                                    '<tr>' +
+                                    '   <td>' +
+                                    count +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    json.document.name +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    json.document.description +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    '<a class="btn btn-default"  target="_blank" href="{{ baseUrl }}/' + json.document.file + '"><i class="fa fa-eye"></i></a>' +
+                                    '<button type="button" class="btn btn-default remove-service"  onclick="removeMachineDocument(' + json.document.id + ', this)"><i class="fa fa-trash"></i></button>' +
+                                    '   </td>' +
+                                    '</tr>';
+                            $('#document_list').append(html);
+                        }
+                    }
+                };
+                xhr.send( fd );
+
                 e.preventDefault(); //Prevent Default action.
 
             });

@@ -36,12 +36,6 @@ class Attribute
     private $sortOrder;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AttributeGroup")
-     * @ORM\JoinColumn(name="attribute_group_id", referencedColumnName="id")
-     */
-    private $attributeGroup;
-
-    /**
      * Get id
      *
      * @return int
@@ -97,30 +91,6 @@ class Attribute
     public function getSortOrder()
     {
         return $this->sortOrder;
-    }
-
-    /**
-     * Set Attribute Group
-     *
-     * @param AttributeGroup $attributeGroup
-     *
-     * @return Attribute
-     */
-    public function setAttributeGroup(AttributeGroup $attributeGroup)
-    {
-        $this->attributeGroup = $attributeGroup;
-
-        return $this;
-    }
-
-    /**
-     * Get Attribute Group
-     *
-     * @return Attribute
-     */
-    public function getAttributeGroup()
-    {
-        return $this->attributeGroup;
     }
 }
 

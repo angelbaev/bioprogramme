@@ -13,7 +13,7 @@ Permissions: Права
 Positions: Длъжности
 Bases: Бази
 Production: Производство
-Machines: Машини
+Machines: Линия/ Поточна линия
 Options: Опции
 Marketing: Маркетинг
 Messaging: Съобщения
@@ -150,10 +150,10 @@ Weight: Тегло
 Length: Дължина
 Width: Ширина
 Height: Височина
-Machines: Машини
-Machine: Машина
-Machine creation: Създаване на машина
-Machine edit: Редактиране на машина
+Machines: Линия/ Поточна линия
+Machine: Поточна линия
+Machine creation: Създаване на поточна линия
+Machine edit: Редактиране на поточна линия
 Lines: Линии
 Line: Линия
 Line creation: Създаване на линия
@@ -174,18 +174,20 @@ Edit param: Редактиране на параметър
 Param: Паратметър
 Building Blocks: Съставни части и елементи
 Building Block: Съставна част
-Complects: Комплекти
+Building block: Съставна част
+Complects: Машини
 Buildingblock creation: Нова съставна част
 Buildingblock edit: Редактиране на съставна част
 Date of manufacture: Дата производство
 Date implementation: Дата внедряване
-Complect creation: Създаване на комплект
-Complect edit: Редактиране на комплект
-Complect: Комплект
+Complect creation: Създаване на машини
+Complect edit: Редактиране на машина
+Complect: Машина
 Number: Номер
 Add param: Добави параметър
-Add Complect: Добави комплект
-Search Complect: Намери комплект
+Add Complect: Добави машина
+Search Complect: Намери машина
 Work: Работи
 Not work: Не работи
 In service: В ремонт
+Address: Адрес

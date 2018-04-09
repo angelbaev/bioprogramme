@@ -2,21 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f7b927f-2962-48f3-bcc9-6244d934fb5c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectDocumentType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/translations/messages.bg.yml" afterPath="$PROJECT_DIR$/app/Resources/translations/messages.bg.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/theme/common/aside.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/theme/common/aside.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Twig/AppExtension.php" afterPath="$PROJECT_DIR$/src/AppBundle/Twig/AppExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/BuildingBlockController.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/BuildingBlockController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Base.php" afterPath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Base.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Form/BaseType.php" afterPath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Form/BaseType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/show.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/show.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/building/index.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/building/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/ComplectController.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/ComplectController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/MachineController.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/MachineController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Attribute.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Attribute.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlock.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlock.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Complect.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Complect.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Machine.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Machine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/AttributeType.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/AttributeType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockType.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectType.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineType.php" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/index.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/show.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/show.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/edit.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/edit.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/index.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/show.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/index.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/edit.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/edit.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/show.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/show.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/edit.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/edit.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/index.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/show.html.twig" afterPath="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/show.html.twig" />
     </list>
@@ -40,43 +50,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Machine.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Machine.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.423077">
-              <caret line="201" column="22" selection-start-line="201" selection-start-column="22" selection-end-line="201" selection-end-column="22" />
-              <folding>
-                <element signature="e#55#96#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MachineType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.346154">
-              <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="6.5384617">
-              <caret line="126" column="29" selection-start-line="126" selection-start-column="29" selection-end-line="126" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37362638">
-              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="167" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/show.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="157" column="36" selection-start-line="157" selection-start-column="36" selection-end-line="157" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -85,8 +73,18 @@
       <file leaf-file-name="MachineController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/MachineController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.0">
-              <caret line="52" column="59" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="225" column="83" selection-start-line="225" selection-start-column="50" selection-end-line="225" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47648904">
+              <caret line="204" column="58" selection-start-line="204" selection-start-column="58" selection-end-line="204" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -107,57 +105,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/BioprogrammeAccountBundle/Controller/UserController.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attributegroup/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attributegroup/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attributegroup/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attributegroup/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/AttributeType.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlockAttributeReference.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Repository/BuildingBlockAttributeReferenceRepository.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Complect.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Service/BuildingBlockService.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Service/ComplectService.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/new.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/new.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockAttributeReferenceType.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockFieldType.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/ComplectController.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/show.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/manufacturer/index.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/manufacturer/show.html.twig" />
         <option value="$PROJECT_DIR$/web/dist/css/style.css" />
         <option value="$PROJECT_DIR$/web/dist/js/common.js" />
         <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Line.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Building.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Base.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/new.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/edit.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/theme/common/aside.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Twig/AppExtension.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/show.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/translations/messages.bg.yml" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlock.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockType.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/BuildingBlockController.php" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Base.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Form/BaseType.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/building/index.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/theme/common/aside.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Attribute.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/AttributeType.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Machine.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineType.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/MachineController.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlock.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockType.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/ComplectAttributeReference.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectAttributeReferenceType.php" />
+        <option value="$PROJECT_DIR$/app/Resources/translations/messages.bg.yml" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/MachineDocument.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Complect.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectDocumentType.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/ComplectDocument.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/ComplectController.php" />
         <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeBranchBundle/Controller/BaseController.php" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/edit.html.twig" />
       </list>
     </option>
   </component>
@@ -434,114 +432,6 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="buildingblock" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioprogrammeProductionBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="attribute" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioprogrammeProductionBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioprogrammeProductionBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioprogrammeProductionBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -596,6 +486,10 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -639,12 +533,12 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../omega-aviation" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.crucible.configuration.CrucibleConfigurable" />
@@ -660,9 +554,9 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\INSTALL\xampp\htdocs\biling\src\BioprogrammeProductionBundle\Form" />
+      <recent name="D:\INSTALL\xampp\htdocs\biling\src\BioprogrammeProductionBundle\Entity" />
       <recent name="D:\INSTALL\xampp\htdocs\biling\src\BioprogrammeProductionBundle\Service" />
       <recent name="D:\INSTALL\xampp\htdocs\biling\src\BioprogrammeProductionBundle\Repository" />
-      <recent name="D:\INSTALL\xampp\htdocs\biling\src\BioprogrammeProductionBundle\Entity" />
       <recent name="D:\INSTALL\xampp\htdocs\biling\src\BioprogrammeBranchBundle\Service" />
     </key>
   </component>
@@ -713,14 +607,14 @@
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28756058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33602583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Code Review" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20986238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2087156" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -777,153 +671,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/CategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.87775064">
-          <caret line="49" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/category/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42909536">
-          <caret line="38" column="105" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/category/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/CategoryType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33251834">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.038462">
-          <caret line="23" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.0">
-          <caret line="26" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
-          <caret line="21" column="47" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.038462">
-          <caret line="23" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4779951">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlockAttributeReference.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.076923">
-          <caret line="58" column="28" selection-start-line="58" selection-start-column="15" selection-end-line="58" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockAttributeReferenceType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.346153">
-          <caret line="32" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockFieldType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231">
-          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
-          <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="132" selection-start-line="64" selection-start-column="92" selection-end-line="64" selection-end-column="132" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="130" selection-start-line="26" selection-start-column="130" selection-end-line="26" selection-end-column="130" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/manufacturer/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="155" selection-start-line="45" selection-start-column="107" selection-end-line="45" selection-end-column="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/manufacturer/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="155" selection-start-line="29" selection-start-column="155" selection-end-line="29" selection-end-column="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/dist/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="10" selection-start-line="154" selection-start-column="10" selection-end-line="154" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/dist/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7760968">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Base.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.846153">
-          <caret line="300" column="7" selection-start-line="300" selection-start-column="7" selection-end-line="300" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Building.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385">
-          <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineAttributeReferenceType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.9637795">
@@ -942,9 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="85" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding>
-            <element signature="e#51#99#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -955,20 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.730769">
-          <caret line="79" column="69" selection-start-line="79" selection-start-column="69" selection-end-line="79" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/ComplectController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48188975">
-          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/NotificationController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4">
@@ -976,45 +706,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/theme/common/aside.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5961537">
-          <caret line="93" column="17" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="19" column="99" selection-start-line="19" selection-start-column="85" selection-end-line="19" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.307693">
-          <caret line="115" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Twig/AppExtension.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.615385">
           <caret line="106" column="49" selection-start-line="106" selection-start-column="49" selection-end-line="106" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35748032">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="99" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.23077">
-          <caret line="113" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1036,119 +731,303 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.72283465">
           <caret line="57" column="80" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.346154">
+          <caret line="194" column="0" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Form/BaseType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26771653">
+          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Entity/Building.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.026771653">
+          <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/theme/common/aside.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36124796">
+          <caret line="91" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/building/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26771653">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5590551">
+          <caret line="32" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30393702">
+          <caret line="49" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/ManufacturerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/MachineOrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="90" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Attribute.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-54.846153">
+          <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8393701">
+          <caret line="97" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42834646">
+          <caret line="61" column="51" selection-start-line="61" selection-start-column="51" selection-end-line="61" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockAttributeReferenceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6692913">
+          <caret line="32" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.97322834">
+          <caret line="150" column="23" selection-start-line="150" selection-start-column="23" selection-end-line="150" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockFieldType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4519685">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.115385">
+          <caret line="173" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectAttributeReferenceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4779951">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/AttributeType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4364303">
+          <caret line="25" column="47" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.923077">
+          <caret line="120" column="71" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlockAttributeReference.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.97727275">
+          <caret line="58" column="28" selection-start-line="58" selection-start-column="15" selection-end-line="58" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlock.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.461538">
+          <caret line="137" column="93" selection-start-line="137" selection-start-column="80" selection-end-line="137" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/ComplectAttributeReference.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07823961">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/BuildingBlockController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="171" column="56" selection-start-line="171" selection-start-column="55" selection-end-line="171" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.76923">
+          <caret line="49" column="158" selection-start-line="49" selection-start-column="78" selection-end-line="49" selection-end-column="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Machine.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5">
+          <caret line="487" column="13" selection-start-line="454" selection-start-column="0" selection-end-line="493" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Complect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8710692">
+          <caret line="494" column="51" selection-start-line="494" selection-start-column="51" selection-end-line="494" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/MachineDocument.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.0">
+          <caret line="143" column="7" selection-start-line="132" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineDocumentType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16037735">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectDocumentType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.336478">
+          <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/ComplectType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.576923">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/ComplectDocument.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.307692">
+          <caret line="151" column="31" selection-start-line="151" selection-start-column="31" selection-end-line="151" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="167" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/translations/messages.bg.yml">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41114458">
+          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Controller/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5862069">
+          <caret line="25" column="43" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/base/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="190" column="20" selection-start-line="190" selection-start-column="20" selection-end-line="190" selection-end-column="20" />
-          <folding />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/attribute/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/ComplectController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5086614">
-          <caret line="43" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.02672956">
+          <caret line="137" column="71" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="71" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Complect.php">
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.173077">
-          <caret line="176" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.6415094">
+          <caret line="219" column="56" selection-start-line="219" selection-start-column="53" selection-end-line="219" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/BuildingBlockType.php">
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/complect/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7739403">
-          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3469388">
-          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/BuildingBlockController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65384614">
-          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/buildingblock/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18681319">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeBranchBundle/Resources/views/building/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54631084">
-          <caret line="105" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/BuildingBlock.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.0">
-          <caret line="218" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Entity/Machine.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.423077">
-          <caret line="201" column="22" selection-start-line="201" selection-start-column="22" selection-end-line="201" selection-end-column="22" />
-          <folding>
-            <element signature="e#55#96#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Form/MachineType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.346154">
-          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="157" column="36" selection-start-line="157" selection-start-column="36" selection-end-line="157" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Controller/MachineController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.0">
-          <caret line="52" column="59" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="225" column="83" selection-start-line="225" selection-start-column="50" selection-end-line="225" selection-end-column="83" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.5384617">
-          <caret line="126" column="29" selection-start-line="126" selection-start-column="29" selection-end-line="126" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BioprogrammeProductionBundle/Resources/views/machine/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37362638">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.47648904">
+          <caret line="204" column="58" selection-start-line="204" selection-start-column="58" selection-end-line="204" selection-end-column="58" />
           <folding />
         </state>
       </provider>

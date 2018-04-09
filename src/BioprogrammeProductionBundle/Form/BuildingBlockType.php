@@ -32,7 +32,6 @@ class BuildingBlockType extends AbstractType
                 ]
             )
             ->add('image', ImageType::class)
-            ->add('quantity')
             ->add(
                 'warranty',
                 ChoiceType::class,
@@ -102,9 +101,67 @@ class BuildingBlockType extends AbstractType
                 ]
             )
             ->add('weight')
+            ->add(
+                'weightVal',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        'грам(г, g)' => 'грам(г, g)',
+                        'килограм(кг, kg)' => 'килограм(кг, kg)',
+                        'тон(т, t)' => 'тон(т, t)',
+                    ],
+                    'placeholder' => 'Select',
+                    'label' => false
+                ]
+            )
             ->add('length')
+            ->add(
+                'lengthVal',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        'милиметър(мм, mm)' => 'милиметър(мм, mm)',
+                        'сантиметър(см, cm)' => 'сантиметър(см, cm)',
+                        'метър(м, m)' => 'метър(м, m)',
+                        'инч(in)' => 'инч(in)',
+                        'фут(ft)' => 'фут(ft)',
+                    ],
+                    'placeholder' => 'Select',
+                    'label' => false
+                ]
+            )
             ->add('width')
+            ->add(
+                'widthVal',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        'милиметър(мм, mm)' => 'милиметър(мм, mm)',
+                        'сантиметър(см, cm)' => 'сантиметър(см, cm)',
+                        'метър(м, m)' => 'метър(м, m)',
+                        'инч(in)' => 'инч(in)',
+                        'фут(ft)' => 'фут(ft)',
+                    ],
+                    'placeholder' => 'Select',
+                    'label' => false
+                ]
+            )
             ->add('height')
+            ->add(
+                'heightVal',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        'милиметър(мм, mm)' => 'милиметър(мм, mm)',
+                        'сантиметър(см, cm)' => 'сантиметър(см, cm)',
+                        'метър(м, m)' => 'метър(м, m)',
+                        'инч(in)' => 'инч(in)',
+                        'фут(ft)' => 'фут(ft)',
+                    ],
+                    'placeholder' => 'Select',
+                    'label' => false
+                ]
+            )
             ->add('isActive')
             ->add(
                 'manufacturer',

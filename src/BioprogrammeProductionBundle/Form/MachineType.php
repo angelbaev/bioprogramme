@@ -154,10 +154,10 @@ class MachineType extends AbstractType
             $buildings = $repositoryBuilding->findBy(['base' => $base->getId()]);
         }
 
-        if ($building) {
-            $repositoryLine = $this->em->getRepository(Line::class);
-            $lines = $repositoryLine->findBy(['building' => $building->getId()]);
-        }
+//        if ($building) {
+//            $repositoryLine = $this->em->getRepository(Line::class);
+//            $lines = $repositoryLine->findBy(['building' => $building->getId()]);
+//        }
 
         $form->add(
             'building',
@@ -174,19 +174,19 @@ class MachineType extends AbstractType
             ]
         );
 
-        $form->add(
-            'line',
-            EntityType::class,
-            [
-                'class' => Line::class,
-                'choice_label' => 'name',
-                'choices' => $lines,
-                'required' => false,
-                'placeholder' => 'Select',
-                'attr' => [
-                    'class' => 'select2',
-                ]
-            ]
-        );
+//        $form->add(
+//            'line',
+//            EntityType::class,
+//            [
+//                'class' => Line::class,
+//                'choice_label' => 'name',
+//                'choices' => $lines,
+//                'required' => false,
+//                'placeholder' => 'Select',
+//                'attr' => [
+//                    'class' => 'select2',
+//                ]
+//            ]
+//        );
     }
 }

@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Base{% endtrans %}</th>
                 <th>
                     {% if sort == 'name' %}
                         {% if order == 'asc' %}
@@ -26,27 +27,26 @@
                     {% endif %}
                 </th>
                 <th>{% trans %}Status{% endtrans %}</th>
-                <th>{% trans %}Base{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
         <tr class="filter">
             <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
+            <td>
+                <select name="filter_base" class="form-control">
+                    <option value="*"> {% trans %}All{% endtrans %} </option>
+                    {% for base in bases %}
+                        <option value="{{ base.id }}" {% if filter.base == base.id %} selected {% endif %}>{{ base.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
             <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
             <td>
                 <select name="filter_isActive" class="form-control">
                     <option value="*"> {% trans %}All{% endtrans %} </option>
                     <option value="0" {% if filter.isActive == 0 %} selected {% endif %}>{% trans %}Inactive{% endtrans %}</option>
                     <option value="1" {% if filter.isActive == 1 %} selected {% endif %}>{% trans %}Active{% endtrans %}</option>
-                </select>
-            </td>
-            <td>
-                <select name="filter_base" class="form-control">
-                    <option value="*"> {% trans %}All{% endtrans %} </option>
-                    {% for base in bases %}
-                    <option value="{{ base.id }}" {% if filter.base == base.id %} selected {% endif %}>{{ base.name }}</option>
-                    {% endfor %}
                 </select>
             </td>
             <td class="action-column">
@@ -56,9 +56,9 @@
         {% for building in buildings %}
             <tr>
                 <td><a href="{{ path('branch_building_show', { 'id': building.id }) }}">{{ building.id }}</a></td>
+                <td>{% if building.base %}{{ building.base.name }}{% endif %}</td>
                 <td>{{ building.name }}</td>
                 <td>{{ label(building.isActive) }}</td>
-                <td>{% if building.base %}{{ building.base.name }}{% endif %}</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-default" href="{{ path('branch_building_show', { 'id': building.id }) }}"><i class="fa fa-eye"></i></a>

@@ -201,8 +201,8 @@
         $('[data-complect]').on('click', function (e) {
 //https://www.w3schools.com/howto/howto_js_filter_table.asp
             var complectId = this.value;
-            var url = '{{ path("nomenclature_machine_add_complect", {'id': 'complect_id'}) }}';
-            url = url.replace('complect_id', complectId);
+            var url = '{{ path("nomenclature_machine_add_complect", {'id': 'machine_id'}) }}';
+            url = url.replace('machine_id', {{ machine.id }});
 
             $.ajax({
                 type: "POST",
@@ -346,6 +346,77 @@
             e.preventDefault(); //Prevent Default action.
 
         });
+    </script>
+    <script>
+        $('#bioprogrammeproductionbundle_machine_base').change(function () {
+            var baseSelector = $(this);
+
+            $.ajax({
+                url: "{{ path('nomenclature_building_list') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    baseId: baseSelector.val()
+                },
+                success: function (buildings) {
+                    var buildingSelect = $("#bioprogrammeproductionbundle_machine_building");
+
+                    // Remove current options
+                    buildingSelect.html('');
+
+                    // Empty value ...
+                    if (baseSelector.val()) {
+                        buildingSelect.append('<option value>Избери сграда от ' + baseSelector.find("option:selected").text() + ' ...</option>');
+                    } else {
+                        buildingSelect.append('<option value>Избери</option>');
+                    }
+
+
+                    $.each(buildings, function (key, building) {
+                        buildingSelect.append('<option value="' + building.id + '">' + building.name + '</option>');
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+
+        $('#bioprogrammeproductionbundle_machine_building').change(function () {
+            var buildingSelect = $(this);
+
+            $.ajax({
+                url: "{{ path('nomenclature_line_list') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    buildingId: buildingSelect.val()
+                },
+                success: function (lines) {
+                    var lineSelect = $("#bioprogrammeproductionbundle_machine_line");
+
+                    // Remove current options
+                    lineSelect.html('');
+
+                    // Empty value ...
+                    if (buildingSelect.val()) {
+                        lineSelect.append('<option value>Избери линия от ' + buildingSelect.find("option:selected").text() + ' ...</option>');
+                    } else {
+                        lineSelect.append('<option value>Избери</option>');
+                    }
+
+
+                    $.each(lines, function (key, line) {
+                        lineSelect.append('<option value="' + line.id + '">' + line.name + '</option>');
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+
+        //
     </script>
 {% endblock %}
 {% block stylesheets %}

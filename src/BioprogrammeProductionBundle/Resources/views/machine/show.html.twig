@@ -39,10 +39,10 @@
                 <th>{% trans %}Building{% endtrans %}</th>
                 <td>{% if machine.building %}{{ machine.building.name }}{% endif %}</td>
             </tr>
-            <tr>
-                <th>{% trans %}Line{% endtrans %}</th>
-                <td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>
-            </tr>
+            {#<tr>#}
+                {#<th>{% trans %}Line{% endtrans %}</th>#}
+                {#<td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>#}
+            {#</tr>#}
             <tr>
                 <th>{% trans %}Number{% endtrans %}</th>
                 <td>{{ machine.number }}</td>
@@ -117,10 +117,10 @@
                                         {{ complect.name }}
                                         <hr>
                                         <ul>
-                            {% for buildingBlock in complect.buildingBlocks %}
+                            {% for buildingBlockRef in complect.buildingBlocks %}
                                 <li>
-                                    <span><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}" target="_blank">{{ buildingBlock.name }}</a></span>
-                                    <span>{{ buildingBlock.model }}</span>
+                                    <span><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlockRef.buildingBlock.id }) }}" target="_blank">{{ buildingBlockRef.buildingBlock.name }}</a></span>
+                                    <span>{{ buildingBlockRef.buildingBlock.model }}</span>
                                 </li>
                             {% endfor %}
                                     </ul>

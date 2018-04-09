@@ -46,6 +46,13 @@ class Base
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
      * @ORM\OneToMany(targetEntity="BioprogrammeProductionBundle\Entity\Machine", mappedBy="base")
      */
     private $machines;
@@ -160,6 +167,30 @@ class Base
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Base
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 
     /**

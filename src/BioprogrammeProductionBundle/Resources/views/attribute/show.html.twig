@@ -26,10 +26,10 @@
                 <th>{% trans %}Name{% endtrans %}</th>
                 <td>{{ attribute.name }}</td>
             </tr>
-            <tr>
-                <th>{% trans %}Param groups{% endtrans %}</th>
-                <td>{% if attribute.attributeGroup %} {{ attribute.attributeGroup.name }} {% endif %}</td>
-            </tr>
+            {#<tr>#}
+                {#<th>{% trans %}Param groups{% endtrans %}</th>#}
+                {#<td>{% if attribute.attributeGroup %} {{ attribute.attributeGroup.name }} {% endif %}</td>#}
+            {#</tr>#}
             <tr>
                 <th>{% trans %}Sort order{% endtrans %}</th>
                 <td>{{ attribute.sortOrder }}</td>

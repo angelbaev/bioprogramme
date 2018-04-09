@@ -30,7 +30,7 @@
                 </th>
                 <th>{% trans %}Base{% endtrans %}</th>
                 <th>{% trans %}Building{% endtrans %}</th>
-                <th>{% trans %}Line{% endtrans %}</th>
+                {#<th>{% trans %}Line{% endtrans %}</th>#}
                 <th>{% trans %}State{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
@@ -58,14 +58,14 @@
                     {% endfor %}
                 </select>
             </td>
-            <td>
-                <select class="form-control" name="filter_line">
-                    <option value="*">{% trans %}All{% endtrans %}</option>
-                    {% for line in lines %}
-                        <option value="{{ line.id }}" {% if filter.line == line.id %} selected {% endif %}>{{ line.name }}</option>
-                    {% endfor %}
-                </select>
-            </td>
+            {#<td>#}
+                {#<select class="form-control" name="filter_line">#}
+                    {#<option value="*">{% trans %}All{% endtrans %}</option>#}
+                    {#{% for line in lines %}#}
+                        {#<option value="{{ line.id }}" {% if filter.line == line.id %} selected {% endif %}>{{ line.name }}</option>#}
+                    {#{% endfor %}#}
+                {#</select>#}
+            {#</td>#}
             <td>
                 <select class="form-control" name="filter_state">
                     <option value="*">{% trans %}All{% endtrans %}</option>
@@ -87,7 +87,7 @@
                 <td>{{ machine.name }}</td>
                 <td>{% if machine.base %}{{ machine.base.name }}{% endif %}</td>
                 <td>{% if machine.building %}{{ machine.building.name }}{% endif %}</td>
-                <td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>
+                {#<td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>#}
                 <td>{{ state(machine.state) }}</td>
                 <td>
                     <div class="btn-group">

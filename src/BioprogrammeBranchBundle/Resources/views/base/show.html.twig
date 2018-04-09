@@ -36,6 +36,10 @@
                 <td>{{ base.phone }}</td>
             </tr>
             <tr>
+                <th>{% trans %}Address{% endtrans %}</th>
+                <td>{{ base.address }}</td>
+            </tr>
+            <tr>
                 <th>{% trans %}Branch{% endtrans %}</th>
                 <td>
                     {% if base.branch %}{{ base.branch.name }}{% endif %}

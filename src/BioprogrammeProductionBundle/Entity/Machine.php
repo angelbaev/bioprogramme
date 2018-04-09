@@ -102,12 +102,6 @@ class Machine
     private $building;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BioprogrammeBranchBundle\Entity\Line")
-     * @ORM\JoinColumn(name="line_id", referencedColumnName="id", nullable=true)
-     */
-    private $line;
-
-    /**
      * @ORM\OneToOne(targetEntity="MachineManual", mappedBy="machine")
      */
     private $manual;
@@ -409,31 +403,7 @@ class Machine
     {
         return $this->building;
     }
-
-    /**
-     * Set Line
-     *
-     * @param Line $line
-     *
-     * @return Machine
-     */
-    public function setLine(Line $line)
-    {
-        $this->line = $line;
-
-        return $this;
-    }
-
-    /**
-     * Get Line
-     *
-     * @return Machine
-     */
-    public function getLine()
-    {
-        return $this->line;
-    }
-
+    
     /**
      * Set state
      *
