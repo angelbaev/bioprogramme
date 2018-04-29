@@ -3,6 +3,8 @@
 namespace BioprogrammeProductionBundle\Controller;
 
 use AppBundle\Helper\ImageHelper;
+use BioprogrammeProductionBundle\Entity\Attribute;
+use BioprogrammeProductionBundle\Entity\BuildingBlockAttributeReference;
 use BioprogrammeProductionBundle\Entity\Complect;
 use BioprogrammeProductionBundle\Entity\ComplectAttributeReference;
 use BioprogrammeProductionBundle\Entity\ComplectDocument;
@@ -33,8 +35,8 @@ class ComplectController extends Controller
         $order = $request->get('order', 'asc');
 
         $filter = [
-            'name' => $request->get('filter_name'),
-            'number' => $request->get('filter_number'),
+            'name' => (string)$request->get('filter_name'),
+            'number' => (string)$request->get('filter_number'),
         ];
 
         $orderBy = [$sort, $order];
@@ -125,6 +127,7 @@ class ComplectController extends Controller
 
         return $this->render('BioprogrammeProductionBundle:complect:edit.html.twig', array(
             'complect' => $complect,
+            'attributes' => $this->get('bioprogramme_production.attribute_manager')->findAll(),
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'building_block_field_form' => $buildingBlockFieldForm->createView(),
@@ -223,12 +226,12 @@ class ComplectController extends Controller
             $em->flush();
             $data['status'] = true;
             $attributes = [];
-            foreach ($entity->getBuildingBlock()->getAttributes() as $attribute) {
-                $attributes[] = [
-                    'name' => $attribute->getAttribute()->getName(),
-                    'text' => $attribute->getText()
-                ];
-            }
+//            foreach ($entity->getBuildingBlock()->getAttributes() as $attribute) {
+//                $attributes[] = [
+//                    'name' => $attribute->getAttribute()->getName(),
+//                    'text' => $attribute->getText()
+//                ];
+//            }
             $image = ImageHelper::resize($this->container,  $entity->getBuildingBlock()->getImage(), 64, 64);
             if (!$image) {
                 $image = ImageHelper::resize($this->container, 'img/no_image.jpg', 64, 64);
@@ -237,10 +240,11 @@ class ComplectController extends Controller
             $data['buildingBlock'] = [
                 'id' => $entity->getId(),
                 'image' => $image,
+                'buildingBlockId' => $entity->getBuildingBlock()->getId(),
                 'name' => $entity->getBuildingBlock()->getName(),
                 'model' => $entity->getBuildingBlock()->getModel(),
                 'number' => $entity->getBuildingBlock()->getNumber(),
-                'attributeRefs' => $attributes,
+                'attributeRefs' => [],
                 'quantity' => $entity->getQuantity()
             ];
         }
@@ -265,9 +269,98 @@ class ComplectController extends Controller
         if ($id) {
             $data['status'] = true;
             $em = $this->getDoctrine()->getManager();
+
+            $bbAttributeReferences = $em->getRepository(BuildingBlockAttributeReference::class)->findBy(['complect' => $id]);
+            foreach($bbAttributeReferences as $bbAttributeReference) {
+                $em->remove($bbAttributeReference);
+            }
+            $em->flush();
+
             $entity = $em->getRepository(ComplectAttributeReference::class)->find($id);
             $em->remove($entity);
             $em->flush();
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     *
+     *
+     * @Route("/add-building-block-attribute", name="nomenclature_complect_add_building_block_attr")
+     * @Method({"POST"})
+     */
+    public function addBuildingBlockAttributeAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $complectRefId = $request->get('complect_ref_id', false);
+        $attributes = $request->get('bb_attribute', []);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository(ComplectAttributeReference::class)->find($complectRefId);
+        $data = [];
+        foreach($attributes['id'] as $k => $attrId) {
+            $attrEnity =  $em->getRepository(Attribute::class)->find($attrId);
+            $bbEnity = new BuildingBlockAttributeReference();
+            $bbEnity->setComplect($entity);
+            $bbEnity->setAttribute($attrEnity);
+            $bbEnity->setText($attributes['text'][$k]);
+            $em->persist($bbEnity);
+            $data[] = [
+                'attribute_id' => $attrId,
+                'complect_ref_id' => $complectRefId,
+                'name' => $attrEnity->getName(),
+                'text' => $attributes['text'][$k],
+            ];
+        }
+        $em->flush();
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     *
+     *
+     * @Route("/remove-building-block-attribute", name="nomenclature_complect_remove_building_block_attr")
+     * @Method({"POST"})
+     */
+    public function removeBuildingBlockAttributeAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+        $bbAttrRefId = $request->get('bb_attr_ref_id', false);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository(BuildingBlockAttributeReference::class)->find($bbAttrRefId);
+        $em->remove($entity);
+        $em->flush();
+
+        return new JsonResponse(['status' => true]);
+    }
+
+    /**
+     *
+     *
+     * @Route("/list-building-block-attribute", name="nomenclature_complect_list_building_block_attr")
+     * @Method({"GET", "POST"})
+     */
+    public function listBuildingBlockAttributeAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+        $complectRefId = $request->get('complect_ref_id', false);
+        $em = $this->getDoctrine()->getManager();
+        $data = [];
+        $results = $em->getRepository(BuildingBlockAttributeReference::class)->findBy(['complect' => $complectRefId]);
+        foreach($results as $result) {
+            $data[] = [
+                'id' => $result->getId(),
+                'name' => $result->getAttribute()->getName(),
+                'text' => $result->getText(),
+            ];
         }
 
         return new JsonResponse($data);

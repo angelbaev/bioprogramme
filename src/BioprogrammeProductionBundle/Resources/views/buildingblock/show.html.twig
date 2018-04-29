@@ -42,22 +42,6 @@
                 <td>{{ buildingBlock.description|raw }}</td>
             </tr>
             <tr>
-                <th>{% trans %}Warranty{% endtrans %}</th>
-                <td>{{ buildingBlock.warranty }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Weight{% endtrans %}</th>
-                <td>{{ buildingBlock.weight }} {{ buildingBlock.weightVal }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Length{% endtrans %}</th>
-                <td>{{ buildingBlock.length }} {{ buildingBlock.lengthVal }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Height{% endtrans %}</th>
-                <td>{{ buildingBlock.height }} {{ buildingBlock.heightVal }}</td>
-            </tr>
-            <tr>
                 <th>{% trans %}Status{% endtrans %}</th>
                 <td>{{ label(buildingBlock.isActive) }}</td>
             </tr>
@@ -77,33 +61,33 @@
                 <th>{% trans %}Updatedby{% endtrans %}</th>
                 <td>{{ buildingBlock.updatedBy }}</td>
             </tr>
-            <tr>
-                <td colspan="2">
+            {#<tr>#}
+                {#<td colspan="2">#}
 
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th colspan="4">{% trans %}Params{% endtrans %}</th>
-                            </tr>
-                            <tr>
-                                <th>#</th>
-                                <th>{% trans %}Param{% endtrans %}</th>
-                                <th>{% trans %}Text{% endtrans %}</th>
-                            </tr>
-                            </thead>
-                            <tbody id="attribute_list">
-                            {% for key, buildingBlockAttrRef in buildingBlock.attributes %}
-                                <tr>
-                                    <td>{{ key+1 }}</td>
-                                    <td>{{ buildingBlockAttrRef.attribute.name }}</td>
-                                    <td>{{ buildingBlockAttrRef.text }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        {#<table class="table table-bordered">#}
+                            {#<thead>#}
+                            {#<tr>#}
+                                {#<th colspan="4">{% trans %}Params{% endtrans %}</th>#}
+                            {#</tr>#}
+                            {#<tr>#}
+                                {#<th>#</th>#}
+                                {#<th>{% trans %}Param{% endtrans %}</th>#}
+                                {#<th>{% trans %}Text{% endtrans %}</th>#}
+                            {#</tr>#}
+                            {#</thead>#}
+                            {#<tbody id="attribute_list">#}
+                            {#{% for key, buildingBlockAttrRef in buildingBlock.attributes %}#}
+                                {#<tr>#}
+                                    {#<td>{{ key+1 }}</td>#}
+                                    {#<td>{{ buildingBlockAttrRef.attribute.name }}</td>#}
+                                    {#<td>{{ buildingBlockAttrRef.text }}</td>#}
+                                {#</tr>#}
+                            {#{% endfor %}#}
+                            {#</tbody>#}
+                        {#</table>#}
 
-                </td>
-            </tr>
+                {#</td>#}
+            {#</tr>#}
         </tbody>
     </table>
             </div>

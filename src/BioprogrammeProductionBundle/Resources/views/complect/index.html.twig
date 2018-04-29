@@ -28,6 +28,7 @@
                     {% endif %}
                 </th>
                 <th>{% trans %}Price{% endtrans %}</th>
+                <th>{% trans %}Manufacturer{% endtrans %}</th>
                 <th>{% trans %}Quantity{% endtrans %}</th>
                 <th>{% trans %}State{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
@@ -42,6 +43,7 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
             <td class="action-column">
                 <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
             </td>
@@ -52,8 +54,9 @@
                 <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
                 <td>{{ complect.number }}</td>
                 <td>{{ complect.name }}</td>
-                <td>{{ complect.price }} лв.</td>
+                <td>{{ complect.price|number_format(2, '.', '') }} лв.</td>
                 <td>{{ complect.quantity }}</td>
+                <td>{{ complect.manufacturer.name }}</td>
                 <td>{{ state(complect.state) }}</td>
                 <td>
                     <div class="btn-group">

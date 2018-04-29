@@ -13,7 +13,7 @@ Permissions: Права
 Positions: Длъжности
 Bases: Бази
 Production: Производство
-Machines: Линия/ Поточна линия
+Machines: Активи
 Options: Опции
 Marketing: Маркетинг
 Messaging: Съобщения
@@ -57,7 +57,7 @@ Role creation: Създай роля
 Role edit: Редактиране на роля
 Role: Роля
 Value: Стойност
-Description: Описнаие
+Description: Описание
 Createdat: Създаден на
 Updatedat: Редактиран на
 Permission: Права
@@ -150,10 +150,10 @@ Weight: Тегло
 Length: Дължина
 Width: Ширина
 Height: Височина
-Machines: Линия/ Поточна линия
-Machine: Поточна линия
-Machine creation: Създаване на поточна линия
-Machine edit: Редактиране на поточна линия
+Machines: Активи
+Machine: Актив
+Machine creation: Създаване на Активи
+Machine edit: Редактиране на Активи
 Lines: Линии
 Line: Линия
 Line creation: Създаване на линия
@@ -191,3 +191,5 @@ Work: Работи
 Not work: Не работи
 In service: В ремонт
 Address: Адрес
+Add Params: Добави параметри
+Name and Params: Наименование и параметри

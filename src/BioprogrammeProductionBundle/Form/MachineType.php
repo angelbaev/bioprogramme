@@ -51,6 +51,7 @@ class MachineType extends AbstractType
                 'description',
                 TextareaType::class,
                 [
+                    'required' => false,
                     'attr' => [
                         'class' => 'wysihtml',
                     ]

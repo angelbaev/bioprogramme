@@ -31,6 +31,8 @@ $(document).ready(function() {
     //bootstrap WYSIHTML5 - text editor
     $('.wysihtml').wysihtml5();
 
+    $('.range-datepicker').daterangepicker();
+
     $(document).on('click', '[data-zoom]', function(e) {
         $('#image-preview').attr('src', $(this).data('image'));
         $('#image-caption').html($(this).attr('alt'));
@@ -105,7 +107,7 @@ var CustomerEventSource = /** @class */ (function () {
 
     CustomerEventSource.init = function () {
         if(typeof(EventSource) !== 'undefined') {
-            CustomerEventSource.notificationEventHandler();
+            //CustomerEventSource.notificationEventHandler();
         } else {
             console.log('EventSource is not supported!');
         }

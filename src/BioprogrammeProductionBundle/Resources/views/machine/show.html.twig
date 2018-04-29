@@ -69,11 +69,15 @@
             </tr>
             <tr>
                 <th>{% trans %}Price{% endtrans %}</th>
-                <td>{{ machine.price }} лв.</td>
+                <td>{{ machine.price|number_format(2, '.', '') }} лв.</td>
             </tr>
             <tr>
                 <th>{% trans %}Status{% endtrans %}</th>
                 <td>{{ label(machine.isActive) }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Manufacturer{% endtrans %}</th>
+                <td>{{ machine.manufacturer.name }}</td>
             </tr>
             <tr>
                 <th>{% trans %}Createdat{% endtrans %}</th>
@@ -116,17 +120,22 @@
                                     <td>
                                         {{ complect.name }}
                                         <hr>
-                                        <ul>
+                                        <div>
                             {% for buildingBlockRef in complect.buildingBlocks %}
-                                <li>
-                                    <span><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlockRef.buildingBlock.id }) }}" target="_blank">{{ buildingBlockRef.buildingBlock.name }}</a></span>
-                                    <span>{{ buildingBlockRef.buildingBlock.model }}</span>
-                                </li>
+                                <div>
+                                    <span><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlockRef.buildingBlock.id }) }}" target="_blank">{{ buildingBlockRef.buildingBlock.model }}</a></span> -
+                                    <span>{{ buildingBlockRef.buildingBlock.name }}</span>
+                                        <hr>
+                                    {% for attributeRef in buildingBlockRef.attributes %}
+                                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<i>{{ attributeRef.attribute.name }} - {{ attributeRef.text }}</i></div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
                             {% endfor %}
-                                    </ul>
+                                    </div>
                                     </td>
                                     <td>{{ complect.price }} лв.</td>
-                                    <td>{{ complect.state }}</td>
+                                    <td>{{ state(complect.state) }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

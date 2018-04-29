@@ -57,9 +57,13 @@
                                     <td>{{ key+1 }}</td>
                                     <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
                                     <td>{{ complect.number }}</td>
-                                    <td>{{ complect.name }}</td>
-                                    <td>{{ complect.price }}</td>
-                                    <td>{{ complect.state }}</td>
+                                    <td>
+                                        <a href="{{ path('nomenclature_complect_show', { 'id': complect.id }) }}" target="_blank">
+                                        {{ complect.name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ complect.price }} лв.</td>
+                                    <td>{{ state(complect.state) }}</td>
                                     <td>
                                         <button type="button" class="btn btn-default" onclick="removeMachineComplect({{ complect.id }}, this)">
                                             <i class="fa fa-trash"></i>
@@ -154,8 +158,8 @@
                             <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}" data-zoom data-image="{{ complect.image }}"></td>
                             <td>{{ complect.number }}</td>
                             <td>{{ complect.name }}</td>
-                            <td>{{ complect.price }}</td>
-                            <td>{{ complect.state }}</td>
+                            <td>{{ complect.price }} лв.</td>
+                            <td>{{ state(complect.state) }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -197,7 +201,10 @@
 {% block javascripts %}
     <script>
         $('#table_complect_list').DataTable();
-
+        function state(id) {
+            var labels = {1:'Работи',2:'Не работи', 3:'В ремонт'};
+            return '<small class="label label-success">' + labels[id] +'</small>';
+        }
         $('[data-complect]').on('click', function (e) {
 //https://www.w3schools.com/howto/howto_js_filter_table.asp
             var complectId = this.value;
@@ -211,7 +218,11 @@
                 dataType: "json",
                 success: function(json){
                     if (json.status){
-                        var count = ($('#complect_list tr').length + 1)
+                        var count = ($('#complect_list tr').length + 1);
+
+                        var url = '{{ path('nomenclature_complect_show', { 'id': 'complect_id' }) }}';
+                        url = url.replace('complect_id', json.complect.id);
+
                         var html =
                                 '<tr>' +
                                 '   <td>' +
@@ -224,13 +235,15 @@
                                 json.complect.number +
                                 '   </td>' +
                                 '   <td>' +
+                                '   <a href="' + url + '">' +
                                 json.complect.name +
+                                '   </a>' +
                                 '   </td>' +
                                 '   <td>' +
-                                json.complect.price +
+                                json.complect.price + ' лв.' +
                                 '   </td>' +
                                 '   <td>' +
-                                json.complect.state +
+                                state(json.complect.state) +
                                 '   </td>' +
                                 '   <td>' +
                                 '<button type="button" class="btn btn-default remove-service"  onclick="removeMachineComplect(' + json.complect.id + ', this)"><i class="fa fa-trash"></i></button>' +

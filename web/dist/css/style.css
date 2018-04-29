@@ -95,6 +95,11 @@ a.sort-by:after {
     height: auto;
 }
 
+.delete-item {
+    cursor: pointer;
+    color: #9e0505;
+    font-size: 1.6em;
+}
 /** image modal **/
 /* The Modal (background) */
 .image-modal {

@@ -2,6 +2,7 @@
 
 namespace BioprogrammeProductionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,6 +40,19 @@ class ComplectAttributeReference
      * @ORM\JoinColumn(name="building_block_id", referencedColumnName="id")
      */
     private $buildingBlock;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BuildingBlockAttributeReference", mappedBy="complect")
+     */
+    private $attributes;
+
+    /**
+     * BuildingBlock constructor.
+     */
+    public function __construct()
+    {
+        $this->attributes = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -118,6 +132,46 @@ class ComplectAttributeReference
     public function getComplect()
     {
         return $this->complect;
+    }
+
+    /**
+     * Get Attributes
+     *
+     * @return BuildingBlock
+     */
+    public function getAttributes()
+    {
+        return $this->attributes->toArray();
+    }
+
+    /**
+     * Add Attribute
+     *
+     * @param Attribute $category
+     * @return BuildingBlock
+     */
+    public function addAttribute(Attribute $attribute)
+    {
+        if (!$this->attributes->contains($attribute)) {
+            $this->attributes->add($attribute);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove Attribute
+     *
+     * @param Attribute $category
+     * @return BuildingBlock
+     */
+    public function removeAttribute(Attribute $attribute)
+    {
+        if ($this->attributes->contains($attribute)) {
+            $this->attributes->removeElement($attribute);
+        }
+
+        return $this;
     }
 }
 

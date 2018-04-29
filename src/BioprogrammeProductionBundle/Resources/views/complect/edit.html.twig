@@ -45,7 +45,7 @@
                                 <th>{% trans %}Image{% endtrans %}</th>
                                 <th>{% trans %}Number{% endtrans %}</th>
                                 <th>{% trans %}Model{% endtrans %}</th>
-                                <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Name and Params{% endtrans %}</th>
                                 <th>{% trans %}Quantity{% endtrans %}</th>
                                 <th>{% trans %}Actions{% endtrans %}</th>
                             </tr>
@@ -64,14 +64,19 @@
                                     <td>
                                         {{ complectAttributeRef.buildingBlock.name }}
                                         <hr>
-                                        {% for attributeRef in complectAttributeRef.buildingBlock.attributes %}
-                                            <div>{{ attributeRef.attribute.name }} - {{ attributeRef.text }}</div>
+                                        <div id="complectAttributeRef_{{ complectAttributeRef.id }}">
+                                        {% for attributeRef in complectAttributeRef.attributes %}
+                                            <div>{{ attributeRef.attribute.name }} - {{ attributeRef.text }} <span class="delete-item" onclick="removeRef({{ attributeRef.id }}, this)">&times;</span></div>
                                         {% endfor %}
+                                        </div>
                                     </td>
                                     <td>{{ complectAttributeRef.quantity }}</td>
                                     <td>
                                         <button type="button" class="btn btn-default" onclick="removeBuildingBlock({{ complectAttributeRef.id }}, this)">
                                             <i class="fa fa-trash"></i>
+                                        </button>
+                                        <button title="Добави параметри" type="button" class="btn btn-success" onclick="addParams({{ complectAttributeRef.id }}, this)">
+                                            <i class="fa fa-plus"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -166,9 +171,91 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+    <div class="modal fade" id="modal-bb-attributes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{% trans %}Add Params{% endtrans %}</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="ajax_complect_bb_form" class="form-horizontal">
+                        <input type="hidden" name="complect_ref_id" value="">
+                        <div id="bb-form-group">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-default clone-attr"><i class="fa fa-copy"></i></button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select name="bb_attribute[id][]" required="required" class="form-control">
+                                        <option></option>
+                                        {% for key, attribute in attributes %}
+                                        <option value="{{ attribute.id }}">{{ attribute.name }}</option>
+                                        {% endfor %}
+                                    </select >
+                                </div>
+                                <div class="col-sm-6">
+                                    <input id="" name="bb_attribute[text][]" maxlength="255" class="form-control" value="" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <input id="ajax_complect_bb_form_submit" class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 {% endblock %}
     {% block javascripts %}
         <script>
+            $('.clone-attr').on('click', function(){
+                var element = $(this).closest('.form-group').clone();
+                element.addClass('is-cloned');
+                $('#bb-form-group').append(element);
+            });
+            $('#ajax_complect_bb_form_submit').on('click', function(e) {
+                //complect_ref_id
+                $.ajax({
+                    type: "POST",
+                    url: '{{ path("nomenclature_complect_add_building_block_attr") }}',
+                    data: $("#ajax_complect_bb_form").serialize(),
+                    dataType: "json",
+                    success: function(json){
+                        $.ajax({
+                            type: "POST",
+                            url: '{{ path("nomenclature_complect_list_building_block_attr") }}',
+                            data: {complect_ref_id: $('input[name="complect_ref_id"]').val()},
+                            dataType: "json",
+                            success: function(json){
+                                var artibiteHtml = '';
+                                $.each(json, function( index, value ) {
+                                    artibiteHtml += '<div>' + value.name + ' - ' + value.text + '<span class="delete-item" onclick="removeRef(' + value.id + ', this)">&times;</span></div>';
+                                });
+
+                                $('#complectAttributeRef_' + $('input[name="complect_ref_id"]').val()).append(artibiteHtml)
+                            },
+                            failure: function(errMsg) {
+                            }
+                        });
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+
+            });
+            function addParams(id, e) {
+                $('#modal-bb-attributes').modal('show');
+                $('input[name="complect_ref_id"]').val(id);
+                $('.is-cloned').remove();
+            }
             function removeBuildingBlock(id, e) {
                 var url = '{{ path("nomenclature_complect_remove_building_block", {'id': 'complect_id'}) }}';
                 url = url.replace('complect_id', {{ complect.id }});
@@ -188,6 +275,21 @@
                 });
             }
 
+            function removeRef(id, e) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('nomenclature_complect_remove_building_block_attr') }}",
+                    data: {bb_attr_ref_id: id},
+                    dataType: "json",
+                    success: function(json){
+                        if (json.status){
+                            $(e).closest('div').remove();
+                        }
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+            }
             $('#ajax_building_block_field_form').on('submit', function(e) {
                 var url = '{{ path("nomenclature_complect_add_building_block", {'id': 'complect_id'}) }}';
                 url = url.replace('complect_id', {{ complect.id }});
@@ -203,11 +305,8 @@
                         if(json.status) {
                             var count = ($('#attribute_list tr').length + 1);
                             var url = '{{ path('nomenclature_buildingblock_show', { 'id': 'buildingblock_id' }) }}';
-                            url = url.replace('buildingblock_id', json.buildingBlock.id);
-                            var artibiteHtml = '';
-                            $.each(json.buildingBlock.attributeRefs, function( index, value ) {
-                                artibiteHtml += '<div>' + value.name + ' - ' + value.text + '</div>';
-                            });
+                            url = url.replace('buildingblock_id', json.buildingBlock.buildingBlockId);
+
                             var html =
                                     '<tr>' +
                                     '   <td>' +
@@ -227,13 +326,15 @@
                                     '   <td>' +
                                     json.buildingBlock.name +
                                     '   <hr>' +
-                                    artibiteHtml +
+                                    '   <div id="complectAttributeRef_' + json.buildingBlock.id + '">' +
+                                    '   </div>' +
                                     '   </td>' +
                                     '   <td>' +
                                     json.buildingBlock.quantity +
                                     '   </td>' +
                                     '   <td>' +
                                     '<button type="button" class="btn btn-default remove-service"  onclick="removeBuildingBlock(' + json.buildingBlock.id + ', this)"><i class="fa fa-trash"></i></button>' +
+                                    '<button title="Добави параметри" type="button" class="btn btn-success" onclick="addParams(' + json.buildingBlock.id + ', this)"><i class="fa fa-plus"></i></button>' +
                                     '   </td>' +
                                     '</tr>';
                             $('#attribute_list').append(html);

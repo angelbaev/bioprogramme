@@ -29,10 +29,10 @@ class BuildingBlockAttributeReference
     private $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BuildingBlock")
-     * @ORM\JoinColumn(name="building_block_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="ComplectAttributeReference")
+     * @ORM\JoinColumn(name="complect_ref_id", referencedColumnName="id")
      */
-    private $buildingBlock;
+    private $complect;
 
     /**
      * @ORM\ManyToOne(targetEntity="Attribute")
@@ -76,15 +76,15 @@ class BuildingBlockAttributeReference
     }
 
     /**
-     * Set BuildingBlock
+     * Set ComplectAttributeReference
      *
-     * @param BuildingBlock $machine
+     * @param ComplectAttributeReference $complect
      *
      * @return BuildingBlockAttributeReference
      */
-    public function setBuildingBlock(BuildingBlock $block)
+    public function setComplect(ComplectAttributeReference $complect)
     {
-        $this->buildingBlock = $block;
+        $this->complect = $complect;
 
         return $this;
     }
@@ -94,9 +94,9 @@ class BuildingBlockAttributeReference
      *
      * @return BuildingBlock
      */
-    public function getBuildingBlock()
+    public function getComplect()
     {
-        return $this->buildingBlock;
+        return $this->complect;
     }
 
     /**

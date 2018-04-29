@@ -72,6 +72,22 @@
                 <td>{% if complect.dateImplementation %}{{ complect.dateImplementation|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
+                <th>{% trans %}Weight{% endtrans %}</th>
+                <td>{{ complect.weight }} {{ complect.weightVal }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Length{% endtrans %}</th>
+                <td>{{ complect.length }} {{ complect.lengthVal }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Height{% endtrans %}</th>
+                <td>{{ complect.height }} {{ complect.heightVal }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Manufacturer{% endtrans %}</th>
+                <td>{{ complect.manufacturer.name }}</td>
+            </tr>
+            <tr>
                 <th>{% trans %}Createdat{% endtrans %}</th>
                 <td>{% if complect.createdAt %}{{ complect.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
@@ -121,7 +137,7 @@
                                 <td>
                                     {{ complectAttributeRef.buildingBlock.name }}
                                     <hr>
-                                    {% for attributeRef in complectAttributeRef.buildingBlock.attributes %}
+                                    {% for attributeRef in complectAttributeRef.attributes %}
                                         <div>{{ attributeRef.attribute.name }} - {{ attributeRef.text }}</div>
                                     {% endfor %}
                                 </td>

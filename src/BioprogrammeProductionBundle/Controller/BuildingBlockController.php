@@ -117,7 +117,7 @@ class BuildingBlockController extends Controller
         }
 
         $buildingBlockAttributeReference = new BuildingBlockAttributeReference();
-        $buildingBlockAttributeReference->setBuildingBlock($buildingBlock);
+        //$buildingBlockAttributeReference->setBuildingBlock($buildingBlock);
         $buildingBlockAttributeForm = $this->createForm('BioprogrammeProductionBundle\Form\BuildingBlockAttributeReferenceType', $buildingBlockAttributeReference);
 
         return $this->render('BioprogrammeProductionBundle:buildingblock:edit.html.twig', array(
