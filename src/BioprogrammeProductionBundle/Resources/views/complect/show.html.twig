@@ -4,7 +4,7 @@
 <div class="col-xs-12">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">{% trans %}Complect{% endtrans %}</h3>
+            <h3 class="box-title">{% trans %}Complect{% endtrans %} - {{ complect.name }}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -17,97 +17,58 @@
             </div>
 
             <br><br>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td>
+                        <img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}"  data-zoom data-image="{{ complect.image }}">
+                    </td>
+                    <td>
+                        {% trans %}Number{% endtrans %}: {{ complect.number }} <br>
+                        {% trans %}Price{% endtrans %}: <span style="background-color: #ddd; padding: 2px; font-weight: bold;">{{ complect.price|number_format(2, '.', '') }} лв. </span><br>
+                    </td>
+                    <td>
+                        {% trans %}Date of manufacture{% endtrans %}: {% if complect.dateOfManufacture %}{{ complect.dateOfManufacture|date('Y-m-d') }}{% endif %} <br>
+                        {% trans %}Date implementation{% endtrans %}: {% if complect.dateImplementation %}{{ complect.dateImplementation|date('Y-m-d') }}{% endif %} <br>
+                        {% trans %}Manufacturer{% endtrans %}: {{ complect.manufacturer.name }} <br>
+                    </td>
+                    <td>
+                        {% trans %}Weight{% endtrans %}: {{ complect.weight }} ({{ complect.weightVal }}) <br>
+                        {% trans %}Length{% endtrans %}: {{ complect.length }} ({{ complect.lengthVal }}) <br>
+                        {% trans %}Height{% endtrans %}: {{ complect.height }} ({{ complect.heightVal }}) <br>
+                    </td>
+                    <td>
+                        {% trans %}Createdat{% endtrans %}: {% if complect.createdAt %}{{ complect.createdAt|date('Y-m-d H:i:s') }}{% endif %} <br>
+                        {% trans %}Updatedat{% endtrans %}: {% if complect.updatedAt %}{{ complect.updatedAt|date('Y-m-d H:i:s') }}{% endif %} <br>
+                        {% trans %}Createdby{% endtrans %}: {{ complect.createdBy }} <br>
+                        {% trans %}Updatedby{% endtrans %}: {{ complect.updatedBy }} <br>
+                    </td>
+                    <td>
+                        {% trans %}State{% endtrans %}: {{ state(complect.state) }} <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        {% trans %}Description{% endtrans %}<br>
+                        {% if complect.description == '' %}
+                            Няма описание
+                        {% endif %}
+                        {{ complect.description|raw }}
+                    </td>
+                    <td>
+                        {% trans %}Warranty{% endtrans %}
+                        {{ complect.warranty }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Complect{% endtrans %}</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Building Blocks{% endtrans %}</a></li>
-                    <li><a href="#tab_3" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
+                    <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Building Blocks{% endtrans %}</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
                 </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
-                    <br>
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <th>{% trans %}Id{% endtrans %}</th>
-                <td>{{ complect.id }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Number{% endtrans %}</th>
-                <td>{{ complect.number }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Name{% endtrans %}</th>
-                <td>{{ complect.name }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Description{% endtrans %}</th>
-                <td>{{ complect.description|raw }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Image{% endtrans %}</th>
-                <td><img src="{{ image_resize(complect.image, 64, 64) }}" alt="{{ complect.name }}"  data-zoom data-image="{{ complect.image }}"></td>
-            </tr>
-            <tr>
-                <th>{% trans %}Price{% endtrans %}</th>
-                <td>{{ complect.price }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Quantity{% endtrans %}</th>
-                <td>{{ complect.quantity }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Warranty{% endtrans %}</th>
-                <td>{{ complect.warranty }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}State{% endtrans %}</th>
-                <td>{{ state(complect.state) }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Date of manufacture{% endtrans %}</th>
-                <td>{% if complect.dateOfManufacture %}{{ complect.dateOfManufacture|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Date implementation{% endtrans %}</th>
-                <td>{% if complect.dateImplementation %}{{ complect.dateImplementation|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Weight{% endtrans %}</th>
-                <td>{{ complect.weight }} {{ complect.weightVal }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Length{% endtrans %}</th>
-                <td>{{ complect.length }} {{ complect.lengthVal }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Height{% endtrans %}</th>
-                <td>{{ complect.height }} {{ complect.heightVal }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Manufacturer{% endtrans %}</th>
-                <td>{{ complect.manufacturer.name }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Createdat{% endtrans %}</th>
-                <td>{% if complect.createdAt %}{{ complect.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Updatedat{% endtrans %}</th>
-                <td>{% if complect.updatedAt %}{{ complect.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Createdby{% endtrans %}</th>
-                <td>{{ complect.createdBy }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Updatedby{% endtrans %}</th>
-                <td>{{ complect.updatedBy }}</td>
-            </tr>
-
-        </tbody>
-    </table>
-                </div>
-                <div class="tab-pane" id="tab_2">
                     <br>
                     <table class="table table-bordered">
                         <thead>
@@ -116,9 +77,6 @@
                         </tr>
                         <tr>
                             <th>#</th>
-                            <th>{% trans %}Image{% endtrans %}</th>
-                            <th>{% trans %}Number{% endtrans %}</th>
-                            <th>{% trans %}Model{% endtrans %}</th>
                             <th>{% trans %}Name{% endtrans %}</th>
                             <th>{% trans %}Quantity{% endtrans %}</th>
                         </tr>
@@ -127,28 +85,24 @@
                         {% for key, complectAttributeRef in complect.buildingBlocks %}
                             <tr>
                                 <td>{{ key+1 }}</td>
-                                <td><img src="{{ image_resize(complectAttributeRef.buildingBlock.image, 64, 64) }}" alt="{{ complectAttributeRef.buildingBlock.name }}"  data-zoom data-image="{{ complectAttributeRef.buildingBlock.image }}"></td>
                                 <td>
                                     <a href="{{ path('nomenclature_buildingblock_show', { 'id': complectAttributeRef.buildingBlock.id }) }}" target="_blank">
-                                        {{ complectAttributeRef.buildingBlock.number }}
+                                        {{ complectAttributeRef.buildingBlock.name }}
                                     </a>
-                                </td>
-                                <td>{{ complectAttributeRef.buildingBlock.model }}</td>
-                                <td>
-                                    {{ complectAttributeRef.buildingBlock.name }}
-                                    <hr>
+                                    <div style="background-color: #ddd">
                                     {% for attributeRef in complectAttributeRef.attributes %}
-                                        <div>{{ attributeRef.attribute.name }} - {{ attributeRef.text }}</div>
+                                        <div style="padding-left: 15px;">{{ attributeRef.attribute.name }} - {{ attributeRef.text }}</div>
                                     {% endfor %}
+                                    </div>
                                 </td>
                                 <td>{{ complectAttributeRef.quantity }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
-                </div>
 
-                <div class="tab-pane" id="tab_3">
+                </div>
+                <div class="tab-pane" id="tab_2">
                     <br>
                     <table class="table table-bordered">
                         <thead>
@@ -174,7 +128,6 @@
                         {% endfor %}
                         </tbody>
                     </table>
-
                 </div>
 
 

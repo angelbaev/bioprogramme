@@ -42,9 +42,6 @@
                             </tr>
                             <tr>
                                 <th>#</th>
-                                <th>{% trans %}Image{% endtrans %}</th>
-                                <th>{% trans %}Number{% endtrans %}</th>
-                                <th>{% trans %}Model{% endtrans %}</th>
                                 <th>{% trans %}Name and Params{% endtrans %}</th>
                                 <th>{% trans %}Quantity{% endtrans %}</th>
                                 <th>{% trans %}Actions{% endtrans %}</th>
@@ -54,15 +51,10 @@
                             {% for key, complectAttributeRef in complect.buildingBlocks %}
                                 <tr>
                                     <td>{{ key+1 }}</td>
-                                    <td><img src="{{ image_resize(complectAttributeRef.buildingBlock.image, 64, 64) }}" alt="{{ complectAttributeRef.buildingBlock.name }}"  data-zoom data-image="{{ complectAttributeRef.buildingBlock.image }}"></td>
                                     <td>
                                         <a href="{{ path('nomenclature_buildingblock_show', { 'id': complectAttributeRef.buildingBlock.id }) }}" target="_blank">
-                                            {{ complectAttributeRef.buildingBlock.number }}
-                                        </a>
-                                    </td>
-                                    <td>{{ complectAttributeRef.buildingBlock.model }}</td>
-                                    <td>
                                         {{ complectAttributeRef.buildingBlock.name }}
+                                        </a>
                                         <hr>
                                         <div id="complectAttributeRef_{{ complectAttributeRef.id }}">
                                         {% for attributeRef in complectAttributeRef.attributes %}
@@ -70,7 +62,7 @@
                                         {% endfor %}
                                         </div>
                                     </td>
-                                    <td>{{ complectAttributeRef.quantity }}</td>
+                                    <td data-bb-id="{{ complectAttributeRef.id }}" class="editable-input">{{ complectAttributeRef.quantity }}</td>
                                     <td>
                                         <button type="button" class="btn btn-default" onclick="removeBuildingBlock({{ complectAttributeRef.id }}, this)">
                                             <i class="fa fa-trash"></i>
@@ -134,14 +126,13 @@
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">{% trans %}Building Block{% endtrans %}</h4>
                 </div>
-                <div class="modal-body">
-                    {{ form_start(building_block_field_form, {attr:{'id': 'ajax_building_block_field_form'}}) }}
-                    {{ form_widget(building_block_field_form) }}
-                    <input id="ajax_building_block_field_form_submit" class="btn btn-success btn-flat" type="submit" value="{% trans %}Save{% endtrans %}" />
-                    {{ form_end(building_block_field_form) }}
+                <div class="modal-body" id="bb-modal-body">
+
                 </div>
                 <div class="modal-footer">
-
+                    <button title="{% trans %}New building block{% endtrans %}" id="add_new_complect_bb_ref" type="button" class="btn btn-success">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -290,7 +281,7 @@
                     }
                 });
             }
-            $('#ajax_building_block_field_form').on('submit', function(e) {
+            $(document).on('submit', '#ajax_building_block_field_form', function(e) {
                 var url = '{{ path("nomenclature_complect_add_building_block", {'id': 'complect_id'}) }}';
                 url = url.replace('complect_id', {{ complect.id }});
 
@@ -313,23 +304,14 @@
                                     count +
                                     '   </td>' +
                                     '   <td>' +
-                                    '   <img src="' + json.buildingBlock.image + '"  alt="' + json.buildingBlock.name + '" data-zoom data-image="' + json.buildingBlock.image + '">' +
-                                    '   </td>' +
-                                    '   <td>' +
                                     '   <a href="' + url + '" target="_blank">' +
-                                    json.buildingBlock.number +
-                                    '   </a>' +
-                                    '   </td>' +
-                                    '   <td>' +
-                                    json.buildingBlock.model +
-                                    '   </td>' +
-                                    '   <td>' +
                                     json.buildingBlock.name +
+                                    '   </a>' +
                                     '   <hr>' +
                                     '   <div id="complectAttributeRef_' + json.buildingBlock.id + '">' +
                                     '   </div>' +
                                     '   </td>' +
-                                    '   <td>' +
+                                    '   <td data-bb-id="' + json.buildingBlock.id + '" class="editable-input">' +
                                     json.buildingBlock.quantity +
                                     '   </td>' +
                                     '   <td>' +
@@ -416,5 +398,96 @@
                 e.preventDefault(); //Prevent Default action.
 
             });
+
+            $(document).on('click', '.editable-input', function (e) {
+                e.preventDefault();
+                if ($(this).find('input').length === 0) {
+                    var qty = $(this).text();
+                    console.log(qty);
+                    $(this).html('<input id="bb_qty" value="' + qty + '" />');
+                }
+            });
+            $(document).on('blur', '.editable-input', function (e) {
+                e.preventDefault();
+                if ($(this).find('input').length === 1) {
+                    var bbId = $(this).data('bb-id');
+                    var qty = $('#bb_qty').val();
+                    $(this).html(qty);
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('nomenclature_complect_change_building_block_qty') }}",
+                        data: {bbRefId: bbId, quantity: qty},
+                        dataType: "json",
+                        success: function(json){
+
+                        },
+                        failure: function(errMsg) {
+                        }
+                    });
+
+                }
+            });
+            $(document).on('show.bs.modal', '#modal-building-block', function () {
+                var url = '{{ path("nomenclature_load_complect_ref_form", {'id': 'complect_id'}) }}';
+                url = url.replace('complect_id', {{ complect.id }});
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {},
+                    dataType: "html",
+                    success: function(content){
+                        $('#bb-modal-body').html(content);
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+            });
+            $(document).on('click', '#add_new_complect_bb_ref', function (e)  {
+                var url = '{{ path("nomenclature_load_new_building_blog_form", {'id': 'complect_id'}) }}';
+                url = url.replace('complect_id', {{ complect.id }});
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {},
+                    dataType: "html",
+                    success: function(content){
+                        $('#bb-modal-body').html(content);
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+            });
+
+            $(document).on('submit', '#ajax_building_block_new_form', function(e) {
+                var url = '{{ path("nomenclature_bind_new_building_blog", {'id': 'complect_id'}) }}';
+                url = url.replace('complect_id', {{ complect.id }});
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $("#ajax_building_block_new_form").serialize(),
+                    dataType: "json",
+                    success: function(json){
+                        var url = '{{ path("nomenclature_load_complect_ref_form", {'id': 'complect_id'}) }}';
+                        url = url.replace('complect_id', {{ complect.id }});
+                        $.ajax({
+                            type: "GET",
+                            url: url,
+                            data: {},
+                            dataType: "html",
+                            success: function(content){
+                                $('#bb-modal-body').html(content);
+                            },
+                            failure: function(errMsg) {
+                            }
+                        });
+                    },
+                    failure: function(errMsg) {
+                    }
+                });
+                e.preventDefault(); //Prevent Default action.
+
+            });
+
         </script>
     {% endblock %}

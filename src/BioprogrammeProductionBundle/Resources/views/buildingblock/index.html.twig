@@ -14,9 +14,6 @@
         <thead>
             <tr>
                 <th>{% trans %}Id{% endtrans %}</th>
-                <th>{% trans %}Image{% endtrans %}</th>
-                <th>{% trans %}Number{% endtrans %}</th>
-                <th>{% trans %}Model{% endtrans %}</th>
                 <th>
                     {% if sort == 'name' %}
                         {% if order == 'asc' %}
@@ -28,18 +25,13 @@
                         <a href="{{ path(app.request.get('_route'), {sort: 'name', order: order, page: page}|merge(queryParams)) }}">{% trans %}Name{% endtrans %}</a>
                     {% endif %}
                 </th>
-                <th>{% trans %}Status{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
         <tr class="filter">
             <td class="pointer" onclick="resetFilter('{{ path(app.request.get('_route')) }}')"><i class="fa fa-filter"></i></td>
-            <td></td>
-            <td><input type="text" class="form-control" name="filter_number" value="{{ filter.number }}"></td>
-            <td><input type="text" class="form-control" name="filter_model" value="{{ filter.model }}"></td>
             <td><input type="text" class="form-control" name="filter_name" value="{{ filter.name }}"></td>
-            <td></td>
             <td class="action-column">
                 <button class="btn btn-block btn-primary" onclick="filter('{{ path(app.request.get('_route')) }}');"><i class="fa fa-filter"></i> {% trans %}Filter{% endtrans %}</button>
             </td>
@@ -47,11 +39,7 @@
         {% for buildingBlock in buildingBlocks %}
             <tr>
                 <td><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}">{{ buildingBlock.id }}</a></td>
-                <td><img src="{{ image_resize(buildingBlock.image, 64, 64) }}" alt="{{ buildingBlock.name }}" data-zoom data-image="{{ buildingBlock.image }}"></td>
-                <td>{{ buildingBlock.number }}</td>
-                <td>{{ buildingBlock.model }}</td>
                 <td>{{ buildingBlock.name }}</td>
-                <td>{% if buildingBlock.isActive %}{{ label(buildingBlock.isActive) }}{% endif %}</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-default" href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlock.id }) }}"><i class="fa fa-eye"></i></a>
@@ -85,18 +73,6 @@
             if (filter_name) {
                 url += '&filter_name=' + encodeURIComponent(filter_name);
             }
-            var filter_number = $('input[name=\'filter_number\']').val();
-
-            if (filter_number) {
-                url += '&filter_number=' + encodeURIComponent(filter_number);
-            }
-
-            var filter_model = $('input[name=\'filter_model\']').val();
-
-            if (filter_model) {
-                url += '&filter_model=' + encodeURIComponent(filter_model);
-            }
-
             location = url;
         }
 

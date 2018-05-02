@@ -178,3 +178,7 @@ a.sort-by:after {
         width: 100%;
     }
 }
+
+.editable-input {
+    cursor: pointer;
+}

@@ -4,7 +4,7 @@
 <div class="col-xs-12">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">{% trans %}Machine{% endtrans %}</h3>
+            <h3 class="box-title">{% trans %}Machine{% endtrans %} - {{ machine.name }}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -16,89 +16,52 @@
                 {{ form_end(delete_form) }}
             </div>
             <br><br>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td>
+                        <img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}"  data-zoom data-image="{{ machine.image }}">
+                    </td>
+                    <td>
+                        {% trans %}Number{% endtrans %}: {{ machine.number }} <br>
+                        {% trans %}Model{% endtrans %}: {{ machine.model }} <br>
+                        {% trans %}Price{% endtrans %}: <span style="background-color: #ddd; padding: 2px; font-weight: bold;">{{ machine.price|number_format(2, '.', '') }} лв. </span><br>
+                    </td>
+                    <td>
+                        {% trans %}Base{% endtrans %}: {% if machine.base %}{{ machine.base.name }}{% endif %} <br>
+                        {% trans %}Building{% endtrans %}: {% if machine.building %}{{ machine.building.name }}{% endif %} <br>
+                        {% trans %}Manufacturer{% endtrans %}: {{ machine.manufacturer.name }} <br>
+                    </td>
+                    <td>
+                        {% trans %}Createdat{% endtrans %}: {% if machine.createdAt %}{{ machine.createdAt|date('Y-m-d H:i:s') }}{% endif %} <br>
+                        {% trans %}Updatedat{% endtrans %}: {% if machine.updatedAt %}{{ machine.updatedAt|date('Y-m-d H:i:s') }}{% endif %} <br>
+                        {% trans %}Createdby{% endtrans %}: {{ machine.createdBy }} <br>
+                        {% trans %}Updatedby{% endtrans %}: {{ machine.updatedBy }} <br>
+                    </td>
+                    <td>
+                        {% trans %}State{% endtrans %}: {{ state(machine.state) }} <br>
+                        {% trans %}Status{% endtrans %}: {{ label(machine.isActive) }} <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        {% trans %}Description{% endtrans %}<br>
+                        {% if machine.description == '' %}
+                            Няма описание
+                        {% endif %}
+                        {{ machine.description|raw }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Machine{% endtrans %}</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Complects{% endtrans %}</a></li>
-                    <li><a href="#tab_3" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
-                    <li><a href="#tab_4" data-toggle="tab">{% trans %}Documentation{% endtrans %}</a></li>
+                    <li class="active"><a href="#tab_1" data-toggle="tab">{% trans %}Complects{% endtrans %}</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">{% trans %}Documents{% endtrans %}</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">{% trans %}Documentation{% endtrans %}</a></li>
                 </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
-                    <br>
-            <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <th>{% trans %}Id{% endtrans %}</th>
-                <td>{{ machine.id }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Base{% endtrans %}</th>
-                <td>{% if machine.base %}{{ machine.base.name }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Building{% endtrans %}</th>
-                <td>{% if machine.building %}{{ machine.building.name }}{% endif %}</td>
-            </tr>
-            {#<tr>#}
-                {#<th>{% trans %}Line{% endtrans %}</th>#}
-                {#<td>{% if machine.line %}{{ machine.line.name }}{% endif %}</td>#}
-            {#</tr>#}
-            <tr>
-                <th>{% trans %}Number{% endtrans %}</th>
-                <td>{{ machine.number }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Model{% endtrans %}</th>
-                <td>{{ machine.model }}</td>
-            </tr>
-           <tr>
-                <th>{% trans %}Name{% endtrans %}</th>
-                <td>{{ machine.name }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Description{% endtrans %}</th>
-                <td>{{ machine.description|raw }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Image{% endtrans %}</th>
-                <td><img src="{{ image_resize(machine.image, 64, 64) }}" alt="{{ machine.name }}" data-zoom data-image="{{ machine.image }}"></td>
-            </tr>
-            <tr>
-                <th>{% trans %}State{% endtrans %}</th>
-                <td>{{ state(machine.state) }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Price{% endtrans %}</th>
-                <td>{{ machine.price|number_format(2, '.', '') }} лв.</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Status{% endtrans %}</th>
-                <td>{{ label(machine.isActive) }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Manufacturer{% endtrans %}</th>
-                <td>{{ machine.manufacturer.name }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Createdat{% endtrans %}</th>
-                <td>{% if machine.createdAt %}{{ machine.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Updatedat{% endtrans %}</th>
-                <td>{% if machine.updatedAt %}{{ machine.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Createdby{% endtrans %}</th>
-                <td>{{ machine.createdBy }}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}Updatedby{% endtrans %}</th>
-                <td>{{ machine.updatedBy }}</td>
-            </tr>
-        </tbody>
-    </table>
-                </div>
-                <div class="tab-pane" id="tab_2">
                     <br>
                         <table class="table table-bordered">
                             <thead>
@@ -107,6 +70,7 @@
                                 <th>{% trans %}Image{% endtrans %}</th>
                                 <th>{% trans %}Number{% endtrans %}</th>
                                 <th>{% trans %}Name{% endtrans %}</th>
+                                <th>{% trans %}Ticket{% endtrans %}</th>
                                 <th>{% trans %}Price{% endtrans %}</th>
                                 <th>{% trans %}State{% endtrans %}</th>
                             </tr>
@@ -119,33 +83,36 @@
                                     <td><a href="{{ path('nomenclature_complect_show', { 'id': complect.id }) }}" target="_blank">{{ complect.number }}</a></td>
                                     <td>
                                         {{ complect.name }}
-                                        <hr>
-                                        <div>
-                            {% for buildingBlockRef in complect.buildingBlocks %}
-                                <div>
-                                    <span><a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlockRef.buildingBlock.id }) }}" target="_blank">{{ buildingBlockRef.buildingBlock.model }}</a></span> -
-                                    <span>{{ buildingBlockRef.buildingBlock.name }}</span>
-                                        <hr>
-                                    {% for attributeRef in buildingBlockRef.attributes %}
-                                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<i>{{ attributeRef.attribute.name }} - {{ attributeRef.text }}</i></div>
-                                    {% endfor %}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                                    </div>
+                                        <div style="background-color: #ddd">
+                                            {% for buildingBlockRef in complect.buildingBlocks %}
+                                                <div style="padding-left: 15px;">
+                                                    <span>
+                                                        <a href="{{ path('nomenclature_buildingblock_show', { 'id': buildingBlockRef.buildingBlock.id }) }}" target="_blank">
+                                                        {{ buildingBlockRef.buildingBlock.name }}
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                                <div style="background-color: #d0e5f5">
+                                                    {% for attributeRef in buildingBlockRef.attributes %}
+                                                        <div style="padding-left: 30px;">
+                                                            {{ attributeRef.attribute.name }} - {{ attributeRef.text }}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
                                     </td>
-                                    <td>{{ complect.price }} лв.</td>
+                                    <td><button class="btn bg-maroon">{% trans %}Ticket{% endtrans %}</button></td>
+                                    <td>{{ complect.price|number_format(2, '.','') }} лв.</td>
                                     <td>{{ state(complect.state) }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
                         </table>
-
                 </div>
-
-                <div class="tab-pane" id="tab_3">
+                <div class="tab-pane" id="tab_2">
                     <br>
-                        <table class="table table-bordered">
+                       <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -176,7 +143,8 @@
                         </table>
 
                 </div>
-                <div class="tab-pane" id="tab_4">
+
+                <div class="tab-pane" id="tab_3">
                     <br>
                     {% if machine.manual%}
                     {{ machine.manual.manual|raw }}

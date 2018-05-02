@@ -19,29 +19,7 @@ class BuildingBlockType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number')
-            ->add('name')
-            ->add('model')
-            ->add(
-                'description',
-                TextareaType::class,
-                [
-                    'attr' => [
-                        'class' => 'wysihtml',
-                    ]
-                ]
-            )
-            ->add('image', ImageType::class)
-            ->add('isActive')
-            ->add(
-                'manufacturer',
-                EntityType::class,
-                [
-                    'class' => Manufacturer::class,
-                    'choice_label' => 'name',
-                    'placeholder' => 'Select'
-                ]
-            );
+            ->add('name');
             //->add('complects');
     }/**
      * {@inheritdoc}

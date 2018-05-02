@@ -4,6 +4,7 @@ namespace BioprogrammeProductionBundle\Controller;
 
 use AppBundle\Helper\ImageHelper;
 use BioprogrammeProductionBundle\Entity\Attribute;
+use BioprogrammeProductionBundle\Entity\BuildingBlock;
 use BioprogrammeProductionBundle\Entity\BuildingBlockAttributeReference;
 use BioprogrammeProductionBundle\Entity\Complect;
 use BioprogrammeProductionBundle\Entity\ComplectAttributeReference;
@@ -13,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -226,24 +228,11 @@ class ComplectController extends Controller
             $em->flush();
             $data['status'] = true;
             $attributes = [];
-//            foreach ($entity->getBuildingBlock()->getAttributes() as $attribute) {
-//                $attributes[] = [
-//                    'name' => $attribute->getAttribute()->getName(),
-//                    'text' => $attribute->getText()
-//                ];
-//            }
-            $image = ImageHelper::resize($this->container,  $entity->getBuildingBlock()->getImage(), 64, 64);
-            if (!$image) {
-                $image = ImageHelper::resize($this->container, 'img/no_image.jpg', 64, 64);
-            }
 
             $data['buildingBlock'] = [
                 'id' => $entity->getId(),
-                'image' => $image,
                 'buildingBlockId' => $entity->getBuildingBlock()->getId(),
                 'name' => $entity->getBuildingBlock()->getName(),
-                'model' => $entity->getBuildingBlock()->getModel(),
-                'number' => $entity->getBuildingBlock()->getNumber(),
                 'attributeRefs' => [],
                 'quantity' => $entity->getQuantity()
             ];
@@ -361,6 +350,108 @@ class ComplectController extends Controller
                 'name' => $result->getAttribute()->getName(),
                 'text' => $result->getText(),
             ];
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     *
+     *
+     * @Route("/change-building-block-qty", name="nomenclature_complect_change_building_block_qty")
+     * @Method({"POST"})
+     */
+    public function changeBuildingBlockQtyAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $bbComplectRefId = $request->get('bbRefId', false);
+        $quantity = $request->get('quantity', 0);
+        $data = ['status' => false];
+        if ($bbComplectRefId) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository(ComplectAttributeReference::class)->find($bbComplectRefId);
+            if ($entity !== null) {
+                $data['status'] = true;
+                $entity->setQuantity($quantity);
+                $em->persist($entity);
+                $em->flush();
+            }
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     *
+     *
+     * @Route("/{id}/load-complect-ref-form", name="nomenclature_load_complect_ref_form")
+     * @Method({"GET"})
+     */
+    public function loadComplectRefFormAction(Request $request, Complect $complect)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('GET')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $complectAttributeReference = new ComplectAttributeReference();
+        $complectAttributeReference->setComplect($complect);
+        $buildingBlockFieldForm = $this->createForm('BioprogrammeProductionBundle\Form\ComplectAttributeReferenceType', $complectAttributeReference);
+        $template = $this->
+        renderView(
+            'BioprogrammeProductionBundle:complect:complect_ref_form.html.twig',
+            ['building_block_field_form' => $buildingBlockFieldForm->createView()]
+        );
+
+        return new Response($template);
+    }
+
+    /**
+     *
+     *
+     * @Route("/{id}/load-new-building-blog-form", name="nomenclature_load_new_building_blog_form")
+     * @Method({"GET"})
+     */
+    public function loadNewComplectRefFormAction(Request $request, Complect $complect)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('GET')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $buildingBlock = new Buildingblock();
+        $form = $this->createForm('BioprogrammeProductionBundle\Form\BuildingBlockType', $buildingBlock);
+        $template = $this->
+        renderView(
+            'BioprogrammeProductionBundle:complect:building_blog_form.html.twig',
+            ['form' => $form->createView()]
+        );
+
+        return new Response($template);
+    }
+
+    /**
+     *
+     *
+     * @Route("/{id}/bind-new-building-blog", name="nomenclature_bind_new_building_blog")
+     * @Method({"POST"})
+     */
+    public function bindNewBuildingBlogAction(Request $request, Complect $complect)
+    {
+        if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
+            throw new HttpException('XMLHttpRequests/AJAX calls must be POSTed');
+        }
+
+        $formData = $request->get('bioprogrammeproductionbundle_buildingblock');
+        $name = isset($formData['name'])? $formData['name']:false;
+
+        $data = ['status' => false];
+        if ($name) {
+            $data['status'] = true;
+            $buildingBlock = new Buildingblock();
+            $buildingBlock->setName($name);
+            $this->get('bioprogramme_production.building_block_manager')->save($buildingBlock);
         }
 
         return new JsonResponse($data);
